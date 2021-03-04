@@ -31,3 +31,13 @@ Para execução do backend é requerido PostgreSQL. O arquivo de criação do ba
 1. Crie um banco de dados para aplicação (Ex: happybank)
 
 1. Execute o comando `psql -d happybank -a -f happybank.sql`
+
+#### Execução da API
+
+Na pasta **/Codigo/HappyBank** execute os comandos
+
+    dotnet restore
+    dotnet run
+
+#### Execução do Frontend
+...
