@@ -4,10 +4,11 @@ Escreva um ou dois  parágrafo resumindo o objetivo do seu projeto.
 
 ## Alunos integrantes da equipe
 
-* Nome completo do aluno 1
-* Nome completo do aluno 2
-* Nome completo do aluno 3
-* Nome completo do aluno 4
+* Breno Moreira Proti de Castro - moreirasgbr@gmail.com
+* Gabrielle Silva de Paula - ggabriellesilva4@gmail.com
+* Gustavo Augusto Caldeira dos Santos - caldeira.santos@gmail.com
+* Hugo José Ferreira Moreira - hugojose39@yahoo.com
+* Maicon Douglas Marcelino - maicondouglasm19@gmail.com
 
 ## Professores responsáveis
 
@@ -16,4 +17,17 @@ Escreva um ou dois  parágrafo resumindo o objetivo do seu projeto.
 
 ## Instruções de utilização
 
-Assim que a primeira versão do sistema estiver disponível, deverá complementar com as instruções de utilização. Descreva como instalar eventuais dependências e como executar a aplicação.
+Para execução do sistema você deverá executar os seguintes passos:
+
+1. Criação do banco de dados
+1. Execução do banckend
+1. Execução do frontend
+
+### Execução do backend
+
+#### Criação do banco de dados
+Para execução do backend é requerido PostgreSQL. O arquivo de criação do banco de dados está na pasta Codigo
+
+1. Crie um banco de dados para aplicação (Ex: happybank)
+
+1. Execute o comando `psql -d happybank -a -f happybank.sql`
