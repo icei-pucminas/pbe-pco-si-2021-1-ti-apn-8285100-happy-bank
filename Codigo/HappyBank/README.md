@@ -9,4 +9,7 @@ Padrões de projeto e arquitetura
 ## Processos de negócio
 
 1. Abertura de conta
+1. Análise de crédito
 1. Depósito
+1. Saque
+1. Transferência

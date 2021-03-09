@@ -1,6 +1,14 @@
 namespace HappyBank.Domain.Model
 {
-    public class Transaction : Entity
+     /*
+    Table: TRANSACTION
+    Colunas:
+        ID GUID
+        ACCOUNT_ID GUID (Relacionado com a tabela ACCOUNT)
+        KIND CHAR(1) (D, W, T)            
+        VALUE DECIMAL            
+    */
+    public abstract class Transaction : Entity
     {
         protected Transaction(Account account, decimal value, TransactionKind kind)
         {
