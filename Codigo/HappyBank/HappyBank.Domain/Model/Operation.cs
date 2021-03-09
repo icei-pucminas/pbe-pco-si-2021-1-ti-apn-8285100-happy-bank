@@ -1,6 +1,6 @@
-namespace HappyBank.Data.Model
+namespace HappyBank.Domain.Model
 {
-    public class Operation
+    public class Operation : Entity
     {
         public Account Account {get; private set;}
         public decimal Value {get; set;}

@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using HappyBank.Data.Model;
+using HappyBank.Domain.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 

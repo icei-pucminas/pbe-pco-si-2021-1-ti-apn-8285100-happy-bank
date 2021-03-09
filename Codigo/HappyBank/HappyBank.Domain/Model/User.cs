@@ -1,8 +1,8 @@
 using System;
 
-namespace HappyBank.Data.Model
+namespace HappyBank.Domain.Model
 {
-    public class User
+    public class User : Entity
     {
         public string Name {get; private set;}
         public string Username {get; private set;}
