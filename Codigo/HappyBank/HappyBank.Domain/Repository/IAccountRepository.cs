@@ -1,6 +1,6 @@
 namespace HappyBank.Domain.Repository
 {
-    public interface IAccountRepository : IRepsitory
+    public interface IAccountRepository : IRepsitory<Account>
     {
         
     }

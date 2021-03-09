@@ -1,3 +1,5 @@
+using System;
+
 namespace HappyBank.Domain.Model
 {
     /*
@@ -8,7 +10,8 @@ namespace HappyBank.Domain.Model
     */
     public class Transfer : Transaction
     {
-        protected Transfer(Account account, Account accountDestiny, decimal value) : base(account, value, TransactionKind.TRANSFER)
+        protected Transfer(Account account, Account accountDestiny, decimal value, DateTime executionDate) 
+            : base(account, value, executionDate, TransactionKind.TRANSFER)
         {
             this.AccountDestiny = accountDestiny;   
         }
