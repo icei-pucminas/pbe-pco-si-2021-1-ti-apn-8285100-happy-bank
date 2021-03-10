@@ -1,3 +1,4 @@
+using HappyBank.Domain.Model;
 using HappyBank.Domain.Repository;
 using HappyBank.Infra.UseCases;
 using HappyBank.UseCases.Exceptions;
@@ -17,7 +18,11 @@ namespace HappyBank.UseCases.UserRegistration
         {
             ValidateInput(input);
 
-            return null;
+            var user = new User(input.Name, input.Username);
+
+            Guid userId = _userRepository.Add(user);
+
+            return new UserRegistrationOutput{ UserId = userId };
         }
 
         private void ValidateInput(UserRegistrationInput input)

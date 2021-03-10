@@ -32,9 +32,9 @@ namespace HappyBank.UnitTests.UseCases
         [Fact]
         public void Existin_Username_Must_Throw_ArgumentException()
         {
-            var existingUsername = "existing_username";
             var existingName = "Existing Name";
-
+            var existingUsername = "existing_username";
+            
             IUserRepository userRepository = Substitute.For<IUserRepository>();
             
             userRepository.FindByUsername(existingUsername).Returns(new User(existingName, existingUsername));
@@ -48,6 +48,30 @@ namespace HappyBank.UnitTests.UseCases
             };
 
             Assert.Throws<InvalidUsernameException>(() => userRegistrationUC.Execute(input));
+        }
+
+        [Fact]
+        public void No_Existin_Username_Must_Insert_User_And_Return_Its_Id()
+        {
+            var name = "New User";
+            var username = "new_user";
+            
+
+            IUserRepository userRepository = Substitute.For<IUserRepository>();
+            userRepository.Add(Arg.Is<User>(x => x.Username == username)).Returns(Guid.NewGuid());
+
+            UserRegistrationUC userRegistrationUC = new UserRegistrationUC(userRepository);
+
+            var input = new UserRegistrationInput
+            {
+                Name = name,
+                Username = username
+            };
+
+            var output = userRegistrationUC.Execute(input);
+
+            Assert.NotNull(output);
+            Assert.True(output.UserId != Guid.Empty);
         }
     }
 }
