@@ -13,6 +13,7 @@ namespace HappyBank.Domain.Model
     {
         public User(string name, string username)
         {
+            Id = Guid.NewGuid();
             Name = name;
             Username = username;
         }

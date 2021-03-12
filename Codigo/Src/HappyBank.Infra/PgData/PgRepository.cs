@@ -14,8 +14,8 @@ namespace HappyBank.Infra.Data.Pg
 
         public abstract Guid Add(TEntity entity);
         public abstract bool Delete(TEntity client);
-        public abstract TEntity Get(int id);
-        public abstract List<TEntity> GetAll();
+        public abstract TEntity FindOne(Guid id);
+        public abstract List<TEntity> FindAll();
         public abstract bool Update(TEntity client);
     }
 }

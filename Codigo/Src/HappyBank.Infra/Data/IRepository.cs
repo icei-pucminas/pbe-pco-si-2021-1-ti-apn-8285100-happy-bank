@@ -5,8 +5,8 @@ namespace HappyBank.Infra.Data
 {
     public interface IRepository<TEntity> where TEntity : IEntity
     {
-        TEntity Get(int id);
-        List<TEntity> GetAll();
+        TEntity FindOne(Guid id);
+        List<TEntity> FindAll();
         Guid Add(TEntity entity);
         bool Update(TEntity client);
         bool Delete(TEntity client);

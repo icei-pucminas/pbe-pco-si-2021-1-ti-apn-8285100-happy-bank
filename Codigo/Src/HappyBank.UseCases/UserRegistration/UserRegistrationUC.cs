@@ -1,6 +1,7 @@
 using HappyBank.Domain.Model;
 using HappyBank.Domain.Repository;
 using HappyBank.Infra.UseCases;
+using HappyBank.UseCases.Constants;
 using HappyBank.UseCases.Exceptions;
 using System;
 
@@ -8,9 +9,7 @@ namespace HappyBank.UseCases.UserRegistration
 {
     public class UserRegistrationUC : IUseCase<UserRegistrationInput, UserRegistrationOutput>
     {
-        private const string INVALID_INPUT_MESSAGE = "Parâmetro de entrada inválido";
-        private const string INVALID_USERNAME = "Nome de usuário inválido ou existente";
-        private IUserRepository _userRepository;
+        private readonly IUserRepository _userRepository;
         public UserRegistrationUC(IUserRepository userRepository) => 
             _userRepository = userRepository;
 
@@ -29,12 +28,12 @@ namespace HappyBank.UseCases.UserRegistration
         {
             if(null == input || String.IsNullOrEmpty(input.Name) || String.IsNullOrEmpty(input.Username))
             {
-                throw new ArgumentException(INVALID_INPUT_MESSAGE);
+                throw new ArgumentException(Messages.INVALID_INPUT_MESSAGE);
             }
 
-            if(null != _userRepository.FindByUsername(input.Username))
+            if(null != _userRepository.FindOneByUsername(input.Username))
             {
-                throw new InvalidUsernameException(INVALID_USERNAME);
+                throw new InvalidUsernameException(Messages.INVALID_USERNAME);
             }
         }
     }

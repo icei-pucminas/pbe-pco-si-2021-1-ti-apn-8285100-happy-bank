@@ -5,6 +5,6 @@ namespace HappyBank.Domain.Repository
 {
     public interface IUserRepository : IRepository<User>
     {
-        User FindByUsername(string username);   
+        User FindOneByUsername(string username);   
     }
 }

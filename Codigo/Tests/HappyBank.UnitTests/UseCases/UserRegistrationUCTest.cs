@@ -36,8 +36,7 @@ namespace HappyBank.UnitTests.UseCases
             var existingUsername = "existing_username";
             
             IUserRepository userRepository = Substitute.For<IUserRepository>();
-            
-            userRepository.FindByUsername(existingUsername).Returns(new User(existingName, existingUsername));
+            userRepository.FindOneByUsername(existingUsername).Returns(new User(existingName, existingUsername));
 
             UserRegistrationUC userRegistrationUC = new UserRegistrationUC(userRepository);
 
@@ -56,7 +55,6 @@ namespace HappyBank.UnitTests.UseCases
             var name = "New User";
             var username = "new_user";
             
-
             IUserRepository userRepository = Substitute.For<IUserRepository>();
             userRepository.Add(Arg.Is<User>(x => x.Username == username)).Returns(Guid.NewGuid());
 
