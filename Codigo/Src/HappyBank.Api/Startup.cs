@@ -15,6 +15,7 @@ using HappyBank.Domain.Repository;
 using HappyBank.Data.Repository;
 using HappyBank.UseCases.UserRegistration;
 using HappyBank.UseCases.OpenAccount;
+using HappyBank.Api.Services;
 
 namespace HappyBank.api
 {
@@ -36,12 +37,14 @@ namespace HappyBank.api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "HappyBank.api", Version = "v1" });
             });
+            services.AddHttpContextAccessor();
 
-            services.AddScoped<IAccountRepository, AccountRepository>();
-            services.AddScoped<IUserRepository, UserRepository>();
-            
-            services.AddScoped<OpenAccountUC>();
-            services.AddScoped<UserRegistrationUC>();
+            services.AddTransient<ContextService>();            
+
+            services.AddSingleton<IAccountRepository, AccountRepository>();
+            services.AddSingleton<IUserRepository, UserRepository>();
+            services.AddSingleton<OpenAccountUC>();
+            services.AddSingleton<UserRegistrationUC>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

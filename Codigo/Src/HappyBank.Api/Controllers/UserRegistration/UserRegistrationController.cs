@@ -5,24 +5,24 @@ using HappyBank.UseCases.UserRegistration;
 namespace HappyBank.Api.Controllers.UserRegistration
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("user")]
     public class UserRegistrationController
     {
-        //private readonly ILogger<UserRegistrationController> _logger;
+        private readonly ILogger<UserRegistrationController> _logger;
         private readonly UserRegistrationUC _userRegistrationUC;
 
         public UserRegistrationController(
-            //Logger<UserRegistrationController> logger,
+            ILogger<UserRegistrationController> logger,
             UserRegistrationUC userRegistrationUC)
         {
-            //_logger = logger;
+            _logger = logger;
             _userRegistrationUC = userRegistrationUC;
         }
 
         [HttpPost("register")]
         public UserRegistrationResponse Register(UserRegistrationRequest request)
         {
-            //_logger.LogInformation($"Registering user {request.Username}");
+            _logger.LogInformation($"Registering user {request.Username}");
 
             var output =_userRegistrationUC.Execute(new UserRegistrationInput {
                 Name = request.Name,
