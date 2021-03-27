@@ -41,10 +41,11 @@ namespace HappyBank.api
 
             services.AddTransient<ContextService>();            
 
-            services.AddSingleton<IAccountRepository, AccountRepository>();
-            services.AddSingleton<IUserRepository, UserRepository>();
-            services.AddSingleton<OpenAccountUC>();
-            services.AddSingleton<UserRegistrationUC>();
+            services.AddTransient<IDbConnection>((sp) => new NpgsqlConnection("Host=localhost;Username=postgres;Password=postgres;Database=happybanktests"));
+            services.AddTransient<IAccountRepository, AccountRepository>();
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<OpenAccountUC>();
+            services.AddTransient<UserRegistrationUC>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
