@@ -16,6 +16,7 @@ using HappyBank.Data.Repository;
 using HappyBank.UseCases.UserRegistration;
 using HappyBank.UseCases.OpenAccount;
 using HappyBank.Api.Services;
+using Npgsql;
 
 namespace HappyBank.api
 {
