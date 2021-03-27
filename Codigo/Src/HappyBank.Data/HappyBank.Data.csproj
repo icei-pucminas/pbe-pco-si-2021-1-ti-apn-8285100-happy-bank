@@ -7,6 +7,7 @@
    <ItemGroup>
     <ProjectReference Include="..\HappyBank.Infra\HappyBank.Infra.csproj" />
     <ProjectReference Include="..\HappyBank.Domain\HappyBank.Domain.csproj" />
+       <PackageReference Include="Npgsql" Version="5.0.3" />
   </ItemGroup>
 
 </Project>
