@@ -17,6 +17,7 @@ using HappyBank.UseCases.UserRegistration;
 using HappyBank.UseCases.OpenAccount;
 using HappyBank.Api.Services;
 using Npgsql;
+using System.Data;
 
 namespace HappyBank.api
 {
@@ -42,7 +43,7 @@ namespace HappyBank.api
 
             services.AddTransient<ContextService>();            
 
-            services.AddTransient<IDbConnection>((sp) => new NpgsqlConnection("Host=localhost;Username=postgres;Password=postgres;Database=happybanktests"));
+            services.AddTransient<NpgsqlConnection>((sp) => new NpgsqlConnection("Host=localhost;Username=postgres;Password=postgres;Database=happybank"));
             services.AddTransient<IAccountRepository, AccountRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<OpenAccountUC>();

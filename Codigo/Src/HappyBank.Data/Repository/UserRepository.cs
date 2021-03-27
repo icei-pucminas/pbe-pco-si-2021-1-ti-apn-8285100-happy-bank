@@ -16,7 +16,7 @@ namespace HappyBank.Data.Repository
 
         public override Guid Add(User entity)
         {
-            using (var cmd = new NpgsqlCommand("INSERT INTO user (id, name, \"username\") VALUES (@id, @name, @username)", Connection))
+            using (var cmd = new NpgsqlCommand("INSERT INTO \"user\" (id, name, username) VALUES (@id, @name, @username)", Connection))
             {
                 cmd.Parameters.AddWithValue("id", entity.Id);
                 cmd.Parameters.AddWithValue("name", entity.Name);
