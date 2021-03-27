@@ -11,7 +11,7 @@ namespace HappyBank.Data.Repository
     {
         public UserRepository(global::Npgsql.NpgsqlConnection connection) : base(connection)
         {
-
+            this.Connection.Open();
         }
 
         public override Guid Add(User entity)
