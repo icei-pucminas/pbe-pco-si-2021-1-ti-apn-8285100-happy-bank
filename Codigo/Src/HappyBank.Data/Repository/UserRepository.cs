@@ -30,7 +30,14 @@ namespace HappyBank.Data.Repository
 
         public override bool Delete(User client)
         {
-            throw new NotImplementedException();
+            using ( var cmd = new NpgsqlCommand("DELETE FROM \"user\" (id, name, username) WHERE (@id, @name, @username)", Connection))
+            {
+                cmd.Parameters.AddWithValue("id", client.Id);
+                cmd.Parameters.AddWithValue("name", client.Name);
+                cmd.Parameters.AddWithValue("username", client.Username);
+            }
+
+            return true;
         }
 
         public override List<User> FindAll()
