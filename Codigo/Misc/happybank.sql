@@ -1,7 +1,13 @@
 /* HappyBank */
-CREATE TABLE "bank"
+CREATE OR REPLACE function new_id() returns uuid as $$
+begin 
+	return md5(random()::text || clock_timestamp()::text)::uuid;
+end;
+$$ LANGUAGE plpgsql;
+
+CREATE TABLE bank
 (
-	id uuid NOT NULL PRIMARY KEY,
+	id uuid NOT NULL PRIMARY KEY DEFAULT new_id(),
 	bank_number int NOT NULL,
 	"name" varchar(100) NOT NULL,
 	gov_number varchar (20) NOT NULL,	
@@ -12,9 +18,9 @@ CREATE TABLE "bank"
 	address_number varchar (20) NOT NULL
 );
 
-CREATE TABLE "customer"
+CREATE TABLE customer
 (
-	id uuid NOT null PRIMARY KEY,
+	id uuid NOT null PRIMARY KEY DEFAULT new_id(),
 	"name" varchar(100) NOT NULL,
 	gov_number varchar (20) NOT NULL,
 	street varchar (50) NOT NULL,
@@ -28,9 +34,9 @@ CREATE TABLE "customer"
 	"password" varchar (50) NOT NULL
 );
 
-CREATE TABLE "employees"
+CREATE TABLE employees
 (
-    id uuid NOT NULL PRIMARY KEY,
+    id uuid NOT NULL PRIMARY KEY DEFAULT new_id(),
     resgistration varchar (6) NOT NULL UNIQUE,
     bank_id uuid,
 	wage decimal NOT NULL,
@@ -41,9 +47,9 @@ CREATE TABLE "employees"
 
 CREATE SEQUENCE account_number_seq START 1;
 
-CREATE TABLE "account"
+CREATE TABLE account 
 (
-    id uuid NOT NULL PRIMARY KEY,
+    id uuid NOT NULL PRIMARY KEY DEFAULT new_id(),
     bank_id uuid,
 	customer_id uuid,
 	agency_number int NOT null default 1,
@@ -54,7 +60,7 @@ CREATE TABLE "account"
 
 CREATE TABLE "transaction"
 (
-    id uuid NOT NULL PRIMARY KEY,
+    id uuid NOT NULL PRIMARY KEY DEFAULT new_id(),
 	acount_id uuid NOT NULL,
 	kind char(1) NOT NULL,
 	value decimal NOT NULL,
@@ -62,7 +68,7 @@ CREATE TABLE "transaction"
     CONSTRAINT transaction_account_fk FOREIGN KEY (acount_id) REFERENCES account(id)
 );
 
-CREATE TABLE "transfer"
+CREATE TABLE transfer
 (
     id uuid NOT NULL PRIMARY KEY,
 	acount_destiny_id uuid NOT null,
@@ -70,23 +76,23 @@ CREATE TABLE "transfer"
 	CONSTRAINT transfer_account_destiny_fk FOREIGN KEY (acount_destiny_id) REFERENCES account(id)
 );
 
-CREATE TABLE "withdraw"
+CREATE TABLE withdraw
 (
-    id uuid NOT NULL PRIMARY KEY,
+    id uuid NOT NULL PRIMARY KEY DEFAULT,
 	terminal_code varchar(50) NOT NULL,
 	CONSTRAINT withdraw_transaction_fk FOREIGN KEY (id) REFERENCES transaction(id)
 );
 
-CREATE TABLE "deposit"
+CREATE TABLE deposit
 (
-    id uuid NOT NULL PRIMARY KEY,
+    id uuid NOT NULL PRIMARY KEY DEFAULT,
 	envelope_code varchar(50) NOT NULL,
 	CONSTRAINT deposit_transaction_fk FOREIGN KEY (id) REFERENCES transaction(id)
 );
 
-CREATE TABLE "operation"
+CREATE TABLE operation
 (
-    id uuid NOT NULL PRIMARY KEY,
+    id uuid NOT NULL PRIMARY KEY DEFAULT new_id(),
 	acount_id uuid NOT NULL,
 	transaction_id uuid NOT NULL,
 	kind char(1) NOT NULL,
@@ -95,9 +101,3 @@ CREATE TABLE "operation"
     CONSTRAINT operation_account_fk FOREIGN KEY (acount_id) REFERENCES account(id),
     CONSTRAINT operation_transaction_fk FOREIGN KEY (transaction_id) REFERENCES transaction(id)
 );
-
-CREATE OR REPLACE function new_id() returns uuid as $$
-begin 
-	return md5(random()::text || clock_timestamp()::text)::uuid;
-end;
-$$ LANGUAGE plpgsql;
