@@ -95,3 +95,9 @@ CREATE TABLE "operation"
     CONSTRAINT operation_account_fk FOREIGN KEY (acount_id) REFERENCES account(id),
     CONSTRAINT operation_transaction_fk FOREIGN KEY (transaction_id) REFERENCES transaction(id)
 );
+
+CREATE OR REPLACE function new_id() returns uuid as $$
+begin 
+	return md5(random()::text || clock_timestamp()::text)::uuid;
+end;
+$$ LANGUAGE plpgsql;

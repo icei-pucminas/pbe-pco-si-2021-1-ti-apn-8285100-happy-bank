@@ -8,9 +8,9 @@ namespace HappyBank.Data.Repository
 {
     public class AccountRepository : DummyRepository<Account>, IAccountRepository
     {
-        public List<Account> FindByOwnerId(Guid ownerId)
+        public List<Account> FindCustomerId(Guid customerId)
         {
-            return _list.FindAll(a => a.Owner.Id == ownerId);
+            return _list.FindAll(a => a.Customer.Id == customerId);
         }
     }
 }

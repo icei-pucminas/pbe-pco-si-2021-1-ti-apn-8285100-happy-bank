@@ -9,7 +9,7 @@ namespace HappyBank.Data.Repository
 {
     public class CustomerRepository : PgRepository<Customer>, ICustomerRepository
     {
-        public Customer(global::Npgsql.NpgsqlConnection connection) : base(connection)
+        public CustomerRepository(global::Npgsql.NpgsqlConnection connection) : base(connection)
         {
             this.Connection.Open();
         }
