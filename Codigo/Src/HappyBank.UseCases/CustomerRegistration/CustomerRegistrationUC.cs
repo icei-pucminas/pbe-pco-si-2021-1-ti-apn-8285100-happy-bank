@@ -5,7 +5,7 @@ using HappyBank.UseCases.Constants;
 using HappyBank.UseCases.Exceptions;
 using System;
 
-namespace HappyBank.UseCases.UserRegistration
+namespace HappyBank.UseCases.CustomerRegistration
 {
     public class UserRegistrationUC : IUseCase<UserRegistrationInput, UserRegistrationOutput>
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace HappyBank.UseCases.UserRegistration
+namespace HappyBank.UseCases.CustomerRegistration
 {
     public class UserRegistrationOutput
     {

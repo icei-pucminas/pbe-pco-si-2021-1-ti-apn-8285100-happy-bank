@@ -1,6 +1,6 @@
-namespace HappyBank.UseCases.UserRegistration
+namespace HappyBank.UseCases.CustomerRegistration
 {
-    public class UserRegistrationInput
+    public class CustomerRegistrationInput
     {
         public string Name {get; set;}
         public string Username {get; set;}
