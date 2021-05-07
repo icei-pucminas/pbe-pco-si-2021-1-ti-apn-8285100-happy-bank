@@ -1,81 +1,96 @@
-CREATE TABLE public.bank
+CREATE TABLE bank
 (
-	id uuid NOT NULL,
-	cnpj varchar (14) NOT NULL,
-	"name" varchar(50) NOT NULL,
-	street varchar (50) NOT NULL,
-	district varchar (50) NOT NULL,
-	city varchar (50) NOT NULL,
-	"state" varchar (20) NOT NULL,
-	address_number varchar (20) NOT NULL,
-    CONSTRAINT bank_pk PRIMARY KEY (id)
-);
-
-CREATE TABLE public.customer
-(
-	id uuid NOT NULL,
-	"password" varchar (64) NOT NULL,
-	govnumber varchar (11) NOT NULL UNIQUE,
+	id uuid NOT NULL PRIMARY KEY,
+	bank_number int NOT NULL,
 	"name" varchar(100) NOT NULL,
+	gov_number varchar (20) NOT NULL,	
 	street varchar (50) NOT NULL,
 	district varchar (50) NOT NULL,
 	city varchar (50) NOT NULL,
 	"state" varchar (20) NOT NULL,
-	email varchar (100) NOT NULL UNIQUE,
-	phone varchar (20) NOT NULL,
-	address_number varchar (20) NOT NULL,
-	birth_date date NOT NULL DEFAULT NOW(),
-	CONSTRAINT customer_pk PRIMARY KEY (id),
+	address_number varchar (20) NOT NULL
 );
 
-CREATE TABLE public.employees
+CREATE TABLE customer
 (
-    id uuid NOT NULL,
+	id uuid NOT null PRIMARY KEY,
+	"name" varchar(100) NOT NULL,
+	gov_number varchar (20) NOT NULL,
+	street varchar (50) NOT NULL,
+	district varchar (50) NOT NULL,
+	city varchar (50) NOT NULL,
+	"state" varchar (20) NOT NULL,
+	address_number varchar (20) NOT NULL,
+	birth_date date NOT NULL,
+	phone varchar (30) NOT NULL,
+	email varchar (100) NOT NULL UNIQUE,
+	"password" varchar (50) NOT NULL
+);
+
+CREATE TABLE employees
+(
+    id uuid NOT NULL PRIMARY KEY,
     resgistration varchar (6) NOT NULL UNIQUE,
-    bank_fk uuid,
-	wage varchar (50) NOT NULL,
+    bank_id uuid,
+	wage decimal NOT NULL,
 	"name" varchar(100) NOT NULL,
 	"function" varchar (100) NOT NULL,
-    CONSTRAINT employees_pk PRIMARY KEY (id),
-    CONSTRAINT bank_fk FOREIGN KEY (bank_fk) REFERENCES public.bank(id),
+    CONSTRAINT employees_bank_fk FOREIGN KEY (bank_id) REFERENCES bank(id)
 );
 
-CREATE TABLE public.account 
+CREATE SEQUENCE account_number_seq START 1;
+
+CREATE TABLE account 
 (
-    id uuid NOT NULL,
-    bank_fk uuid,
-	customer_fk uuid,
-	agency_bank varchar(4) NOT NULL,
-	account_bank varchar (9) NOT NULL UNIQUE,
-    CONSTRAINT account_pk PRIMARY KEY (id),
-	CONSTRAINT bank_fk FOREIGN KEY (bank_fk) REFERENCES public.bank(id)
-	CONSTRAINT customer_fk FOREIGN KEY (customer_fk) REFERENCES public.customer(id)
+    id uuid NOT NULL PRIMARY KEY,
+    bank_id uuid,
+	customer_id uuid,
+	agency_number int NOT null default 1,
+	account_bank int NOT NULL UNIQUE DEFAULT nextval('account_number_seq'),
+    CONSTRAINT account_bank_fk FOREIGN KEY (bank_id) REFERENCES bank(id),
+	CONSTRAINT account_customer_fk FOREIGN KEY (customer_id) REFERENCES customer(id)
 );
 
-CREATE TABLE public.transaction
+CREATE TABLE transaction
 (
-    id uuid NOT NULL,
-	acount_bank uuid,
-	type_transaction varchar (20) NOT NULL,
-	value_transaction varchar (100) NOT NULL,
-	terminal_code varchar (50),
-	deposit_code varchar (50),
-	agency_recipient varchar (4),
-	account_recipient varchar (9),
-	date_transaction date NOT NULL DEFAULT NOW(),
-    CONSTRAINT transaction_pk PRIMARY KEY (id),
-	CONSTRAINT account_fk FOREIGN KEY (acount_bank) REFERENCES public.account(id),
+    id uuid NOT NULL PRIMARY KEY,
+	acount_id uuid NOT NULL,
+	kind char(1) NOT NULL,
+	value decimal NOT NULL,
+	execution_date timestamp,
+    CONSTRAINT transaction_account_fk FOREIGN KEY (acount_id) REFERENCES account(id)
 );
 
-ALTER TABLE public.bank ADD CONSTRAINT
+CREATE TABLE transfer
 (
-
+    id uuid NOT NULL PRIMARY KEY,
+	acount_destiny_id uuid NOT null,
+	CONSTRAINT transfer_transaction_fk FOREIGN KEY (id) REFERENCES transaction(id),
+	CONSTRAINT transfer_account_destiny_fk FOREIGN KEY (acount_destiny_id) REFERENCES account(id)
 );
 
-ALTER TABLE public.transaction ADD
-"name" varchar(100) NOT NULL,
+CREATE TABLE withdraw
+(
+    id uuid NOT NULL PRIMARY KEY,
+	terminal_code varchar(50) NOT NULL,
+	CONSTRAINT withdraw_transaction_fk FOREIGN KEY (id) REFERENCES transaction(id)
+);
 
-DROP TABLE public."transaction";
+CREATE TABLE deposit
+(
+    id uuid NOT NULL PRIMARY KEY,
+	envelope_code varchar(50) NOT NULL,
+	CONSTRAINT deposit_transaction_fk FOREIGN KEY (id) REFERENCES transaction(id)
+);
 
-INSERT INTO public.bank (id, name, username)
-VALUES()
+CREATE TABLE operation
+(
+    id uuid NOT NULL PRIMARY KEY,
+	acount_id uuid NOT NULL,
+	transaction_id uuid NOT NULL,
+	kind char(1) NOT NULL,
+	value decimal NOT NULL,
+	execution_date timestamp,
+    CONSTRAINT operation_account_fk FOREIGN KEY (acount_id) REFERENCES account(id),
+    CONSTRAINT operation_transaction_fk FOREIGN KEY (transaction_id) REFERENCES transaction(id)
+);

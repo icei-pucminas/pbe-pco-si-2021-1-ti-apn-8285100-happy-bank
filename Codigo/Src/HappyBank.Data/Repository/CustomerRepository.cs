@@ -7,14 +7,14 @@ using Npgsql;
 
 namespace HappyBank.Data.Repository
 {
-    public class UserRepository : PgRepository<User>, IUserRepository
+    public class CustomerRepository : PgRepository<Customer>, ICustomerRepository
     {
-        public UserRepository(global::Npgsql.NpgsqlConnection connection) : base(connection)
+        public Customer(global::Npgsql.NpgsqlConnection connection) : base(connection)
         {
             this.Connection.Open();
         }
 
-        public override Guid Add(User entity)
+        public override Guid Add(Customer entity)
         {
             using (var cmd = new NpgsqlCommand("INSERT INTO \"user\" (id, name, username) VALUES (@id, @name, @username)", Connection))
             {
