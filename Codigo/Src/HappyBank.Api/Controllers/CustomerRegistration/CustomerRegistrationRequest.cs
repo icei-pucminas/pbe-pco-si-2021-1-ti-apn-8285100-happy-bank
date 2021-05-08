@@ -1,8 +1,8 @@
 using System;
 
-namespace HappyBank.UseCases.CustomerRegistration
+namespace HappyBank.Api.Controllers.CustomerRegistration
 {
-    public class CustomerRegistrationInput
+    public class CustomerRegistrationRequest
     {
         public string Name {get; set;}
         public string GovNumber {get; set;}

@@ -14,13 +14,15 @@ namespace HappyBank.Data.Repository
             this.Connection.Open();
         }
 
+        /* TODO: Implementar os campos restantes de customer */
         public override Guid Add(Customer entity)
         {
-            using (var cmd = new NpgsqlCommand("INSERT INTO \"user\" (id, name, username) VALUES (@id, @name, @username)", Connection))
+            using (var cmd = new NpgsqlCommand("INSERT INTO \"customer\" (name, gov_number, street) VALUES (@name, @gov_numer, @street)", Connection))
             {
-                cmd.Parameters.AddWithValue("id", entity.Id);
                 cmd.Parameters.AddWithValue("name", entity.Name);
-                cmd.Parameters.AddWithValue("username", entity.Username);
+                cmd.Parameters.AddWithValue("gov_number", entity.Name);
+                cmd.Parameters.AddWithValue("street", entity.Street);
+                //cmd.Parameters.AddWithValue("username", entity.Username);
 
                 cmd.ExecuteNonQuery();
             }
@@ -28,34 +30,32 @@ namespace HappyBank.Data.Repository
             return entity.Id;
         }
 
-        public override bool Delete(User client)
+        public override bool Delete(Customer client)
         {
-            using ( var cmd = new NpgsqlCommand("DELETE FROM \"user\" (id, name, username) WHERE (@id, @name, @username)", Connection))
+            using ( var cmd = new NpgsqlCommand("DELETE FROM \"customer\" WHERE id = @id", Connection))
             {
                 cmd.Parameters.AddWithValue("id", client.Id);
-                cmd.Parameters.AddWithValue("name", client.Name);
-                cmd.Parameters.AddWithValue("username", client.Username);
             }
 
             return true;
         }
 
-        public override List<User> FindAll()
+        public override List<Customer> FindAll()
         {
             throw new NotImplementedException();
         }
 
-        public override User FindOne(Guid id)
+        public override Customer FindOne(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public User FindOneByUsername(string username)
+        public Customer FindOneByEmail(string username)
         {
             return null;
         }
 
-        public override bool Update(User client)
+        public override bool Update(Customer client)
         {
             throw new NotImplementedException();
         }

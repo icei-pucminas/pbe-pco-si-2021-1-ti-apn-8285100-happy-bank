@@ -25,21 +25,20 @@ namespace HappyBank.Api.Controllers.OpenAccount
         }
 
         [HttpPost("open")]
-        public OpenAccountOutput Register(OpenAccountRequest request)
+        public OpenAccountResponse Register(OpenAccountRequest request)
         {
-            _logger.LogInformation($"Opening account user: {_contextService.UserId()}");
+            _logger.LogInformation($"Opening account customer: {_contextService.CustomerId()}");
 
-            var userId = _contextService.UserId();
+            var customerId = _contextService.CustomerId();
 
             var output = _openAccountUC.Execute(new OpenAccountInput{
-                BranchNumber = request.BranchNumber,
-                UserId = userId
+                CustomerId = customerId
             });
 
-            return new OpenAccountOutput{
+            return new OpenAccountResponse{
                 AccountId = output.AccountId,
                 AccountNumber = output.AccountNumber,
-                BranchNumber = output.BranchNumber
+                AgencyNumber = output.AgencyNumber
             };
         }   
     }

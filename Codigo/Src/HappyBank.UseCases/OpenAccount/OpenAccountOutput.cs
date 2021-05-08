@@ -6,6 +6,6 @@ namespace HappyBank.UseCases.OpenAccount
     {
         public Guid AccountId{get; set;}
         public int AccountNumber{get; set;}
-        public int BranchNumber {get; set;}
+        public int AgencyNumber {get; set;}
     }
 }

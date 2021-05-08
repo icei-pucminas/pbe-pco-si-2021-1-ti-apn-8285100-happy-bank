@@ -7,33 +7,44 @@ using System;
 
 namespace HappyBank.UseCases.CustomerRegistration
 {
-    public class UserRegistrationUC : IUseCase<UserRegistrationInput, UserRegistrationOutput>
+    public class CustomerRegistrationUC : IUseCase<CustomerRegistrationInput, CustomerRegistrationOutput>
     {
-        private readonly IUserRepository _userRepository;
-        public UserRegistrationUC(IUserRepository userRepository) => 
-            _userRepository = userRepository;
+        private readonly ICustomerRepository _CustomerRepository;
+        public CustomerRegistrationUC(ICustomerRepository CustomerRepository) => 
+            _CustomerRepository = CustomerRepository;
 
-        public UserRegistrationOutput Execute(UserRegistrationInput input)
+        public CustomerRegistrationOutput Execute(CustomerRegistrationInput input)
         {
             ValidateInput(input);
 
-            var user = new User(input.Name, input.Username);
+            var Customer = new Customer(
+                input.Name, 
+                input.GovNumber, 
+                input.Street, 
+                input.District, 
+                input.City, 
+                input.State, 
+                input.AddressNumber, 
+                input.BirthDate, 
+                input.Phone, 
+                input.Email, 
+                input.Password);
 
-            Guid userId = _userRepository.Add(user);
+            Guid CustomerId = _CustomerRepository.Add(Customer);
 
-            return new UserRegistrationOutput{ UserId = userId };
+            return new CustomerRegistrationOutput{ CustomerId = CustomerId };
         }
 
-        private void ValidateInput(UserRegistrationInput input)
+        private void ValidateInput(CustomerRegistrationInput input)
         {
-            if(null == input || String.IsNullOrEmpty(input.Name) || String.IsNullOrEmpty(input.Username))
+            if(null == input || String.IsNullOrEmpty(input.Name) || String.IsNullOrEmpty(input.Name))
             {
                 throw new ArgumentException(Messages.INVALID_INPUT_MESSAGE);
             }
 
-            if(null != _userRepository.FindOneByUsername(input.Username))
+            if(null != _CustomerRepository.FindOneByEmail(input.Email))
             {
-                throw new InvalidUsernameException(Messages.INVALID_USERNAME);
+                throw new CustomerNotFoundException(Messages.INVALID_USERNAME);
             }
         }
     }

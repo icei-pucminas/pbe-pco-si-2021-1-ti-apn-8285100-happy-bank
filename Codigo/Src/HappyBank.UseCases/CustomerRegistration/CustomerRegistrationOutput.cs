@@ -4,6 +4,6 @@ namespace HappyBank.UseCases.CustomerRegistration
 {
     public class CustomerRegistrationOutput
     {
-        public Guid UserId {get; set;}
+        public Guid CustomerId {get; set;}
     }
 }

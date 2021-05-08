@@ -78,14 +78,14 @@ CREATE TABLE transfer
 
 CREATE TABLE withdraw
 (
-    id uuid NOT NULL PRIMARY KEY DEFAULT,
+    id uuid NOT NULL PRIMARY KEY,
 	terminal_code varchar(50) NOT NULL,
 	CONSTRAINT withdraw_transaction_fk FOREIGN KEY (id) REFERENCES transaction(id)
 );
 
 CREATE TABLE deposit
 (
-    id uuid NOT NULL PRIMARY KEY DEFAULT,
+    id uuid NOT NULL PRIMARY KEY,
 	envelope_code varchar(50) NOT NULL,
 	CONSTRAINT deposit_transaction_fk FOREIGN KEY (id) REFERENCES transaction(id)
 );
