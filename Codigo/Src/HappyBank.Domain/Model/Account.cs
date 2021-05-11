@@ -11,6 +11,15 @@ namespace HappyBank.Domain.Model
             this.Customer = customer;
         }
 
+        public Account(Guid id, Bank bank, Customer customer, int agencyNumber, int accountNumber)
+        {
+            this.Id = id;
+            this.Bank = bank;
+            this.Customer = customer;
+            this.AgencyNumber = agencyNumber;
+            this.AccountNumber = accountNumber;
+        }
+
         public Bank Bank {get; private set;}
         public Customer Customer {get; private set;}
         public int AgencyNumber {get; private set;}

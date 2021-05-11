@@ -30,40 +30,66 @@ namespace HappyBank.UnitTests.UseCases
         }
 
         [Fact]
-        public void Existin_Customername_Must_Throw_ArgumentException()
+        public void Existing_Customer_Email_Must_Throw_ArgumentException()
         {
-            var existingName = "Existing Name";
-            var existingCustomername = "existing_Customername";
+            var customerId = Guid.NewGuid();
+            var name = $"Customer {customerId}";
+            var email = $"{customerId}@happybank.com";
+
+            var customer = new Customer(
+                name,
+                customerId.ToString(),
+                "Av. Amazonas", 
+                "Centro", 
+                "Belo Horizonte", 
+                "MG", 
+                "1001", 
+                new DateTime(1985, 8, 15),
+                "(31)91111-1111", 
+                email, 
+                customerId.ToString()
+            );
+            
             
             ICustomerRepository CustomerRepository = Substitute.For<ICustomerRepository>();
-            CustomerRepository.FindOneByCustomername(existingCustomername).Returns(new Customer(existingName, existingCustomername));
-
-            CustomerRegistrationUC CustomerRegistrationUC = new CustomerRegistrationUC(CustomerRepository);
-
-            var input = new CustomerRegistrationInput
-            {
-                Name = existingName,
-                Customername = existingCustomername
-            };
-
-            Assert.Throws<InvalidCustomernameException>(() => CustomerRegistrationUC.Execute(input));
-        }
-
-        [Fact]
-        public void No_Existin_Customername_Must_Insert_Customer_And_Return_Its_Id()
-        {
-            var name = "New Customer";
-            var Customername = "new_Customer";
-            
-            ICustomerRepository CustomerRepository = Substitute.For<ICustomerRepository>();
-            CustomerRepository.Add(Arg.Is<Customer>(x => x.Customername == Customername)).Returns(Guid.NewGuid());
+            CustomerRepository.FindOneByEmail(email).Returns(customer);
 
             CustomerRegistrationUC CustomerRegistrationUC = new CustomerRegistrationUC(CustomerRepository);
 
             var input = new CustomerRegistrationInput
             {
                 Name = name,
-                Customername = Customername
+                GovNumber =  customerId.ToString(),
+                Street = "Av. Amazonas", 
+                District = "Centro", 
+                City = "Belo Horizonte", 
+                State = "MG", 
+                AddressNumber = "1001", 
+                BirthDate = new DateTime(1985, 8, 15),
+                Phone = "(31)91111-1111", 
+                Email = email,
+                Password = customerId.ToString()
+            };
+
+            Assert.Throws<CustomerDuplicatedException>(() => CustomerRegistrationUC.Execute(input));
+        }
+
+        [Fact]
+        public void No_Existin_Customername_Must_Insert_Customer_And_Return_Its_Id()
+        {
+            var customerId = Guid.NewGuid();
+            var name = $"Customer {customerId}";
+            var email = $"{customerId}@happybank.com";
+            
+            ICustomerRepository customerRepository = Substitute.For<ICustomerRepository>();
+            customerRepository.Add(Arg.Is<Customer>(x => x.Email == email)).Returns(customerId);
+
+            CustomerRegistrationUC CustomerRegistrationUC = new CustomerRegistrationUC(customerRepository);
+
+            var input = new CustomerRegistrationInput
+            {
+                Name = name,
+                Email = email
             };
 
             var output = CustomerRegistrationUC.Execute(input);

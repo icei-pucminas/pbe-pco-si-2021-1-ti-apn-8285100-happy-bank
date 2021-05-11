@@ -13,7 +13,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using HappyBank.Domain.Repository;
 using HappyBank.Data.Repository;
-using HappyBank.UseCases.UserRegistration;
+using HappyBank.UseCases.CustomerRegistration;
 using HappyBank.UseCases.OpenAccount;
 using HappyBank.Api.Services;
 using Npgsql;
@@ -45,9 +45,9 @@ namespace HappyBank.api
 
             services.AddTransient<NpgsqlConnection>((sp) => new NpgsqlConnection("Host=localhost;Username=postgres;Password=postgres;Database=happybank"));
             services.AddTransient<IAccountRepository, AccountRepository>();
-            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<ICustomerRepository, CustomerRepository>();
             services.AddTransient<OpenAccountUC>();
-            services.AddTransient<UserRegistrationUC>();
+            services.AddTransient<CustomerRegistrationUC>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
