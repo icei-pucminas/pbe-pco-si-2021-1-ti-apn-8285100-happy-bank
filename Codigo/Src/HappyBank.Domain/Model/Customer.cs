@@ -35,16 +35,16 @@ namespace HappyBank.Domain.Model
             this.Password = password;
         }
         
-        public string Name {get; private set;}
-        public string GovNumber {get; private set;}
-        public string Street {get; private set;}
-        public string District {get; private set;}
-        public string City {get; private set;}
-        public string State {get; private set;}
-        public string AddressNumber {get; private set;}
-        public DateTime BirthDate {get; private set;}
-        public string Phone {get; private set;}
-        public string Email {get; private set;}
-        public string Password {get; private set;}
+        public string Name {get; set;}
+        public string GovNumber {get; set;}
+        public string Street {get; set;}
+        public string District {get; set;}
+        public string City {get; set;}
+        public string State {get; set;}
+        public string AddressNumber {get; set;}
+        public DateTime BirthDate {get; set;}
+        public string Phone {get; set;}
+        public string Email {get; set;}
+        public string Password {get; set;}
     }
 }

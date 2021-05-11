@@ -13,8 +13,14 @@ namespace HappyBank.IntegrationTests.HappyData
         public CustomerRepositoryTest()
         {
             var connString = "Host=127.0.0.1;Port=5432;Username=postgres;Password=postgres;Database=happybanktests";
+            this.Connection = new NpgsqlConnection(connString);
+            this.Connection.Open();
 
-            Connection = new NpgsqlConnection(connString);
+            using (var cmd = new NpgsqlCommand("DELETE FROM \"customer\"", Connection))
+            {
+                cmd.Prepare();
+                cmd.ExecuteNonQuery();
+            }
         }
         
         [Fact]
@@ -35,7 +41,7 @@ namespace HappyBank.IntegrationTests.HappyData
         }
 
         [Fact]
-        public void Complete_Customer_Mus_Insert_And_Return_Equal_Entity()
+        public void Complete_Customer_Must_Insert_And_Return_Equal_Entity()
         {
             var repository = new CustomerRepository(Connection);
             var customer = CreateCustomer();
@@ -58,6 +64,88 @@ namespace HappyBank.IntegrationTests.HappyData
             Assert.Equal(customer.Email, dbCustomer.Email);
             Assert.Equal(customer.Password, dbCustomer.Password);
         }
+
+        [Fact]
+        public void Complete_Customer_Must_Insert_And_Update_Return_Equal_Entity()
+        {
+            var repository = new CustomerRepository(Connection);
+            var customer = CreateCustomer();
+
+            var newId = repository.Add(customer);
+            var dbCustomer = repository.FindOne(newId);
+
+            Assert.True(newId != Guid.Empty);            
+            Assert.Equal(newId, dbCustomer.Id);
+            Assert.Equal(customer.Name, dbCustomer.Name);
+            
+            dbCustomer.Name = $"{dbCustomer.Name} updated";
+            Assert.True(repository.Update(dbCustomer));
+
+            var updatedCustomer = repository.FindOne(newId);
+
+            Assert.Equal(updatedCustomer.Name, dbCustomer.Name);
+            Assert.Equal(updatedCustomer.GovNumber, dbCustomer.GovNumber);
+            Assert.Equal(updatedCustomer.Street, dbCustomer.Street);
+            Assert.Equal(updatedCustomer.District, dbCustomer.District);
+            Assert.Equal(updatedCustomer.City, dbCustomer.City);
+            Assert.Equal(updatedCustomer.State, dbCustomer.State);
+            Assert.Equal(updatedCustomer.AddressNumber, dbCustomer.AddressNumber);
+            Assert.Equal(updatedCustomer.BirthDate, dbCustomer.BirthDate);
+            Assert.Equal(updatedCustomer.Phone, dbCustomer.Phone);
+            Assert.Equal(updatedCustomer.Email, dbCustomer.Email);
+            Assert.Equal(updatedCustomer.Password, dbCustomer.Password);
+        }
+
+        [Fact]
+        public void Complete_Customer_Must_Insert_And_Not_Found_After_Delete()
+        {
+            var repository = new CustomerRepository(Connection);
+            var customer = CreateCustomer();
+
+            var newId = repository.Add(customer);
+            var dbCustomer = repository.FindOne(newId);
+
+            Assert.True(newId != Guid.Empty);            
+            Assert.Equal(newId, dbCustomer.Id);
+            Assert.Equal(customer.Name, dbCustomer.Name);
+            
+            repository.Delete(dbCustomer);
+            Assert.Null(repository.FindOne(newId));
+        }
+
+        [Fact]    
+        public void Complete_Customer_Must_Insert_And_Return_In_List()
+        {
+            var repository = new CustomerRepository(Connection);
+            
+            repository.Add(CreateCustomer());
+            repository.Add(CreateCustomer());
+            repository.Add(CreateCustomer());
+            repository.Add(CreateCustomer());
+            repository.Add(CreateCustomer());
+            repository.Add(CreateCustomer());
+            repository.Add(CreateCustomer());
+            repository.Add(CreateCustomer());
+            repository.Add(CreateCustomer());
+            repository.Add(CreateCustomer());
+            
+
+            var customers = repository.FindAll();
+            Assert.True(customers.Count == 10);
+        }
+
+         [Fact]    
+        public void Complete_Customer_Must_Insert_And_Return_By_Email()
+        {
+            var repository = new CustomerRepository(Connection);
+            var customer = CreateCustomer();
+            
+            repository.Add(customer);
+            
+            var dbCustomer = repository.FindOneByEmail(customer.Email);
+            Assert.NotNull(dbCustomer);
+        }
+
 
         private Customer CreateCustomer()
         {
