@@ -3,8 +3,8 @@ using HappyBank.Infra.Data;
 
 namespace HappyBank.Domain.Repository
 {
-    public interface IUserRepository : IRepository<User>
+    public interface IBankRepository : IRepository<Bank>
     {
-        User FindOneByUsername(string username);   
+        Bank HappyBank{get;}
     }
 }

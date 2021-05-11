@@ -9,12 +9,14 @@ namespace HappyBank.UseCases.OpenAccount
 {
     public class OpenAccountUC : IUseCase<OpenAccountInput, OpenAccountOutput>
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IBankRepository _bankRepository;
+        private readonly ICustomerRepository _customerRepository;
         private readonly IAccountRepository _accountRepository;
 
-        public OpenAccountUC(IUserRepository userRepository, IAccountRepository accountRepository)
+        public OpenAccountUC(IBankRepository bankRepository, ICustomerRepository customerRepository, IAccountRepository accountRepository)
         {
-            _userRepository = userRepository;
+            _bankRepository = bankRepository;
+            _customerRepository = customerRepository;
             _accountRepository = accountRepository;
         }
 
@@ -22,37 +24,37 @@ namespace HappyBank.UseCases.OpenAccount
         {
             ValidateInput(input);
             
-            var user = FindUser(input);
+            var Customer = FindCustomer(input);
 
-            var account = new Account(user, input.BranchNumber);
+            var account = new Account(_bankRepository.HappyBank, Customer);
             var accountId =_accountRepository.Add(account);
             var createdAccount = _accountRepository.FindOne(accountId);
 
             return new OpenAccountOutput{
                 AccountId = accountId,
                 AccountNumber = createdAccount.AccountNumber,
-                BranchNumber = createdAccount.BranchNumber
+                AgencyNumber = createdAccount.AgencyNumber
             };
         }
 
         private void ValidateInput(OpenAccountInput input)
         {
-            if(null == input || input.UserId == Guid.Empty || input.BranchNumber <= 0)
+            if(null == input || input.CustomerId == Guid.Empty)
             {
                 throw new ArgumentException(Messages.INVALID_INPUT_MESSAGE);
             }
         }
 
-        private User FindUser(OpenAccountInput input)
+        private Customer FindCustomer(OpenAccountInput input)
         {
-            var user = _userRepository.FindOne(input.UserId);
+            var Customer = _customerRepository.FindOne(input.CustomerId);
 
-            if(null == user)
+            if(null == Customer)
             {
-                throw new UserNotFoundException();
+                throw new CustomerNotFoundException();
             }
 
-            return user;
+            return Customer;
         }
     }
 }

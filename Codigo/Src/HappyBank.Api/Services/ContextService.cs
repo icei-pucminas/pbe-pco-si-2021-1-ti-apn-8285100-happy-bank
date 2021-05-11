@@ -8,20 +8,20 @@ namespace HappyBank.Api.Services
 {
     public class ContextService
     {
-        private const string USER_ID = "x-user-id";
+        private const string CUSTOMER_ID = "x-customer-id";
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly IUserRepository _userRepository;
+        private readonly ICustomerRepository _customerRepository;
         
-        public ContextService(IUserRepository userRepository, IHttpContextAccessor httpContextAccessor)
+        public ContextService(ICustomerRepository customerRepository, IHttpContextAccessor httpContextAccessor)
         {
-            this._userRepository = userRepository;
+            this._customerRepository = customerRepository;
             this._httpContextAccessor = httpContextAccessor;
         }
 
-        public Guid UserId()
+        public Guid CustomerId()
         {
             var headerValues = new StringValues();
-            if(_httpContextAccessor.HttpContext.Request.Headers.TryGetValue(USER_ID, out headerValues))
+            if(_httpContextAccessor.HttpContext.Request.Headers.TryGetValue(CUSTOMER_ID, out headerValues))
             {
                 Guid result = Guid.Empty;
                 if(Guid.TryParse(headerValues.ToString(), out result))
@@ -30,7 +30,7 @@ namespace HappyBank.Api.Services
                 }
             }
 
-            throw new UserNotFoundException();
+            throw new CustomerNotFoundException();
         }        
     }
 }

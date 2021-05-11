@@ -2,15 +2,6 @@ using System;
 
 namespace HappyBank.Domain.Model
 {
-     /*
-    Table: TRANSACTION
-    Colunas:
-        ID GUID
-        ACCOUNT_ID GUID (Relacionado com a tabela ACCOUNT)
-        KIND CHAR(1) (D, W, T)            
-        VALUE DECIMAL
-        EXECUTION_DATE DATE_TIME
-    */
     public abstract class Transaction : Entity
     {
         protected Transaction(Account account, decimal value, DateTime executionTime, TransactionKind kind)
@@ -30,8 +21,8 @@ namespace HappyBank.Domain.Model
 
     public enum TransactionKind
     {
-        DEPOSIT,
-        WITHDRAW,
-        TRANSFER
+        DEPOSIT, /*0*/
+        WITHDRAW, /*1*/
+        TRANSFER /*2*/
     }
 }

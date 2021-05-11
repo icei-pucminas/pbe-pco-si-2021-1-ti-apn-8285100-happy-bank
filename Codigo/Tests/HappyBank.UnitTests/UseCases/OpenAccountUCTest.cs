@@ -13,57 +13,78 @@ namespace HappyBank.UnitTests.UseCases
         [Fact]
         public void Null_Input_Test_Must_Throw_ArgumentException()
         {
-            IUserRepository userRepository = Substitute.For<IUserRepository>();
+            IBankRepository bankRepository = Substitute.For<IBankRepository>();
+            ICustomerRepository customerRepository = Substitute.For<ICustomerRepository>();
             IAccountRepository accountRepository = Substitute.For<IAccountRepository>();
-
-            OpenAccountUC openAccountUC = new OpenAccountUC(userRepository, accountRepository);
+            
+            OpenAccountUC openAccountUC = new OpenAccountUC(bankRepository, customerRepository, accountRepository);
             Assert.Throws<ArgumentException>(() => openAccountUC.Execute(null));            
         }
 
         [Fact]
         public void Empty_Input_Test_Must_Throw_ArgumentException()
         {
-            IUserRepository userRepository = Substitute.For<IUserRepository>();
+            IBankRepository bankRepository = Substitute.For<IBankRepository>();
+            ICustomerRepository customerRepository = Substitute.For<ICustomerRepository>();
             IAccountRepository accountRepository = Substitute.For<IAccountRepository>();
-
-            OpenAccountUC openAccountUC = new OpenAccountUC(userRepository, accountRepository);
+            
+            OpenAccountUC openAccountUC = new OpenAccountUC(bankRepository, customerRepository, accountRepository);
             Assert.Throws<ArgumentException>(() => openAccountUC.Execute(new OpenAccountInput()));            
         }
 
         [Fact]
-        public void No_Existing_User_Must_Throw_UserNotFoundException()
+        public void No_Existing_Customer_Must_Throw_CustomerNotFoundException()
         {
-            IUserRepository userRepository = Substitute.For<IUserRepository>();
+            IBankRepository bankRepository = Substitute.For<IBankRepository>();
+            ICustomerRepository customerRepository = Substitute.For<ICustomerRepository>();
             IAccountRepository accountRepository = Substitute.For<IAccountRepository>();
             
-            OpenAccountUC openAccountUC = new OpenAccountUC(userRepository, accountRepository);
-            Assert.Throws<UserNotFoundException>(() => openAccountUC.Execute(new OpenAccountInput{
-                UserId = Guid.NewGuid(),
-                BranchNumber = 1
+            bankRepository.HappyBank.Returns(new Bank(0, "HappyBank Test", "1", "", "", "", "", ""));
+            
+            OpenAccountUC openAccountUC = new OpenAccountUC(bankRepository, customerRepository, accountRepository);
+            Assert.Throws<CustomerNotFoundException>(() => openAccountUC.Execute(new OpenAccountInput{
+                CustomerId = Guid.NewGuid()
             }));            
         }
 
          [Fact]
-        public void Existing_User_Must_Add_Account_And_Return_Its_Info()
+        public void Existing_Customer_Must_Add_Account_And_Return_Its_Info()
         {
-            var userId = Guid.NewGuid();
+            var customerId = Guid.NewGuid();
             var accountId = Guid.NewGuid();
-            var branchNumber = new Random().Next(9999);
-            var user = new User($"User {userId}", userId.ToString());
-            var account = new Account(user, branchNumber);
+            var accountNumber = new Random().Next(9999);
+            var bank = new Bank(0, "Test Bank", null, null, null, null, null, null);
+            
+            var customer = new Customer(
+                $"Customer {customerId}",
+                customerId.ToString(),
+                "Av. Amazonas", 
+                "Centro", 
+                "Belo Horizonte", 
+                "MG", 
+                "1001", 
+                new DateTime(1985, 8, 15),
+                "(31)91111-1111", 
+                $"{customerId}@happybank.com", 
+                customerId.ToString()
+            );
 
-            IUserRepository userRepository = Substitute.For<IUserRepository>();
+            var account = new Account(Guid.NewGuid(), bank, customer, 1, 1);
+
+            IBankRepository bankRepository = Substitute.For<IBankRepository>();
+            ICustomerRepository customerRepository = Substitute.For<ICustomerRepository>();
             IAccountRepository accountRepository = Substitute.For<IAccountRepository>();
+
+            bankRepository.HappyBank.Returns(new Bank(0, "HappyBank Test", "1", "", "", "", "", ""));
 
             accountRepository.Add(Arg.Any<Account>()).Returns(accountId);
             accountRepository.FindOne(accountId).Returns(account);
-            userRepository.FindOne(userId).Returns(user);
+            customerRepository.FindOne(customerId).Returns(customer);
             
-            OpenAccountUC openAccountUC = new OpenAccountUC(userRepository, accountRepository);
+            OpenAccountUC openAccountUC = new OpenAccountUC(bankRepository, customerRepository, accountRepository);
 
             var output = openAccountUC.Execute(new OpenAccountInput{
-                UserId = userId,
-                BranchNumber = branchNumber
+                CustomerId = customerId
             });
 
             Assert.True(output.AccountId == accountId);

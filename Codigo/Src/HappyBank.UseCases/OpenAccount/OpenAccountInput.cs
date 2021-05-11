@@ -4,7 +4,6 @@ namespace HappyBank.UseCases.OpenAccount
 {
     public class OpenAccountInput
     {
-        public Guid UserId {get; set;}
-        public int BranchNumber {get; set;}
+        public Guid CustomerId {get; set;}
     }
 }
