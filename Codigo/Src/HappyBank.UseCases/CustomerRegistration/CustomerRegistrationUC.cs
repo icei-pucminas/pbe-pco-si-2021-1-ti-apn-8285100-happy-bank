@@ -44,7 +44,7 @@ namespace HappyBank.UseCases.CustomerRegistration
 
             if(null != _CustomerRepository.FindOneByEmail(input.Email))
             {
-                throw new CustomerNotFoundException(Messages.INVALID_USERNAME);
+                throw new CustomerDuplicatedException(Messages.INVALID_USERNAME);
             }
         }
     }

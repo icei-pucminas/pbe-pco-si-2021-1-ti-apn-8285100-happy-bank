@@ -30,7 +30,7 @@ namespace HappyBank.UnitTests.UseCases
         }
 
         [Fact]
-        public void Existin_Customername_Must_Throw_ArgumentException()
+        public void Existing_Customer_Email_Must_Throw_ArgumentException()
         {
             var customerId = Guid.NewGuid();
             var name = $"Customer {customerId}";
@@ -71,7 +71,7 @@ namespace HappyBank.UnitTests.UseCases
                 Password = customerId.ToString()
             };
 
-            Assert.Throws<InvalidEmailException>(() => CustomerRegistrationUC.Execute(input));
+            Assert.Throws<CustomerDuplicatedException>(() => CustomerRegistrationUC.Execute(input));
         }
 
         [Fact]

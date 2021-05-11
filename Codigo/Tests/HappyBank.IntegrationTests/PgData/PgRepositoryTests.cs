@@ -31,7 +31,7 @@ namespace HappyBank.IntegrationTests.PgData
             var id = Guid.NewGuid();
             var newId = repository.Add(new SampleEntity(id, $"Sample {id}"));
 
-            Assert.NotNull(newId);
+            Assert.True(newId != Guid.Empty);
             Assert.True(id == newId);
         }
     }
