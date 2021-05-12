@@ -6,5 +6,7 @@ namespace HappyBank.Domain.Repository
     public interface IBankRepository : IRepository<Bank>
     {
         Bank HappyBank{get;}
+
+        Bank FindOneByBankNumber(int bankNumber);
     }
 }

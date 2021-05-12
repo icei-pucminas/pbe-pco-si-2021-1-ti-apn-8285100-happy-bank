@@ -4,9 +4,9 @@ namespace HappyBank.Domain.Model
 {
     public class Bank : Entity
     {
-        public Bank(int bankNumber, string name, string govNumber, string street, string district, string city, string state, string addressNumber)
+        public Bank(Guid id, int bankNumber, string name, string govNumber, string street, string district, string city, string state, string addressNumber, string v)
         {
-            this.Id = Guid.NewGuid();
+            this.Id = id;
             this.BankNumber = bankNumber;
             this.Name = name;
             this.GovNumber = govNumber;
@@ -14,16 +14,28 @@ namespace HappyBank.Domain.Model
             this.District = district;
             this.City = city;
             this.State = state;
-            this.AddressNumber = this.AddressNumber;
+            this.AddressNumber = addressNumber;
         }
 
-        public int BankNumber {get; private set;}
-        public string Name {get; private set;}
-        public string GovNumber {get; private set;}
-        public string Street {get; private set;}
-        public string District {get; private set;}
-        public string City {get; private set;}
-        public string State {get; private set;}
-        public string AddressNumber {get; private set;}
+        public Bank(int bankNumber, string name, string govNumber, string street, string district, string city, string state, string addressNumber)
+        {
+            this.BankNumber = bankNumber;
+            this.Name = name;
+            this.GovNumber = govNumber;
+            this.Street = street;
+            this.District = district;
+            this.City = city;
+            this.State = state;
+            this.AddressNumber = addressNumber;
+        }
+
+        public int BankNumber { get; set; }
+        public string Name { get; set; }
+        public string GovNumber { get; set; }
+        public string Street { get; set; }
+        public string District { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string AddressNumber { get; set; }
     }
 }

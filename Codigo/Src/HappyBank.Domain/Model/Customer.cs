@@ -4,11 +4,11 @@ namespace HappyBank.Domain.Model
 {
     public class Customer : Entity
     {
-        public Customer(Guid id, string name, string govNumer, string street, string district, string city, string state, string addressNumber, DateTime birthDate, string phone, string email, string password)
+        public Customer(Guid id, string name, string govNumber, string street, string district, string city, string state, string addressNumber, DateTime birthDate, string phone, string email, string password)
         {
             this.Id = id;
             this.Name = name;
-            this.GovNumber = govNumer;
+            this.GovNumber = govNumber;
             this.Street = street;
             this.District = district;
             this.City = city;
@@ -20,10 +20,10 @@ namespace HappyBank.Domain.Model
             this.Password = password;
         }
         
-        public Customer(string name, string govNumer, string street, string district, string city, string state, string addressNumber, DateTime birthDate, string phone, string email, string password)
+        public Customer(string name, string govNumber, string street, string district, string city, string state, string addressNumber, DateTime birthDate, string phone, string email, string password)
         {
             this.Name = name;
-            this.GovNumber = govNumer;
+            this.GovNumber = govNumber;
             this.Street = street;
             this.District = district;
             this.City = city;
