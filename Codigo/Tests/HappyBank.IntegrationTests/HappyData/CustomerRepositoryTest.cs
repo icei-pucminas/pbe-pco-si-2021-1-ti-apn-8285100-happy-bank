@@ -12,7 +12,7 @@ namespace HappyBank.IntegrationTests.HappyData
 
         public CustomerRepositoryTest()
         {
-            var connString = "Host=127.0.0.1;Port=5432;Username=postgres;Password=postgres;Database=happybanktests";
+            var connString = "Host=127.0.0.1;Port=5432;Username=postgres;Password=postgres;Database=happybanktests2";
             this.Connection = new NpgsqlConnection(connString);
             this.Connection.Open();
 
