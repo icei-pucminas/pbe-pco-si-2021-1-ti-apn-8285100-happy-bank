@@ -4,7 +4,7 @@ namespace HappyBank.Domain.Model
 {
     public class Bank : Entity
     {
-        public Bank(Guid id, int bankNumber, string name, string govNumber, string street, string district, string city, string state, string addressNumber, string v)
+        public Bank(Guid id, int bankNumber, string name, string govNumber, string street, string district, string city, string state, string addressNumber)
         {
             this.Id = id;
             this.BankNumber = bankNumber;

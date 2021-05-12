@@ -18,7 +18,7 @@ namespace HappyBank.Data.Repository
 
         public override Guid Add(Bank entity)
         {
-            using (var cmd = new NpgsqlCommand("INSERT INTO \"bank\" (bank_number, name, gov_number, street, district, city, state, address_number) VALUES (@name, @gov_number, @street, @district, @city, @state, @address_number) RETURNING id", Connection))
+            using (var cmd = new NpgsqlCommand("INSERT INTO \"bank\" (bank_number, name, gov_number, street, district, city, state, address_number) VALUES (@bank_number, @name, @gov_number, @street, @district, @city, @state, @address_number) RETURNING id", Connection))
             {
                 cmd.Parameters.AddWithValue("bank_number", entity.BankNumber);
                 cmd.Parameters.AddWithValue("name", entity.Name);
@@ -141,8 +141,7 @@ namespace HappyBank.Data.Repository
                 reader.GetString(5),
                 reader.GetString(6),
                 reader.GetString(7),
-                reader.GetString(8),
-                reader.GetString(9)
+                reader.GetString(8)
             );
         }
     }
