@@ -37,7 +37,7 @@ CREATE TABLE customer
 CREATE TABLE employees
 (
     id uuid NOT NULL PRIMARY KEY DEFAULT new_id(),
-    resgistration varchar (6) NOT NULL UNIQUE,
+    registration varchar (6) NOT NULL UNIQUE,
     bank_id uuid,
 	wage decimal NOT NULL,
 	"name" varchar(100) NOT NULL,
