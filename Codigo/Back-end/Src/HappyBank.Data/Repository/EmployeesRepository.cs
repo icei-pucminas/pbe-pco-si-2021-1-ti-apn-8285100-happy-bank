@@ -7,16 +7,16 @@ using Npgsql;
 
 namespace HappyBank.Data.Repository
 {
-    public class EmployeesRepository : PgRepository<Employees>, IEmployeesRepository
+    public class EmployeeRepository : PgRepository<Employee>, IEmployeeRepository
     {
-        public EmployeesRepository(global::Npgsql.NpgsqlConnection connection) : base(connection)
+        public EmployeeRepository(global::Npgsql.NpgsqlConnection connection) : base(connection)
         {
             
         }
 
-        public override Guid Add(Employees entity)
+        public override Guid Add(Employee entity)
         {
-            using (var cmd = new NpgsqlCommand("INSERT INTO \"employees\" (registration, bank_id, wage, name, function) VALUES (@registration, @bank_id, @wage, @name, @function) RETURNING id", Connection))
+            using (var cmd = new NpgsqlCommand("INSERT INTO \"employee\" (registration, bank_id, wage, name, function) VALUES (@registration, @bank_id, @wage, @name, @function) RETURNING id", Connection))
             {
                 cmd.Parameters.AddWithValue("registration", entity.Registration);
                 cmd.Parameters.AddWithValue("bank_id", entity.Bank);
@@ -29,9 +29,9 @@ namespace HappyBank.Data.Repository
             }
         }
 
-        public override bool Delete(Employees client)
+        public override bool Delete(Employee client)
         {
-            using (var cmd = new NpgsqlCommand("DELETE FROM \"employees\" WHERE id = @id", Connection))
+            using (var cmd = new NpgsqlCommand("DELETE FROM \"employee\" WHERE id = @id", Connection))
             {
                 cmd.Parameters.AddWithValue("id", client.Id);
                 cmd.Prepare();
@@ -39,10 +39,10 @@ namespace HappyBank.Data.Repository
             }
         }
 
-        public override List<Employees> FindAll()
+        public override List<Employee> FindAll()
         {
-            var result = new List<Employees>();
-            using (var cmd = new NpgsqlCommand("SELECT id, registration, bank_id, wage, name, function FROM employees order by id", Connection))
+            var result = new List<Employee>();
+            using (var cmd = new NpgsqlCommand("SELECT id, registration, bank_id, wage, name, function FROM employee order by id", Connection))
             {
                 cmd.Prepare();
 
@@ -52,7 +52,7 @@ namespace HappyBank.Data.Repository
                     {
                         while (reader.Read())
                         {
-                            result.Add(GetEmployees(reader));
+                            result.Add(GetEmployee(reader));
                         }
                     }
                 }
@@ -61,9 +61,9 @@ namespace HappyBank.Data.Repository
             return result;
         }
 
-        public override Employees FindOne(Guid id)
+        public override Employee FindOne(Guid id)
         {
-            using (var cmd = new NpgsqlCommand("SELECT id, registration, bank_id, wage, name, function FROM employees WHERE id = @id", Connection))
+            using (var cmd = new NpgsqlCommand("SELECT id, registration, bank_id, wage, name, function FROM employee WHERE id = @id", Connection))
             {
                 cmd.Parameters.AddWithValue("id", id);
                 cmd.Prepare();
@@ -74,7 +74,7 @@ namespace HappyBank.Data.Repository
                     {
                         while (reader.Read())
                         {
-                            return GetEmployees(reader);
+                            return GetEmployee(reader);
                         }
                     }
                 }
@@ -83,9 +83,9 @@ namespace HappyBank.Data.Repository
             return null;
         }
 
-        public Employees FindOneByRegistration (string registration)
+        public Employee FindOneByRegistration(string registration)
         {
-            using (var cmd = new NpgsqlCommand("SELECT id, registration, bank_id, wage, name, function FROM employees WHERE registration = @registration", Connection))
+            using (var cmd = new NpgsqlCommand("SELECT id, registration, bank_id, wage, name, function FROM employee WHERE registration = @registration", Connection))
             {
                 cmd.Parameters.AddWithValue("registration", registration);
                 cmd.Prepare();
@@ -96,7 +96,7 @@ namespace HappyBank.Data.Repository
                     {
                         while (reader.Read())
                         {
-                            return GetEmployees(reader);
+                            return GetEmployee(reader);
                         }
                     }
                 }
@@ -105,9 +105,9 @@ namespace HappyBank.Data.Repository
             return null;
         }
 
-        public override bool Update(Employees entity)
+        public override bool Update(Employee entity)
         {
-            using (var cmd = new NpgsqlCommand("UPDATE \"employees\" SET registration=@registration, bank_id=@bank_id, wage=@wage, name=@name, function=@function WHERE id=@id", Connection))
+            using (var cmd = new NpgsqlCommand("UPDATE \"employee\" SET registration=@registration, bank_id=@bank_id, wage=@wage, name=@name, function=@function WHERE id=@id", Connection))
             {
                 cmd.Parameters.AddWithValue("id", entity.Id);
                 cmd.Parameters.AddWithValue("registration", entity.Registration);
@@ -121,12 +121,12 @@ namespace HappyBank.Data.Repository
             }
         }
 
-        private Employees GetEmployees(NpgsqlDataReader reader)
+        private Employee GetEmployee(NpgsqlDataReader reader)
         {
-            return new Employees(
+            return new Employee(
                 reader.GetGuid(0), 
                 reader.GetString(1), 
-                reader.GetBank(2), 
+                null, //reader.GetBank(2), TODO: Recuperar banco
                 reader.GetDecimal(3), 
                 reader.GetString(4), 
                 reader.GetString(5)

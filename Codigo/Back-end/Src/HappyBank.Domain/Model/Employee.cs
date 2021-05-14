@@ -2,9 +2,9 @@ using System;
 
 namespace HappyBank.Domain.Model
 {
-    public class Employees : Entity
+    public class Employee : Entity
     {
-        public Employees(Guid id, string registration, Bank bank, decimal wage, string name, string function)
+        public Employee(Guid id, string registration, Bank bank, decimal wage, string name, string function)
         {
             this.Id = id;
             this.Registration = registration;
@@ -14,7 +14,7 @@ namespace HappyBank.Domain.Model
             this.Function = function;
         }
 
-        public Employees(string registration, Bank bank, decimal wage, string name, string function)
+        public Employee(string registration, Bank bank, decimal wage, string name, string function)
         {
             this.Registration = registration;
             this.Bank = bank;
