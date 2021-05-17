@@ -69,7 +69,7 @@ namespace HappyBank.UnitTests.UseCases
                 customerId.ToString()
             );
 
-            var account = new Account(Guid.NewGuid(), bank, customer, 1, 1);
+            var account = new Account(Guid.NewGuid(), bank.Id, customer.Id, 1, 1);
 
             IBankRepository bankRepository = Substitute.For<IBankRepository>();
             ICustomerRepository customerRepository = Substitute.For<ICustomerRepository>();

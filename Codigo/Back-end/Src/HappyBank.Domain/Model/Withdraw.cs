@@ -4,8 +4,8 @@ namespace HappyBank.Domain.Model
 {
     public class Withdraw : Transaction
     {
-        public Withdraw(Account account, decimal value, DateTime executionDate, string terminalCode) 
-            : base (account, value, executionDate, TransactionKind.WITHDRAW)
+        public Withdraw(Guid accountId, decimal value, DateTime executionDate, string terminalCode) 
+            : base (accountId, value, executionDate, TransactionKind.WITHDRAW)
         {
             this.TerminalCode = terminalCode;
         }

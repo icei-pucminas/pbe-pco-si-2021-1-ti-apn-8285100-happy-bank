@@ -4,12 +4,12 @@ namespace HappyBank.Domain.Model
 {
     public class Transfer : Transaction
     {
-        protected Transfer(Account account, Account accountDestiny, decimal value, DateTime executionDate) 
-            : base(account, value, executionDate, TransactionKind.TRANSFER)
+        protected Transfer(Guid accountId, Guid accountDestinyId, decimal value, DateTime executionDate) 
+            : base(accountId, value, executionDate, TransactionKind.TRANSFER)
         {
             this.Id = Guid.NewGuid();
-            this.AccountDestiny = accountDestiny;   
+            this.AccountDestinyId = accountDestinyId;   
         }
-        public Account AccountDestiny {get; private set;}
+        public Guid AccountDestinyId {get; private set;}
     }
 }

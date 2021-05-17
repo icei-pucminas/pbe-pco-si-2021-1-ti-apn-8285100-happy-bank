@@ -10,7 +10,7 @@ namespace HappyBank.Data.Repository
     {
         public List<Account> FindCustomerId(Guid customerId)
         {
-            return _list.FindAll(a => a.Customer.Id == customerId);
+            return _list.FindAll(a => a.CustomerId == customerId);
         }
     }
 }

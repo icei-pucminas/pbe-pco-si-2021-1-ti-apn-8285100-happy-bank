@@ -26,7 +26,7 @@ namespace HappyBank.UseCases.OpenAccount
             
             var Customer = FindCustomer(input);
 
-            var account = new Account(_bankRepository.HappyBank, Customer);
+            var account = new Account(_bankRepository.HappyBank.Id, Customer.Id);
             var accountId =_accountRepository.Add(account);
             var createdAccount = _accountRepository.FindOne(accountId);
 
