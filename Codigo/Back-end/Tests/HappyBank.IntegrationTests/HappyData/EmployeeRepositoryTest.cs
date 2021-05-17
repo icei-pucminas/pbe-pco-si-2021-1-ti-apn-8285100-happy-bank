@@ -6,21 +6,15 @@ using HappyBank.Domain.Model;
 
 namespace HappyBank.IntegrationTests.HappyData
 {
-    public class EmployeeRepositoryTest
+    public class EmployeeRepositoryTest : BaseTest
     {
-        private NpgsqlConnection Connection { get; set; }
+        private EmployeeRepository employeeRepository { get; set; }
+        private BankRepository bankRepository { get; set; }
 
         public EmployeeRepositoryTest()
         {
-            var connString = "Host=127.0.0.1;Port=5432;Username=postgres;Password=postgres;Database=happybanktests2";
-            this.Connection = new NpgsqlConnection(connString);
-            this.Connection.Open();
-
-            using (var cmd = new NpgsqlCommand("DELETE FROM \"Employee\"", Connection))
-            {
-                cmd.Prepare();
-                cmd.ExecuteNonQuery();
-            }
+            this.bankRepository = new BankRepository(this.Connection);
+            this.employeeRepository = new EmployeeRepository(this.Connection);
         }
 
         [Fact]
@@ -29,7 +23,7 @@ namespace HappyBank.IntegrationTests.HappyData
 
             var repository = new EmployeeRepository(Connection);
             
-            //Assert.Throws<InvalidOperationException>(() => repository.Add(new Employee(null, , 0, null, null)));
+            Assert.Throws<InvalidOperationException>(() => repository.Add(new Employee(null, Guid.Empty , null, 0m, null)));
         }
 
         [Fact]
@@ -55,7 +49,7 @@ namespace HappyBank.IntegrationTests.HappyData
 
             Assert.Equal(newId, dbEmployee.Id);
             Assert.Equal(Employee.Registration, dbEmployee.Registration);
-            Assert.Equal(Employee.Bank, dbEmployee.Bank);
+            Assert.Equal(Employee.BankId, dbEmployee.BankId);
             Assert.Equal(Employee.Wage, dbEmployee.Wage);
             Assert.Equal(Employee.Name, dbEmployee.Name);
             Assert.Equal(Employee.Function, dbEmployee.Function);
@@ -79,7 +73,7 @@ namespace HappyBank.IntegrationTests.HappyData
 
             var updatedEmployee = repository.FindOne(newId);
             Assert.Equal(updatedEmployee.Registration, dbEmployee.Registration);
-            Assert.Equal(updatedEmployee.Bank, dbEmployee.Bank);
+            Assert.Equal(updatedEmployee.BankId, dbEmployee.BankId);
             Assert.Equal(updatedEmployee.Wage, dbEmployee.Wage);
             Assert.Equal(updatedEmployee.Name, dbEmployee.Name);
             Assert.Equal(updatedEmployee.Function, dbEmployee.Function);
@@ -134,20 +128,41 @@ namespace HappyBank.IntegrationTests.HappyData
             Assert.NotNull(dbEmployee);
         }
 
-
         private Employee CreateEmployee()
         {
-            var EmployeeId = Guid.NewGuid();
-            var bankId = Bank.Id;
-            var strId = EmployeeId.ToString().Substring(0, 20);
-
+            var employeeId = Guid.NewGuid();
+            var strId = employeeId.ToString().Substring(0, 6);
+            var name = $"Employee {strId}";
+            var bank = this.CreateBank();
+            
             return new Employee(
+                name,
+                bank.Id,
                 strId,
-                bankId,
-                2.000,
-                "João da Silva",
+                2000m,
                 "TI"
             );
+        }
+
+        private Bank CreateBank()
+        {
+            var bankNumber = 171;
+            var strId = Guid.NewGuid().ToString().Substring(0, 6);
+            var name = $"Bank {strId}";
+            
+            var bank = new Bank(
+                bankNumber,
+                name,
+                strId,
+                "Av. Amazonas",
+                "Centro",
+                "Belo Horizonte",
+                "MG",
+                "1001"
+            );
+
+            var bankId = this.bankRepository.Add(bank);
+            return this.bankRepository.FindOne(bankId);
         }
     }
 }

@@ -34,15 +34,15 @@ CREATE TABLE customer
 	"password" varchar (50) NOT NULL
 );
 
-CREATE TABLE employees
+CREATE TABLE employee
 (
     id uuid NOT NULL PRIMARY KEY DEFAULT new_id(),
+	name varchar(100) NOT NULL,
+	bank_id uuid,
     registration varchar (6) NOT NULL UNIQUE,
-    bank_id uuid,
 	wage decimal NOT NULL,
-	"name" varchar(100) NOT NULL,
 	"function" varchar (100) NOT NULL,
-    CONSTRAINT employees_bank_fk FOREIGN KEY (bank_id) REFERENCES bank(id)
+    CONSTRAINT employee_bank_fk FOREIGN KEY (bank_id) REFERENCES bank(id)
 );
 
 CREATE SEQUENCE account_number_seq START 1;

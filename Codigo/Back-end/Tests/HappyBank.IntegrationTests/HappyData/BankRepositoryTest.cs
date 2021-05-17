@@ -6,23 +6,9 @@ using HappyBank.Domain.Model;
 
 namespace HappyBank.IntegrationTests.HappyData
 {
-    public class BankRepositoryTest
+    public class BankRepositoryTest : BaseTest
     {
-        private NpgsqlConnection Connection { get; set; }
-
-        public BankRepositoryTest()
-        {
-            var connString = "Host=127.0.0.1;Port=5432;Username=postgres;Password=postgres;Database=happybanktests2";
-            this.Connection = new NpgsqlConnection(connString);
-            this.Connection.Open();
-
-            using (var cmd = new NpgsqlCommand("DELETE FROM \"bank\"", Connection))
-            {
-                cmd.Prepare();
-                cmd.ExecuteNonQuery();
-            }
-        }
-
+        
         [Fact]
         public void Null_BankNumber_Mus_Throw_Exception()
         {

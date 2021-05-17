@@ -6,23 +6,9 @@ using HappyBank.Domain.Model;
 
 namespace HappyBank.IntegrationTests.HappyData
 {
-    public class CustomerRepositoryTest
+    public class CustomerRepositoryTest : BaseTest
     {
-        private NpgsqlConnection Connection {get; set;}
 
-        public CustomerRepositoryTest()
-        {
-            var connString = "Host=127.0.0.1;Port=5432;Username=postgres;Password=postgres;Database=happybanktests2";
-            this.Connection = new NpgsqlConnection(connString);
-            this.Connection.Open();
-
-            using (var cmd = new NpgsqlCommand("DELETE FROM \"customer\"", Connection))
-            {
-                cmd.Prepare();
-                cmd.ExecuteNonQuery();
-            }
-        }
-        
         [Fact]
         public void Null_Email_Mus_Throw_Exception()
         {
@@ -50,7 +36,7 @@ namespace HappyBank.IntegrationTests.HappyData
             var dbCustomer = repository.FindOne(newId);
 
             Assert.True(newId != Guid.Empty);
-            
+
             Assert.Equal(newId, dbCustomer.Id);
             Assert.Equal(customer.Name, dbCustomer.Name);
             Assert.Equal(customer.GovNumber, dbCustomer.GovNumber);
@@ -74,10 +60,10 @@ namespace HappyBank.IntegrationTests.HappyData
             var newId = repository.Add(customer);
             var dbCustomer = repository.FindOne(newId);
 
-            Assert.True(newId != Guid.Empty);            
+            Assert.True(newId != Guid.Empty);
             Assert.Equal(newId, dbCustomer.Id);
             Assert.Equal(customer.Name, dbCustomer.Name);
-            
+
             dbCustomer.Name = $"{dbCustomer.Name} updated";
             Assert.True(repository.Update(dbCustomer));
 
@@ -105,19 +91,19 @@ namespace HappyBank.IntegrationTests.HappyData
             var newId = repository.Add(customer);
             var dbCustomer = repository.FindOne(newId);
 
-            Assert.True(newId != Guid.Empty);            
+            Assert.True(newId != Guid.Empty);
             Assert.Equal(newId, dbCustomer.Id);
             Assert.Equal(customer.Name, dbCustomer.Name);
-            
+
             repository.Delete(dbCustomer);
             Assert.Null(repository.FindOne(newId));
         }
 
-        [Fact]    
+        [Fact]
         public void Complete_Customer_Must_Insert_And_Return_In_List()
         {
             var repository = new CustomerRepository(Connection);
-            
+
             repository.Add(CreateCustomer());
             repository.Add(CreateCustomer());
             repository.Add(CreateCustomer());
@@ -128,20 +114,20 @@ namespace HappyBank.IntegrationTests.HappyData
             repository.Add(CreateCustomer());
             repository.Add(CreateCustomer());
             repository.Add(CreateCustomer());
-            
+
 
             var customers = repository.FindAll();
             Assert.True(customers.Count == 10);
         }
 
-         [Fact]    
+        [Fact]
         public void Complete_Customer_Must_Insert_And_Return_By_Email()
         {
             var repository = new CustomerRepository(Connection);
             var customer = CreateCustomer();
-            
+
             repository.Add(customer);
-            
+
             var dbCustomer = repository.FindOneByEmail(customer.Email);
             Assert.NotNull(dbCustomer);
         }
@@ -152,19 +138,19 @@ namespace HappyBank.IntegrationTests.HappyData
             var customerId = Guid.NewGuid();
             var name = $"Customer {customerId}";
             var email = $"{customerId}@happybank.com";
-            var strId = customerId.ToString().Substring(0, 20);
+            var strId = customerId.ToString().Substring(0, 6);
 
             return new Customer(
                 name,
                 strId,
-                "Av. Amazonas", 
-                "Centro", 
-                "Belo Horizonte", 
-                "MG", 
-                "1001", 
+                "Av. Amazonas",
+                "Centro",
+                "Belo Horizonte",
+                "MG",
+                "1001",
                 new DateTime(1985, 8, 15),
-                "(31)91111-1111", 
-                email, 
+                "(31)91111-1111",
+                email,
                 strId
             );
         }
