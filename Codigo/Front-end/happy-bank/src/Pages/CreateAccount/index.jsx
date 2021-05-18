@@ -1,6 +1,7 @@
 import "./styles.css";
 import DrawCreate from "../../images/heroCreate.png";
 import LogoImg from "../../images/logo.png";
+import { Link } from "react-router-dom";
 
 export default function CreateAccount() {
   return (
@@ -13,13 +14,19 @@ export default function CreateAccount() {
           <input type="text" id="cpf" placeholder="CPF" />
           <input type="text" id="rg" placeholder="RG" />
           <input type="text" id="email" placeholder="E-mail" />
-          <input type="text" id="senha" placeholder="Senha" />
-          <input type="text" id="confirmsenha" placeholder="Confirmar ssenha" />
+          <input type="password" id="senha" placeholder="Senha" />
+          <input
+            type="password"
+            id="confirmsenha"
+            placeholder="Confirmar ssenha"
+          />
         </form>
       </main>
       <div className="drawSide">
         <img src={DrawCreate} alt="" id="drawC" />
-        <img src={LogoImg} alt="" id="logo" />
+        <Link to="/">
+          <img src={LogoImg} alt="" id="logo" />
+        </Link>
       </div>
     </div>
   );

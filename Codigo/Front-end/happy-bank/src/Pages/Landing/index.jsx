@@ -10,7 +10,9 @@ export default function Landing() {
     <div id="page-landing">
       <div className="page-landing-content container">
         <div className="logo-container">
-          <img src={LogoImg} alt="" />
+          <Link to="/deposit">
+            <img src={LogoImg} alt="" />
+          </Link>
           <h2>Sua felicidade começa aqui</h2>
         </div>
 

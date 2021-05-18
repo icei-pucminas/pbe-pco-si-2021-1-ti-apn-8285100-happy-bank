@@ -22,7 +22,9 @@ export default function Login() {
       </div>
       <div id="draw-side">
         <img className="draw" src={DrawImage} alt="Draw" />
-        <img className="logo" src={logo} alt="Logo" />
+        <Link to="/" class="back-link">
+          <img className="logo" src={logo} alt="Logo" />
+        </Link>
       </div>
     </div>
   );

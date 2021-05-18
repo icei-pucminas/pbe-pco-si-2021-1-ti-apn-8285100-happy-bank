@@ -58,13 +58,17 @@ button:hover {
   background: var(--hover-darkPurple);
 }
 
-a {
+#login a {
   text-decoration: none;
   color: #0b0928;
   font-weight: bold;
   display: block;
   margin-left: 37rem;
   font-size: 2.2rem;
+}
+
+#login .back-link {
+  margin-left: 0;
 }
 
 a:hover {
@@ -90,4 +94,13 @@ a:hover {
 .logo {
   display: block;
   width: 25rem;
+}
+
+@media (max-width: 960px) {
+  #draw-side {
+    display: none;
+  }
+  #form-side {
+    width: 100%;
+  }
 }
