@@ -41,11 +41,13 @@ namespace HappyBank.api
             });
             services.AddHttpContextAccessor();
 
-            services.AddTransient<ContextService>();            
+            
+            services.AddSingleton<NpgsqlConnection>((sp) => new NpgsqlConnection("Host=127.0.0.1;Port=5432;Username=postgres;Password=postgres;Database=happybank"));
 
-            services.AddTransient<NpgsqlConnection>((sp) => new NpgsqlConnection("Host=localhost;Username=postgres;Password=postgres;Database=happybank"));
+            services.AddTransient<ContextService>();            
             services.AddTransient<IAccountRepository, AccountRepository>();
             services.AddTransient<ICustomerRepository, CustomerRepository>();
+            services.AddTransient<IBankRepository, BankRepository>();
             services.AddTransient<OpenAccountUC>();
             services.AddTransient<CustomerRegistrationUC>();
         }

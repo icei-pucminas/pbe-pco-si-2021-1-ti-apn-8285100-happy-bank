@@ -9,12 +9,24 @@ namespace HappyBank.Data.Repository
 {
     public class BankRepository : PgRepository<Bank>, IBankRepository
     {
+        private Bank _happyBank;
+        public int HappyBankNumber => 171;
+
         public BankRepository(global::Npgsql.NpgsqlConnection connection) : base(connection)
         {
 
         }
 
-        public Bank HappyBank => throw new NotImplementedException();
+        public Bank HappyBank {
+            get{
+                if(null == _happyBank)
+                {
+                    _happyBank = this.FindOneByBankNumber(HappyBankNumber);
+                }
+
+                return _happyBank;
+            }
+        }
 
         public override Guid Add(Bank entity)
         {

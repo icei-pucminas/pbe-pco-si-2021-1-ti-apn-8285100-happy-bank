@@ -1,15 +1,25 @@
 using System;
 using System.Collections.Generic;
 using Npgsql;
+using System.Data;
 
 namespace HappyBank.Infra.Data.Pg
 {
     public abstract class PgRepository<TEntity> : IRepository<TEntity> where TEntity : IEntity
     {
-        protected NpgsqlConnection Connection {get;}
+        private NpgsqlConnection _connection;
+        protected NpgsqlConnection Connection {
+            get{
+                if(null != this._connection && ConnectionState.Closed.Equals(_connection.State))
+                {
+                    _connection.Open();
+                }                
+                return _connection;
+            }
+        }
         public PgRepository(NpgsqlConnection connection)
         {
-            this.Connection = connection;
+            this._connection = connection;
         }
 
         public abstract Guid Add(TEntity entity);

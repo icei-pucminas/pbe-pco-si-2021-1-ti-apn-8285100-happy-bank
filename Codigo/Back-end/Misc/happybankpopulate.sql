@@ -96,6 +96,6 @@ begin
 
 END $$;
  
-   0 = deposito;
-   1 = transferência;
-   2 = saque;
+-- 0 = deposito;
+-- 1 = transferência;
+-- 2 = saque;
