@@ -20,7 +20,7 @@ namespace HappyBank.IntegrationTests.HappyData
         }
 
         [Fact]
-        public void Null_Registration_Mus_Throw_Exception()
+        public void Null_Registration_Must_Throw_Exception()
         {
 
             var repository = new AccountRepository(Connection);
@@ -34,7 +34,8 @@ namespace HappyBank.IntegrationTests.HappyData
             var repository = new AccountRepository(Connection);
 
             var id = Guid.NewGuid();
-            var newId = repository.Add(CreateAccount());
+            var bank = this.CreateBank();
+            var newId = repository.Add(CreateAccount(bank));
             Assert.True(newId != Guid.Empty);
         }
 
@@ -42,7 +43,9 @@ namespace HappyBank.IntegrationTests.HappyData
         public void Complete_Account_Must_Insert_And_Return_Equal_Entity()
         {
             var repository = new AccountRepository(Connection);
-            var Account = CreateAccount();
+            
+            var bank = this.CreateBank();
+            var Account = CreateAccount(bank);
 
             var newId = repository.Add(Account);
             var dbAccount = repository.FindOne(newId);
@@ -53,14 +56,14 @@ namespace HappyBank.IntegrationTests.HappyData
             Assert.Equal(Account.BankId, dbAccount.BankId);
             Assert.Equal(Account.CustomerId, dbAccount.CustomerId);
             Assert.Equal(Account.AgencyNumber, dbAccount.AgencyNumber);
-            Assert.Equal(Account.AccountNumber, dbAccount.AccountNumber);
         }
 
         [Fact]
         public void Complete_Account_Must_Insert_And_Update_Return_Equal_Entity()
         {
             var repository = new AccountRepository(Connection);
-            var Account = CreateAccount();
+            var bank = this.CreateBank();
+            var Account = CreateAccount(bank);
 
             var newId = repository.Add(Account);
             var dbAccount = repository.FindOne(newId);
@@ -83,7 +86,8 @@ namespace HappyBank.IntegrationTests.HappyData
         public void Complete_Account_Must_Insert_And_Not_Found_After_Delete()
         {
             var repository = new AccountRepository(Connection);
-            var Account = CreateAccount();
+            var bank = this.CreateBank();
+            var Account = CreateAccount(bank);
 
             var newId = repository.Add(Account);
             var dbAccount = repository.FindOne(newId);
@@ -101,16 +105,18 @@ namespace HappyBank.IntegrationTests.HappyData
         {
             var repository = new AccountRepository(Connection);
 
-            repository.Add(CreateAccount());
-            repository.Add(CreateAccount());
-            repository.Add(CreateAccount());
-            repository.Add(CreateAccount());
-            repository.Add(CreateAccount());
-            repository.Add(CreateAccount());
-            repository.Add(CreateAccount());
-            repository.Add(CreateAccount());
-            repository.Add(CreateAccount());
-            repository.Add(CreateAccount());
+            var bank = this.CreateBank();
+
+            repository.Add(CreateAccount(bank));
+            repository.Add(CreateAccount(bank));
+            repository.Add(CreateAccount(bank));
+            repository.Add(CreateAccount(bank));
+            repository.Add(CreateAccount(bank));
+            repository.Add(CreateAccount(bank));
+            repository.Add(CreateAccount(bank));
+            repository.Add(CreateAccount(bank));
+            repository.Add(CreateAccount(bank));
+            repository.Add(CreateAccount(bank));
 
             var Account = repository.FindAll();
             Assert.True(Account.Count == 10);
@@ -119,8 +125,9 @@ namespace HappyBank.IntegrationTests.HappyData
         [Fact]
         public void Complete_Account_Must_Insert_And_Return_By_CustomerId()
         {
+            var bank = this.CreateBank();
             var repository = new AccountRepository(Connection);
-            var Account = CreateAccount();
+            var Account = CreateAccount(bank);
 
             repository.Add(Account);
 
@@ -128,10 +135,9 @@ namespace HappyBank.IntegrationTests.HappyData
             Assert.NotNull(dbAccount);
         }
 
-        private Account CreateAccount()
+        private Account CreateAccount(Bank bank)
         {
             var accountId = Guid.NewGuid();
-            var bank = this.CreateBank();
             var customer = this.CreateCustomer();
             
             return new Account(

@@ -53,7 +53,7 @@ CREATE TABLE account
     bank_id uuid,
 	customer_id uuid,
 	agency_number int NOT null default 1,
-	account_bank int NOT NULL UNIQUE DEFAULT nextval('account_number_seq'),
+	account_number int NOT NULL UNIQUE DEFAULT nextval('account_number_seq'),
     CONSTRAINT account_bank_fk FOREIGN KEY (bank_id) REFERENCES bank(id),
 	CONSTRAINT account_customer_fk FOREIGN KEY (customer_id) REFERENCES customer(id)
 );

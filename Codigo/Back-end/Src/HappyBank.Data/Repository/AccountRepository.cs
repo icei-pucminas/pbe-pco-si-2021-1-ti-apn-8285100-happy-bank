@@ -19,12 +19,17 @@ namespace HappyBank.Data.Repository
 
         public override Guid Add(Account entity)
         {
-            using (var cmd = new NpgsqlCommand("INSERT INTO \"account\" (bank_id, customer_id, agency_number, account_bank) VALUES (@bank_id, @customer_id, @agency_number, @account_bank) RETURNING id", Connection))
+            if(entity.BankId == Guid.Empty || entity.CustomerId == Guid.Empty)
+            {
+                throw new InvalidOperationException();
+            }
+            
+            using (var cmd = new NpgsqlCommand("INSERT INTO \"account\" (bank_id, customer_id, agency_number) VALUES (@bank_id, @customer_id, @agency_number) RETURNING id", Connection))
             {
                 cmd.Parameters.AddWithValue("bank_id", entity.BankId);
                 cmd.Parameters.AddWithValue("customer_id", entity.CustomerId);                
                 cmd.Parameters.AddWithValue("agency_number", entity.AgencyNumber);                
-                cmd.Parameters.AddWithValue("account_bank", entity.AccountNumber);
+                
                 cmd.Prepare();
 
                 return (Guid)cmd.ExecuteScalar();
@@ -44,7 +49,7 @@ namespace HappyBank.Data.Repository
         public override List<Account> FindAll()
         {
             var result = new List<Account>();
-            using (var cmd = new NpgsqlCommand("SELECT id, bank_id, customer_id, agency_number, account_bank FROM account order by id", Connection))
+            using (var cmd = new NpgsqlCommand("SELECT id, bank_id, customer_id, agency_number, account_number FROM account order by id", Connection))
             {
                 cmd.Prepare();
 
@@ -67,7 +72,7 @@ namespace HappyBank.Data.Repository
 
         public override Account FindOne(Guid id)
         {
-            using (var cmd = new NpgsqlCommand("SELECT id, bank_id, customer_id, agency_number, account_bank FROM account WHERE id = @id", Connection))
+            using (var cmd = new NpgsqlCommand("SELECT id, bank_id, customer_id, agency_number, account_number FROM account WHERE id = @id", Connection))
             {
                 cmd.Parameters.AddWithValue("id", id);
                 cmd.Prepare();
@@ -90,7 +95,7 @@ namespace HappyBank.Data.Repository
         public List<Account> FindByCustomerId(Guid customerId)
         {
             var result = new List<Account>();
-            using (var cmd = new NpgsqlCommand("SELECT id, bank_id, customer_id, agency_number, account_bank FROM account WHERE customer_id = customer_id", Connection))
+            using (var cmd = new NpgsqlCommand("SELECT id, bank_id, customer_id, agency_number, account_number FROM account WHERE customer_id = customer_id", Connection))
             {
                 cmd.Parameters.AddWithValue("customer_id", customerId);
                 cmd.Prepare();
@@ -112,13 +117,13 @@ namespace HappyBank.Data.Repository
 
         public override bool Update(Account entity)
         {
-            using (var cmd = new NpgsqlCommand("UPDATE \"account\" SET bank_id=@bank_id, custumer_id=@customer_id, agency_number=@agency_number, account_bank=@account_bank WHERE id=@id", Connection))
+            using (var cmd = new NpgsqlCommand("UPDATE \"account\" SET bank_id=@bank_id, customer_id=@customer_id, agency_number=@agency_number, account_number=@account_number WHERE id=@id", Connection))
             {
                 cmd.Parameters.AddWithValue("id", entity.Id);
                 cmd.Parameters.AddWithValue("bank_id", entity.BankId);
                 cmd.Parameters.AddWithValue("customer_id", entity.CustomerId);                
                 cmd.Parameters.AddWithValue("agency_number", entity.AgencyNumber);                
-                cmd.Parameters.AddWithValue("account_bank", entity.AccountNumber);
+                cmd.Parameters.AddWithValue("account_number", entity.AccountNumber);
                 cmd.Prepare();
 
                 return cmd.ExecuteNonQuery() > 0;

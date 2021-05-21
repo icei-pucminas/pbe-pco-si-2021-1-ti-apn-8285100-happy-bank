@@ -68,7 +68,7 @@ namespace HappyBank.IntegrationTests.HappyData
             Assert.Equal(newId, dbEmployee.Id);
             Assert.Equal(Employee.Registration, dbEmployee.Registration);
 
-            dbEmployee.Registration = $"{dbEmployee.Registration} updated";
+            dbEmployee.Name = $"{dbEmployee.Name} updated";
             Assert.True(repository.Update(dbEmployee));
 
             var updatedEmployee = repository.FindOne(newId);
