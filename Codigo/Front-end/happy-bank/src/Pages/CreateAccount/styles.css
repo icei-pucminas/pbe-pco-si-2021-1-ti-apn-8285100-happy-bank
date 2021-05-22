@@ -117,4 +117,8 @@ button.send-selfie {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+
+  transition: background-color 300ms;
 }

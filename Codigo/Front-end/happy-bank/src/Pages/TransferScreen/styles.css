@@ -1,0 +1,52 @@
+.transfer-content {
+  width: 100vw;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.transfer-title {
+  color: #808080;
+  font-size: 4rem;
+  margin-top: 5rem;
+  margin-left: 5rem;
+}
+
+.transfer-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.transfer-content input {
+  width: 35rem;
+  height: 5rem;
+  outline: none;
+  padding: 3rem;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #808080;
+  border: none;
+  border-radius: 3rem;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.transfer-btn {
+  width: 32rem;
+  height: 60px;
+
+  color: #fff;
+  font-size: 2.5rem;
+  background-color: var(--pink);
+
+  transition: background-color 300ms;
+  cursor: pointer;
+  margin-top: 5rem;
+  align-self: center;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}

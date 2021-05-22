@@ -1,9 +1,11 @@
 import React from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import CreateAccount from "./Pages/CreateAccount";
+import InitialScreen from "./Pages/InitialScreen";
 import Landing from "./Pages/Landing";
 import Login from "./Pages/Login";
 import TerminalDeposit from "./Pages/TerminalDeposit";
+import TransferScreen from "./Pages/TransferScreen";
 
 export default function Routes() {
   return (
@@ -12,6 +14,8 @@ export default function Routes() {
       <Route path="/login" component={Login} />
       <Route path="/createaccount" component={CreateAccount} />
       <Route path="/deposit" component={TerminalDeposit} />
+      <Route path="/myaccount" component={InitialScreen} />
+      <Route path="/transfer" component={TransferScreen} />
     </BrowserRouter>
   );
 }
