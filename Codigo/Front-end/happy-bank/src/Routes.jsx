@@ -4,7 +4,7 @@ import CreateAccount from "./Pages/CreateAccount";
 import InitialScreen from "./Pages/InitialScreen";
 import Landing from "./Pages/Landing";
 import Login from "./Pages/Login";
-import TerminalDeposit from "./Pages/TerminalDeposit";
+import TerminalDeposit from "./Pages/Terminal/TerminalDeposit";
 import TransferScreen from "./Pages/TransferScreen";
 
 export default function Routes() {
@@ -13,7 +13,7 @@ export default function Routes() {
       <Route path="/" exact component={Landing} />
       <Route path="/login" component={Login} />
       <Route path="/createaccount" component={CreateAccount} />
-      <Route path="/deposit" component={TerminalDeposit} />
+      <Route exact path="/deposit" component={TerminalDeposit} />
       <Route path="/myaccount" component={InitialScreen} />
       <Route path="/transfer" component={TransferScreen} />
     </BrowserRouter>

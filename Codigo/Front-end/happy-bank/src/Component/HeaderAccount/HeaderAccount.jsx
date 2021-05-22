@@ -5,13 +5,14 @@ import "./style.css";
 
 function HeaderAccount({ children, Display }) {
   let saldo = 100;
+  let saldoConvert = saldo.toFixed(2).replace(".", ",");
   const accountName = "José da Silva";
 
   return (
     <div id="header-container">
       <div className="balance">
         <span>Saldo em conta</span>
-        <strong>R$ {saldo.toFixed(2).replace(".", ",")}</strong>
+        <strong>R$ {saldoConvert}</strong>
       </div>
       <div className="acconut-name">
         <strong>{accountName}</strong>
