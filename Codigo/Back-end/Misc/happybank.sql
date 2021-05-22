@@ -53,7 +53,7 @@ CREATE TABLE account
     bank_id uuid,
 	customer_id uuid,
 	agency_number int NOT null default 1,
-	account_bank int NOT NULL UNIQUE DEFAULT nextval('account_number_seq'),
+	account_number int NOT NULL UNIQUE DEFAULT nextval('account_number_seq'),
     CONSTRAINT account_bank_fk FOREIGN KEY (bank_id) REFERENCES bank(id),
 	CONSTRAINT account_customer_fk FOREIGN KEY (customer_id) REFERENCES customer(id)
 );
@@ -61,19 +61,19 @@ CREATE TABLE account
 CREATE TABLE "transaction"
 (
     id uuid NOT NULL PRIMARY KEY DEFAULT new_id(),
-	acount_id uuid NOT NULL,
+	account_id uuid NOT NULL,
 	kind char(1) NOT NULL,
 	value decimal NOT NULL,
 	execution_date timestamp,
-    CONSTRAINT transaction_account_fk FOREIGN KEY (acount_id) REFERENCES account(id)
+    CONSTRAINT transaction_account_fk FOREIGN KEY (account_id) REFERENCES account(id)
 );
 
 CREATE TABLE transfer
 (
     id uuid NOT NULL PRIMARY KEY,
-	acount_destiny_id uuid NOT null,
+	account_destiny_id uuid NOT null,
 	CONSTRAINT transfer_transaction_fk FOREIGN KEY (id) REFERENCES transaction(id),
-	CONSTRAINT transfer_account_destiny_fk FOREIGN KEY (acount_destiny_id) REFERENCES account(id)
+	CONSTRAINT transfer_account_destiny_fk FOREIGN KEY (account_destiny_id) REFERENCES account(id)
 );
 
 CREATE TABLE withdraw
@@ -93,11 +93,13 @@ CREATE TABLE deposit
 CREATE TABLE operation
 (
     id uuid NOT NULL PRIMARY KEY DEFAULT new_id(),
-	acount_id uuid NOT NULL,
+	account_id uuid NOT NULL,
 	transaction_id uuid NOT NULL,
 	kind char(1) NOT NULL,
 	value decimal NOT NULL,
 	execution_date timestamp,
-    CONSTRAINT operation_account_fk FOREIGN KEY (acount_id) REFERENCES account(id),
+    CONSTRAINT operation_account_fk FOREIGN KEY (account_id) REFERENCES account(id),
     CONSTRAINT operation_transaction_fk FOREIGN KEY (transaction_id) REFERENCES transaction(id)
 );
+
+

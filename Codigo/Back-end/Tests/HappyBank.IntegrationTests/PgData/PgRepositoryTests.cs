@@ -16,14 +16,14 @@ namespace HappyBank.IntegrationTests.PgData
             Connection.Open();
         }
         
-        [Fact]
+        //[Fact]
         public void Null_Sample_Title_Mus_Throw_Exception()
         {
             var repository = new SampleRepository(Connection);
             Assert.Throws<InvalidOperationException>(() => repository.Add(new SampleEntity(Guid.NewGuid(), null)));
         }
 
-        [Fact]
+        //[Fact]
         public void Complete_Sample_Mus_Insert_And_Return_Id()
         {
             var repository = new SampleRepository(Connection);
