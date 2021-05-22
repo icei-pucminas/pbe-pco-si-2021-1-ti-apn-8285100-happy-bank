@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "JlMtY5KbhXy/HBhl9baJnuv4fD+3xt+6j+zGf8Iq6IumT2OVP1S3CHDLNVJn4cyWSQSBB1fGZfwgevGQZKz5Sw==",
+  "success": true,
+  "projectFilePath": "/home/hugo/Faculdade/pbe-pco-si-2021-1-ti-apn-8285100-happy-bank/Codigo/Src/HappyBank.UseCases/HappyBank.UseCases.csproj",
+  "expectedPackageFiles": [
+    "/home/hugo/.nuget/packages/npgsql/5.0.4/npgsql.5.0.4.nupkg.sha512",
+    "/home/hugo/.nuget/packages/system.runtime.compilerservices.unsafe/4.6.0/system.runtime.compilerservices.unsafe.4.6.0.nupkg.sha512"
+  ],
+  "logs": []
+}

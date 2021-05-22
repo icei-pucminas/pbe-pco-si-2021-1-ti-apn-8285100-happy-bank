@@ -1,0 +1,15 @@
+/home/hugo/Faculdade/pbe-pco-si-2021-1-ti-apn-8285100-happy-bank/Codigo/Src/HappyBank.Domain/bin/Debug/net5.0/HappyBank.Domain.deps.json
+/home/hugo/Faculdade/pbe-pco-si-2021-1-ti-apn-8285100-happy-bank/Codigo/Src/HappyBank.Domain/bin/Debug/net5.0/HappyBank.Domain.dll
+/home/hugo/Faculdade/pbe-pco-si-2021-1-ti-apn-8285100-happy-bank/Codigo/Src/HappyBank.Domain/bin/Debug/net5.0/ref/HappyBank.Domain.dll
+/home/hugo/Faculdade/pbe-pco-si-2021-1-ti-apn-8285100-happy-bank/Codigo/Src/HappyBank.Domain/bin/Debug/net5.0/HappyBank.Domain.pdb
+/home/hugo/Faculdade/pbe-pco-si-2021-1-ti-apn-8285100-happy-bank/Codigo/Src/HappyBank.Domain/bin/Debug/net5.0/HappyBank.Infra.dll
+/home/hugo/Faculdade/pbe-pco-si-2021-1-ti-apn-8285100-happy-bank/Codigo/Src/HappyBank.Domain/bin/Debug/net5.0/HappyBank.Infra.pdb
+/home/hugo/Faculdade/pbe-pco-si-2021-1-ti-apn-8285100-happy-bank/Codigo/Src/HappyBank.Domain/obj/Debug/net5.0/HappyBank.Domain.csprojAssemblyReference.cache
+/home/hugo/Faculdade/pbe-pco-si-2021-1-ti-apn-8285100-happy-bank/Codigo/Src/HappyBank.Domain/obj/Debug/net5.0/HappyBank.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/home/hugo/Faculdade/pbe-pco-si-2021-1-ti-apn-8285100-happy-bank/Codigo/Src/HappyBank.Domain/obj/Debug/net5.0/HappyBank.Domain.AssemblyInfoInputs.cache
+/home/hugo/Faculdade/pbe-pco-si-2021-1-ti-apn-8285100-happy-bank/Codigo/Src/HappyBank.Domain/obj/Debug/net5.0/HappyBank.Domain.AssemblyInfo.cs
+/home/hugo/Faculdade/pbe-pco-si-2021-1-ti-apn-8285100-happy-bank/Codigo/Src/HappyBank.Domain/obj/Debug/net5.0/HappyBank.Domain.csproj.CoreCompileInputs.cache
+/home/hugo/Faculdade/pbe-pco-si-2021-1-ti-apn-8285100-happy-bank/Codigo/Src/HappyBank.Domain/obj/Debug/net5.0/HappyBank.Domain.csproj.CopyComplete
+/home/hugo/Faculdade/pbe-pco-si-2021-1-ti-apn-8285100-happy-bank/Codigo/Src/HappyBank.Domain/obj/Debug/net5.0/HappyBank.Domain.dll
+/home/hugo/Faculdade/pbe-pco-si-2021-1-ti-apn-8285100-happy-bank/Codigo/Src/HappyBank.Domain/obj/Debug/net5.0/ref/HappyBank.Domain.dll
+/home/hugo/Faculdade/pbe-pco-si-2021-1-ti-apn-8285100-happy-bank/Codigo/Src/HappyBank.Domain/obj/Debug/net5.0/HappyBank.Domain.pdb

@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using HappyBank.Domain.Model;
 using HappyBank.Domain.Repository;
-using HappyBank.Infra.Data.Pg;
+using HappyBank.Infra.PgData;
 using Npgsql;
 
 namespace HappyBank.Data.Repository
 {
-    public class EmployeeRepository : PgRepository<Employee>, IEmployeeRepository
+    public class EmployeeRepository : PgCrudRepository<Employee>, IEmployeeRepository
     {
         private readonly IBankRepository _bankRepository;
         public EmployeeRepository(global::Npgsql.NpgsqlConnection connection) : base(connection)

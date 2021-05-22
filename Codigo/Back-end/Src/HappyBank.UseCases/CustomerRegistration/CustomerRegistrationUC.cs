@@ -9,9 +9,9 @@ namespace HappyBank.UseCases.CustomerRegistration
 {
     public class CustomerRegistrationUC : IUseCase<CustomerRegistrationInput, CustomerRegistrationOutput>
     {
-        private readonly ICustomerRepository _CustomerRepository;
+        private readonly ICustomerRepository _customerRepository;
         public CustomerRegistrationUC(ICustomerRepository CustomerRepository) => 
-            _CustomerRepository = CustomerRepository;
+            _customerRepository = CustomerRepository;
 
         public CustomerRegistrationOutput Execute(CustomerRegistrationInput input)
         {
@@ -30,7 +30,7 @@ namespace HappyBank.UseCases.CustomerRegistration
                 input.Email, 
                 input.Password);
 
-            Guid CustomerId = _CustomerRepository.Add(Customer);
+            Guid CustomerId = _customerRepository.Add(Customer);
 
             return new CustomerRegistrationOutput{ CustomerId = CustomerId };
         }
@@ -42,7 +42,7 @@ namespace HappyBank.UseCases.CustomerRegistration
                 throw new ArgumentException(Messages.INVALID_INPUT_MESSAGE);
             }
 
-            if(null != _CustomerRepository.FindOneByEmail(input.Email))
+            if(null != _customerRepository.FindOneByEmail(input.Email))
             {
                 throw new CustomerDuplicatedException(Messages.INVALID_USERNAME);
             }

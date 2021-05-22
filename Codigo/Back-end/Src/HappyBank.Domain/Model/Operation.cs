@@ -12,7 +12,7 @@ namespace HappyBank.Domain.Model
 
     public enum OperationKind
     {
-        CREDIT,
-        DEBIT
+        CREDIT = 1,
+        DEBIT = 0
     }
 }
