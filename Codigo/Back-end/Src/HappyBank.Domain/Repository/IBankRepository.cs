@@ -7,7 +7,6 @@ namespace HappyBank.Domain.Repository
     {
         int HappyBankNumber {get;}
         Bank HappyBank{get;}
-
         Bank FindOneByBankNumber(int bankNumber);
     }
 }

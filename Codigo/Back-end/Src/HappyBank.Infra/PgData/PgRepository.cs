@@ -1,11 +1,9 @@
-using System;
-using System.Collections.Generic;
 using Npgsql;
 using System.Data;
 
-namespace HappyBank.Infra.Data.Pg
+namespace HappyBank.Infra.PgData
 {
-    public abstract class PgRepository<TEntity> : IRepository<TEntity> where TEntity : IEntity
+    public abstract class PgRepository
     {
         private NpgsqlConnection _connection;
         protected NpgsqlConnection Connection {
@@ -21,11 +19,5 @@ namespace HappyBank.Infra.Data.Pg
         {
             this._connection = connection;
         }
-
-        public abstract Guid Add(TEntity entity);
-        public abstract bool Delete(TEntity client);
-        public abstract TEntity FindOne(Guid id);
-        public abstract List<TEntity> FindAll();
-        public abstract bool Update(TEntity client);
     }
 }

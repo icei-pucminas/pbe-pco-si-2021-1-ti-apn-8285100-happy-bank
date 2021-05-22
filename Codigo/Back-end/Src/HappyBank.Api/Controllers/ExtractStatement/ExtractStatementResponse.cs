@@ -1,14 +1,14 @@
 using System;
 using System.Collections.Generic;
 
-namespace HappyBank.UseCases.ExtractStatement
+namespace HappyBank.Api.Controllers.ExtractStatement
 {
-    public class ExtractStatementOutput : List<ExtractStatementItem>
+    public class ExtractStatementResponse : List<ExtractStatementItem>
     {
-           
+        
     }
-    
-    public class ExtractStatementItem 
+
+    public class ExtractStatementItem
     {
         public Guid Id {get; set;}
         public DateTime ExecutionDate {get; set;}
