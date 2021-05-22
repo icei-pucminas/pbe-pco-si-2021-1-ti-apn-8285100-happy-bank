@@ -1,11 +1,12 @@
-using HappyBank.Infra.Data.Pg;
+
 using System;
 using System.Collections.Generic;
+using HappyBank.Infra.PgData;
 using Npgsql;
 
 namespace HappyBank.IntegrationTests.PgData
 {
-    public class SampleRepository : PgRepository<SampleEntity>
+    public class SampleRepository : PgCrudRepository<SampleEntity>
     {
         public SampleRepository(NpgsqlConnection connection) : base(connection) { }
 

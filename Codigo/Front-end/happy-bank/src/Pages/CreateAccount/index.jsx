@@ -1,12 +1,20 @@
 import "./styles.css";
+
 import DrawCreate from "../../images/heroCreate.png";
 import LogoImg from "../../images/logo.png";
+import SelfieImg from "../../images/selfie.png";
+
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
+
 import { FaCircle } from "react-icons/fa";
+import { FiSend } from "react-icons/fi";
+
+import Modal from "../../Component/Modal/Modal";
 
 export default function CreateAccount() {
   const [visibility, setVisibility] = useState(false);
+  const [modal, setModal] = useState(false);
   const [inputs, setInputs] = useState({
     name: "",
     cpf: "",
@@ -27,13 +35,30 @@ export default function CreateAccount() {
     clone[name] = value;
     setInputs(clone);
   }
+
+  function abrirModal() {
+    console.log("Abrindo modal");
+    setModal(true);
+  }
+
+  function closeModal() {
+    setModal(false);
+  }
+
+  async function criarConta(event) {
+    event.preventDefault();
+  }
+
   return (
     <div id="wrapper">
       <main className="mainSide">
         <h1>Criar uma conta</h1>
 
-        <form action="">
-          <div style={{ display: visibility ? "none" : "" }}>
+        <form onSubmit={criarConta}>
+          <div
+            style={{ display: visibility ? "none" : "" }}
+            className="form-wrapper"
+          >
             <input
               type="text"
               name="name"
@@ -42,22 +67,25 @@ export default function CreateAccount() {
               onChange={handleInputs}
               placeholder="Nome completo"
             />
-            <input
-              type="text"
-              name="cpf"
-              id="cpf"
-              value={inputs.cpf}
-              onChange={handleInputs}
-              placeholder="CPF"
-            />
-            <input
-              type="date"
-              name="data"
-              id="data"
-              value={inputs.data}
-              onChange={handleInputs}
-              placeholder="Nascimento"
-            />
+            <div style={{ display: "flex", gap: "20px" }}>
+              <input
+                type="text"
+                name="cpf"
+                id="cpf"
+                value={inputs.cpf}
+                onChange={handleInputs}
+                placeholder="CPF"
+              />
+              <input
+                type="date"
+                name="data"
+                id="data"
+                value={inputs.data}
+                onChange={handleInputs}
+                placeholder="Nascimento"
+              />
+            </div>
+
             <input
               type="email"
               name="email"
@@ -66,84 +94,120 @@ export default function CreateAccount() {
               onChange={handleInputs}
               placeholder="E-mail"
             />
-            <input
-              type="password"
-              name="senha"
-              id="senha"
-              value={inputs.senha}
-              onChange={handleInputs}
-              placeholder="Senha"
-            />
-            <input
-              type="password"
-              name="confirmsenha"
-              id="confirmsenha"
-              value={inputs.confirmsenha}
-              onChange={handleInputs}
-              placeholder="Confirmar senha"
-            />
+            <div style={{ display: "flex", gap: "20px" }}>
+              {" "}
+              <input
+                type="password"
+                name="senha"
+                id="senha"
+                value={inputs.senha}
+                onChange={handleInputs}
+                placeholder="Senha"
+              />
+              <input
+                type="password"
+                name="confirmsenha"
+                id="confirmsenha"
+                value={inputs.confirmsenha}
+                onChange={handleInputs}
+                placeholder="Confirmar senha"
+              />
+            </div>
           </div>
-          <div style={{ display: visibility ? "" : "none" }}>
+
+          <div
+            style={{ display: visibility ? "" : "none" }}
+            className="form-wrapper"
+          >
             <input
               type="text"
               name="rua"
-              id="name"
+              id="rua"
               value={inputs.rua}
               onChange={handleInputs}
               placeholder="Endereço"
             />
+            <div style={{ display: "flex", gap: "20px" }}>
+              <input
+                type="text"
+                name="numero"
+                id="numero"
+                value={inputs.numero}
+                onChange={handleInputs}
+                placeholder="Número"
+              />
+              <input
+                type="text"
+                name="bairro"
+                id="bairro"
+                value={inputs.bairro}
+                onChange={handleInputs}
+                placeholder="Bairro"
+              />
+            </div>
+
             <input
               type="text"
-              name="numero"
-              id="cpf"
-              value={inputs.numero}
-              onChange={handleInputs}
-              placeholder="Número"
-            />
-            <input
-              type="text"
-              name="bairro"
-              id="rg"
-              value={inputs.bairro}
-              onChange={handleInputs}
-              placeholder="Bairro"
-            />
-            <input
-              type="email"
               name="telefone"
-              id="email"
+              id="tel"
               value={inputs.telefone}
               onChange={handleInputs}
               placeholder="Telefone"
             />
-            <input
-              type="password"
-              name="cidade"
-              id="senha"
-              value={inputs.cidade}
-              onChange={handleInputs}
-              placeholder="Cidade"
-            />
-            <input
-              type="password"
-              name="estado"
-              id="confirmsenha"
-              value={inputs.estado}
-              onChange={handleInputs}
-              placeholder="Estado"
-            />
-          </div>
-          <div id="circles">
-            <FaCircle id={visibility ? "circDisable" : "circActive"} />
-            <FaCircle id={visibility ? "circActive" : "circDisable"} />
+            <div style={{ display: "flex", gap: "20px" }}>
+              <input
+                type="text"
+                name="cidade"
+                id="cidade"
+                value={inputs.cidade}
+                onChange={handleInputs}
+                placeholder="Cidade"
+              />
+              <input
+                type="text"
+                name="estado"
+                id="estado"
+                value={inputs.estado}
+                onChange={handleInputs}
+                placeholder="Estado"
+              />
+            </div>
+
+            <button className="btn-create" onClick={abrirModal}>
+              Criar Conta
+            </button>
           </div>
         </form>
+
+        <div id="circles">
+          <button className="btn-circle" onClick={() => setVisibility(false)}>
+            <FaCircle id={visibility ? "circDisable" : "circActive"} />
+          </button>
+          <button className="btn-circle" onClick={() => setVisibility(true)}>
+            <FaCircle id={visibility ? "circActive" : "circDisable"} />
+          </button>
+        </div>
       </main>
       <div className="drawSide">
         <img src={DrawCreate} alt="" id="drawC" />
         <Link to="/">
           <img src={LogoImg} alt="" id="logo" />
         </Link>
+      </div>
+
+      <div style={{ display: modal ? "" : "none" }}>
+        <Modal>
+          <h1>Não cubra seu rosto</h1>
+          <p>
+            Na foto você deve segurar o documento ao lado do seu rosto (selfie),
+            sem cobrir seu rosto e forma legível
+          </p>
+          <img src={SelfieImg} alt="" />
+          <button className="send-selfie" onClick={closeModal}>
+            <FiSend />
+            Enviar
+          </button>
+        </Modal>
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import "./styles.css";
+import React from "react";
 
 import DrawImage from "../../images/draw.png";
 import logo from "../../images/logo.png";

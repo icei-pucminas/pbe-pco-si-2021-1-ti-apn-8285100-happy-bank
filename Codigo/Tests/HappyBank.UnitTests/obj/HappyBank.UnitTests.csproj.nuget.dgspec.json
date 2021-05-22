@@ -1,0 +1,266 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/hugo/Faculdade/pbe-pco-si-2021-1-ti-apn-8285100-happy-bank/Codigo/Tests/HappyBank.UnitTests/HappyBank.UnitTests.csproj": {}
+  },
+  "projects": {
+    "/home/hugo/Faculdade/pbe-pco-si-2021-1-ti-apn-8285100-happy-bank/Codigo/Src/HappyBank.Domain/HappyBank.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/hugo/Faculdade/pbe-pco-si-2021-1-ti-apn-8285100-happy-bank/Codigo/Src/HappyBank.Domain/HappyBank.Domain.csproj",
+        "projectName": "HappyBank.Domain",
+        "projectPath": "/home/hugo/Faculdade/pbe-pco-si-2021-1-ti-apn-8285100-happy-bank/Codigo/Src/HappyBank.Domain/HappyBank.Domain.csproj",
+        "packagesPath": "/home/hugo/.nuget/packages/",
+        "outputPath": "/home/hugo/Faculdade/pbe-pco-si-2021-1-ti-apn-8285100-happy-bank/Codigo/Src/HappyBank.Domain/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/hugo/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "/home/hugo/Faculdade/pbe-pco-si-2021-1-ti-apn-8285100-happy-bank/Codigo/Src/HappyBank.Infra/HappyBank.Infra.csproj": {
+                "projectPath": "/home/hugo/Faculdade/pbe-pco-si-2021-1-ti-apn-8285100-happy-bank/Codigo/Src/HappyBank.Infra/HappyBank.Infra.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.202/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/hugo/Faculdade/pbe-pco-si-2021-1-ti-apn-8285100-happy-bank/Codigo/Src/HappyBank.Infra/HappyBank.Infra.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/hugo/Faculdade/pbe-pco-si-2021-1-ti-apn-8285100-happy-bank/Codigo/Src/HappyBank.Infra/HappyBank.Infra.csproj",
+        "projectName": "HappyBank.Infra",
+        "projectPath": "/home/hugo/Faculdade/pbe-pco-si-2021-1-ti-apn-8285100-happy-bank/Codigo/Src/HappyBank.Infra/HappyBank.Infra.csproj",
+        "packagesPath": "/home/hugo/.nuget/packages/",
+        "outputPath": "/home/hugo/Faculdade/pbe-pco-si-2021-1-ti-apn-8285100-happy-bank/Codigo/Src/HappyBank.Infra/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/hugo/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "Npgsql": {
+              "target": "Package",
+              "version": "[5.0.4, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.202/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/hugo/Faculdade/pbe-pco-si-2021-1-ti-apn-8285100-happy-bank/Codigo/Src/HappyBank.UseCases/HappyBank.UseCases.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/hugo/Faculdade/pbe-pco-si-2021-1-ti-apn-8285100-happy-bank/Codigo/Src/HappyBank.UseCases/HappyBank.UseCases.csproj",
+        "projectName": "HappyBank.UseCases",
+        "projectPath": "/home/hugo/Faculdade/pbe-pco-si-2021-1-ti-apn-8285100-happy-bank/Codigo/Src/HappyBank.UseCases/HappyBank.UseCases.csproj",
+        "packagesPath": "/home/hugo/.nuget/packages/",
+        "outputPath": "/home/hugo/Faculdade/pbe-pco-si-2021-1-ti-apn-8285100-happy-bank/Codigo/Src/HappyBank.UseCases/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/hugo/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "/home/hugo/Faculdade/pbe-pco-si-2021-1-ti-apn-8285100-happy-bank/Codigo/Src/HappyBank.Domain/HappyBank.Domain.csproj": {
+                "projectPath": "/home/hugo/Faculdade/pbe-pco-si-2021-1-ti-apn-8285100-happy-bank/Codigo/Src/HappyBank.Domain/HappyBank.Domain.csproj"
+              },
+              "/home/hugo/Faculdade/pbe-pco-si-2021-1-ti-apn-8285100-happy-bank/Codigo/Src/HappyBank.Infra/HappyBank.Infra.csproj": {
+                "projectPath": "/home/hugo/Faculdade/pbe-pco-si-2021-1-ti-apn-8285100-happy-bank/Codigo/Src/HappyBank.Infra/HappyBank.Infra.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.202/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/hugo/Faculdade/pbe-pco-si-2021-1-ti-apn-8285100-happy-bank/Codigo/Tests/HappyBank.UnitTests/HappyBank.UnitTests.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/hugo/Faculdade/pbe-pco-si-2021-1-ti-apn-8285100-happy-bank/Codigo/Tests/HappyBank.UnitTests/HappyBank.UnitTests.csproj",
+        "projectName": "HappyBank.UnitTests",
+        "projectPath": "/home/hugo/Faculdade/pbe-pco-si-2021-1-ti-apn-8285100-happy-bank/Codigo/Tests/HappyBank.UnitTests/HappyBank.UnitTests.csproj",
+        "packagesPath": "/home/hugo/.nuget/packages/",
+        "outputPath": "/home/hugo/Faculdade/pbe-pco-si-2021-1-ti-apn-8285100-happy-bank/Codigo/Tests/HappyBank.UnitTests/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/hugo/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "/home/hugo/Faculdade/pbe-pco-si-2021-1-ti-apn-8285100-happy-bank/Codigo/Src/HappyBank.Domain/HappyBank.Domain.csproj": {
+                "projectPath": "/home/hugo/Faculdade/pbe-pco-si-2021-1-ti-apn-8285100-happy-bank/Codigo/Src/HappyBank.Domain/HappyBank.Domain.csproj"
+              },
+              "/home/hugo/Faculdade/pbe-pco-si-2021-1-ti-apn-8285100-happy-bank/Codigo/Src/HappyBank.UseCases/HappyBank.UseCases.csproj": {
+                "projectPath": "/home/hugo/Faculdade/pbe-pco-si-2021-1-ti-apn-8285100-happy-bank/Codigo/Src/HappyBank.UseCases/HappyBank.UseCases.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[16.7.1, )"
+            },
+            "NSubstitute": {
+              "target": "Package",
+              "version": "[4.2.2, )"
+            },
+            "coverlet.collector": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[1.3.0, )"
+            },
+            "xunit": {
+              "target": "Package",
+              "version": "[2.4.1, )"
+            },
+            "xunit.runner.visualstudio": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.4.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.202/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

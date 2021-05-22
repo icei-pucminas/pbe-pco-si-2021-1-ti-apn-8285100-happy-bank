@@ -1,0 +1,64 @@
+.initial-screen-content {
+  margin-top: 10rem;
+  margin-left: 5rem;
+}
+
+.initial-screen-content h1 {
+  color: rgb(133, 133, 133);
+}
+
+.initial-btn {
+  height: 40rem;
+  width: 30rem;
+  margin: 20px 40px 0 0;
+  border-radius: 1rem;
+  background-color: #fff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 3rem;
+}
+
+.initial-btn:hover {
+  background-color: #fff;
+
+  box-shadow: 3px 3px 7px 1px rgba(0, 0, 0, 0.25);
+}
+
+.initial-btn span {
+  font-size: 3.3rem;
+  color: rgb(100, 100, 100);
+  font-weight: bold;
+}
+
+.initial-btn div {
+  font-size: 5.5rem;
+  color: var(--pink);
+}
+
+.btn-wrapper {
+  display: flex;
+}
+
+.initial-logo {
+  width: 10vw;
+  position: absolute;
+  right: 7rem;
+}
+
+@media (max-height: 30rem) {
+  .initial-logo {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .btn-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+}
