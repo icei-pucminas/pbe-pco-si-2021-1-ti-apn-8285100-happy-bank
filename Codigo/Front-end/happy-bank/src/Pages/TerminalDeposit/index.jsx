@@ -1,6 +1,7 @@
 import "./styles.css";
 import LogoImg from "../../images/logo.png";
 import { Link } from "react-router-dom";
+import React from "react";
 
 export default function TerminalDeposit() {
   return (

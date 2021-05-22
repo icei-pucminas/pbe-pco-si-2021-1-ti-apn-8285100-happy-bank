@@ -2,6 +2,7 @@ import LogoImg from "../../images/logo.png";
 import LandingImg from "../../images/landing.svg";
 import { Link } from "react-router-dom";
 import "./styles.css";
+import React from "react";
 
 import { BiLogInCircle, BiEdit } from "react-icons/bi";
 
