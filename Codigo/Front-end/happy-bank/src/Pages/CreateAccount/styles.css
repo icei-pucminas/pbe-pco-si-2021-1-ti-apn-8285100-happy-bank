@@ -98,6 +98,8 @@
   color: #fff;
   border: 5px solid #fff;
   margin-top: 3rem;
+
+  align-self: center;
 }
 /* Temporario */
 .btn-circle:hover {

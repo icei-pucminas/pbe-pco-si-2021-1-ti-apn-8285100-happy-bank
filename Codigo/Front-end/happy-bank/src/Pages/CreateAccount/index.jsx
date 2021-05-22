@@ -29,6 +29,58 @@ export default function CreateAccount() {
     estado: "",
     telefone: "",
   });
+
+  function verifyField() {
+    if (inputs.name == "") {
+      alert("Campo nome é obrigatório!");
+      return;
+    }
+    if (inputs.cpf == "") {
+      alert("Campo cpf é obrigatório!");
+      return;
+    }
+    if (inputs.data == "") {
+      alert("Campo data é obrigatório!");
+      return;
+    }
+    if (inputs.email == "") {
+      alert("Campo email é obrigatório!");
+      return;
+    }
+    if (inputs.senha == "") {
+      alert("Campo senha é obrigatório!");
+      return;
+    }
+    if (inputs.confirmsenha == "") {
+      alert("Campo confirmar senha é obrigatório!");
+      return;
+    }
+    if (inputs.bairro == "") {
+      alert("Campo bairro é obrigatório!");
+      return;
+    }
+    if (inputs.confirmsenha == "") {
+      alert("Campo numero é obrigatório!");
+      return;
+    }
+    if (inputs.cidade == "") {
+      alert("Campo cidade é obrigatório!");
+      return;
+    }
+    if (inputs.telefone == "") {
+      alert("Campo telefone é obrigatório!");
+      return;
+    }
+    if (inputs.estado == "") {
+      alert("Campo estado é obrigatório!");
+      return;
+    }
+    if (inputs.rua == "") {
+      alert("Campo rua é obrigatório!");
+      return;
+    }
+  }
+
   function handleInputs({ target }) {
     const { value, name } = target;
     const clone = { ...inputs };
@@ -66,6 +118,7 @@ export default function CreateAccount() {
               value={inputs.name}
               onChange={handleInputs}
               placeholder="Nome completo"
+              required
             />
             <div style={{ display: "flex", gap: "20px" }}>
               <input
@@ -75,6 +128,7 @@ export default function CreateAccount() {
                 value={inputs.cpf}
                 onChange={handleInputs}
                 placeholder="CPF"
+                required
               />
               <input
                 type="date"
@@ -83,6 +137,7 @@ export default function CreateAccount() {
                 value={inputs.data}
                 onChange={handleInputs}
                 placeholder="Nascimento"
+                required
               />
             </div>
 
@@ -93,6 +148,7 @@ export default function CreateAccount() {
               value={inputs.email}
               onChange={handleInputs}
               placeholder="E-mail"
+              required
             />
             <div style={{ display: "flex", gap: "20px" }}>
               {" "}
@@ -103,6 +159,7 @@ export default function CreateAccount() {
                 value={inputs.senha}
                 onChange={handleInputs}
                 placeholder="Senha"
+                required
               />
               <input
                 type="password"
@@ -111,6 +168,7 @@ export default function CreateAccount() {
                 value={inputs.confirmsenha}
                 onChange={handleInputs}
                 placeholder="Confirmar senha"
+                required
               />
             </div>
           </div>
@@ -126,6 +184,7 @@ export default function CreateAccount() {
               value={inputs.rua}
               onChange={handleInputs}
               placeholder="Endereço"
+              required
             />
             <div style={{ display: "flex", gap: "20px" }}>
               <input
@@ -135,6 +194,7 @@ export default function CreateAccount() {
                 value={inputs.numero}
                 onChange={handleInputs}
                 placeholder="Número"
+                required
               />
               <input
                 type="text"
@@ -143,6 +203,7 @@ export default function CreateAccount() {
                 value={inputs.bairro}
                 onChange={handleInputs}
                 placeholder="Bairro"
+                required
               />
             </div>
 
@@ -153,6 +214,7 @@ export default function CreateAccount() {
               value={inputs.telefone}
               onChange={handleInputs}
               placeholder="Telefone"
+              required
             />
             <div style={{ display: "flex", gap: "20px" }}>
               <input
@@ -162,6 +224,7 @@ export default function CreateAccount() {
                 value={inputs.cidade}
                 onChange={handleInputs}
                 placeholder="Cidade"
+                required
               />
               <input
                 type="text"
@@ -170,10 +233,11 @@ export default function CreateAccount() {
                 value={inputs.estado}
                 onChange={handleInputs}
                 placeholder="Estado"
+                required
               />
             </div>
 
-            <button className="btn-create" onClick={abrirModal}>
+            <button className="btn-create" onClick={verifyField}>
               Criar Conta
             </button>
           </div>
