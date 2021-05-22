@@ -237,7 +237,7 @@ export default function CreateAccount() {
               />
             </div>
 
-            <button className="btn-create" onClick={verifyField}>
+            <button className="btn-create" onClick={abrirModal}>
               Criar Conta
             </button>
           </div>
