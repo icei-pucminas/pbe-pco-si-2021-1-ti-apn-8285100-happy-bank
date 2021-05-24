@@ -17,6 +17,7 @@ using HappyBank.UseCases.CustomerRegistration;
 using HappyBank.UseCases.OpenAccount;
 using HappyBank.UseCases.ExtractStatement;
 using HappyBank.UseCases.ExtractBalance;
+using HappyBank.UseCases.SignIn;
 using HappyBank.Api.Services;
 using Npgsql;
 using System.Data;
@@ -32,17 +33,28 @@ namespace HappyBank.api
 
         public IConfiguration Configuration { get; }
 
+        readonly string HappyBankAllowAllOrigins = "_HappyBankAllowAllOrigins";
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: HappyBankAllowAllOrigins,
+                                builder =>
+                                {
+                                    builder.AllowAnyOrigin()
+                                    .AllowAnyMethod()
+                                    .AllowAnyHeader();
+                                });
+            });
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "HappyBank.api", Version = "v1" });
             });
-            services.AddHttpContextAccessor();
 
+            services.AddHttpContextAccessor();
 
             services.AddSingleton<NpgsqlConnection>((sp) => new NpgsqlConnection("Host=127.0.0.1;Port=5432;Username=postgres;Password=postgres;Database=happybank"));
             services.AddSingleton<IAccountRepository, AccountRepository>();
@@ -51,10 +63,11 @@ namespace HappyBank.api
             services.AddSingleton<IExtractStatementRepository, ExtractStatementRepository>();
 
             services.AddTransient<ContextService>();
-            services.AddTransient<OpenAccountUC>();
             services.AddTransient<CustomerRegistrationUC>();
             services.AddTransient<ExtractStatementUC>();
             services.AddTransient<ExtractBalanceUC>();
+            services.AddTransient<OpenAccountUC>();
+            services.AddTransient<SignInUC>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -68,10 +81,8 @@ namespace HappyBank.api
             }
 
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
-            app.UseAuthorization();
+            // app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
