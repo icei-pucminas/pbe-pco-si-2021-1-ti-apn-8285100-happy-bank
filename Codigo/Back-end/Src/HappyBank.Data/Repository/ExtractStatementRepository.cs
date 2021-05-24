@@ -37,7 +37,7 @@ namespace HappyBank.Data.Repository
             INNER JOIN transaction t ON
                 o.transaction_id = t.id
             WHERE
-                t.account_id = @account_id
+                t.account_id = @account_id and o.account_id = @account_id
                 AND t.execution_date between @start and @end
             GROUP BY
                 t.id,
