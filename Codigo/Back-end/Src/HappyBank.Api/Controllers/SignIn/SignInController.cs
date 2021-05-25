@@ -36,7 +36,9 @@ namespace HappyBank.Api.Controllers.SignIn
             return new SignInResponse{
                 CustomerId = output.CustomerId,
                 AccountNumber = output.AccountNumber,
-                AgencyNumber = output.AgencyNumber
+                AgencyNumber = output.AgencyNumber,
+                CustomerName = output.CustomerName,
+                CustomerEmail = output.CustomerEmail
             };
         }   
     }
