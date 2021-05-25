@@ -7,5 +7,7 @@ namespace HappyBank.UseCases.SignIn
         public Guid CustomerId {get; set;}
         public int AgencyNumber {get; set;}
         public int AccountNumber {get; set;}
+        public string CustomerName {get; set;}
+        public string CustomerEmail {get; set;}
     }
 }

@@ -26,7 +26,9 @@ namespace HappyBank.UseCases.SignIn
                     return new SignInOutput{
                         CustomerId = customer.Id,
                         AccountNumber = accountList[0].AccountNumber,
-                        AgencyNumber = accountList[0].AgencyNumber
+                        AgencyNumber = accountList[0].AgencyNumber,
+                        CustomerName = customer.Name,
+                        CustomerEmail = customer.Email
                     };
                 }
             }
