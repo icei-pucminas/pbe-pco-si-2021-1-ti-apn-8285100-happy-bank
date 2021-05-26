@@ -87,7 +87,7 @@ END $$;";
 
         }
 
-        public Transfer FindOneByAccountDestinyId(string accountDestinyId)
+        public Transfer FindOneByAccountDestinyId(Guid accountDestinyId)
         {
             using (var cmd = new NpgsqlCommand("select t.id, t.account_id,  tr.account_destiny_id, t.value, t.execution_date from transaction t inner join transfer d on t.id = d.id WHERE tr.account_destiny_id = @account_destiny_id order by t.id", Connection))
             {

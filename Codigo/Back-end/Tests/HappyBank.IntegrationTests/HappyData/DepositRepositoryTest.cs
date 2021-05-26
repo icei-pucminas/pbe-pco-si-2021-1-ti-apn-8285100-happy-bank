@@ -8,10 +8,16 @@ namespace HappyBank.IntegrationTests.HappyData
 {
     public class DepositRepositoryTest : BaseTest
     {
+        private AccountRepository accountRepository { get; set; }
+        private BankRepository bankRepository { get; set; }
+        private CustomerRepository customerRepository { get; set; }
         private DepositRepository depositRepository { get; set; }
 
         public DepositRepositoryTest()
         {
+            this.accountRepository = new AccountRepository(this.Connection);
+            this.bankRepository = new BankRepository(this.Connection);
+            this.customerRepository = new CustomerRepository(this.Connection);
             this.depositRepository = new DepositRepository(this.Connection);
         }
 
@@ -51,23 +57,6 @@ namespace HappyBank.IntegrationTests.HappyData
         }
 
         [Fact]
-        public void Complete_Deposit_Must_Insert_And_Not_Found_After_Delete()
-        {
-            var repository = new DepositRepository(Connection);
-            var Deposit = CreateDeposit();
-
-            var newId = repository.Add(Deposit);
-            var dbDeposit = repository.FindOne(newId);
-
-            Assert.True(newId != Guid.Empty);
-            Assert.Equal(newId, dbDeposit.Id);
-            Assert.Equal(Deposit.EnvelopeCode, dbDeposit.EnvelopeCode);
-
-            repository.Delete(dbDeposit);
-            Assert.Null(repository.FindOne(newId));
-        }
-
-        [Fact]
         public void Complete_Deposit_Must_Insert_And_Return_In_List()
         {
             var repository = new DepositRepository(Connection);
@@ -95,15 +84,74 @@ namespace HappyBank.IntegrationTests.HappyData
             Assert.NotNull(dbDeposit);
         }
 
+        private Customer CreateCustomer()
+        {
+            var strId = Guid.NewGuid().ToString().Substring(0, 6);
+            var name = $"Customer {strId}";
+            var email = $"{strId}@happybank.com";
+
+            var customer = new Customer(
+                name,
+                strId,
+                "Av. Amazonas",
+                "Centro",
+                "Belo Horizonte",
+                "MG",
+                "1001",
+                new DateTime(1985, 8, 15),
+                "(31)91111-1111",
+                email,
+                strId
+            );
+
+            var customerId = this.customerRepository.Add(customer);
+            return this.customerRepository.FindOne(customerId);
+        }
+
+        private Bank CreateBank()
+        {
+            var bankNumber = 171;
+            var strId = Guid.NewGuid().ToString().Substring(0, 6);
+            var name = $"Bank {strId}";
+            
+            var bank = new Bank(
+                bankNumber,
+                name,
+                strId,
+                "Av. Amazonas",
+                "Centro",
+                "Belo Horizonte",
+                "MG",
+                "1001"
+            );
+
+            var bankId = this.bankRepository.Add(bank);
+            return this.bankRepository.FindOne(bankId);
+        }
+
+        private Account CreateAccount(Bank bank)
+        {
+            var customer = this.CreateCustomer();
+            
+            var account = new Account(
+                bank.Id,
+                customer.Id,
+                1
+            );
+
+            var accountId = this.accountRepository.Add(account);
+            return this.accountRepository.FindOne(accountId);
+        }
+
+
         private Deposit CreateDeposit()
         {
-            var depositId = Guid.NewGuid();
-            var accountId = Guid.NewGuid();
-            var envelopeCode = depositId.ToString().Substring(0, 6);
+            var bank = this.CreateBank();
+            var account = this.CreateAccount(bank);
+            var envelopeCode = Guid.NewGuid().ToString().Substring(0, 6);
 
             return new Deposit(
-                depositId,
-                accountId,
+                account.Id,
                 200m,
                 new DateTime(2020, 8, 15),
                 envelopeCode

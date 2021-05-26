@@ -65,8 +65,6 @@ namespace HappyBank.Data.Repository
                 }
             }
 
-            //result.ForEach(e => e.Bank = )
-
             return result;
         }
 
