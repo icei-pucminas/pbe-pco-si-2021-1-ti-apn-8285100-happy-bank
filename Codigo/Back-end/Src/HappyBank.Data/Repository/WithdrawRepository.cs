@@ -7,27 +7,27 @@ using Npgsql;
 
 namespace HappyBank.Data.Repository
 {
-    public class TransferRepository : PgCrudRepository<Transfer>, ITransferRepository
+    public class WithdrawRepository : PgCrudRepository<Withdraw>, IWithdrawRepository
     {
         private const string INSERT_TRANSACTION_QUERY = "INSERT INTO transaction(account_id, kind, value, execution_date) VALUES (@account_id, @kind, @value, @execution_date) returning id";
-        private const string INSERT_TRANSFER_QUERY = "INSERT INTO transfer(id, account_destiny_id) VALUES (@transaction_id, @account_destiny_id)";
+        private const string INSERT_WITHDRAW_QUERY = "INSERT INTO withdraw(id, terminal_code) VALUES (@transaction_id, @terminal_code)";
         private const string INSERT_OPERATION_QUERY = "INSERT INTO operation(account_id, transaction_id, kind, value, execution_date) VALUES (@account_id, @transaction_id, @kind, @value, @execution_date)";
 
-        public TransferRepository(global::Npgsql.NpgsqlConnection connection) : base(connection)
+        public WithdrawRepository(global::Npgsql.NpgsqlConnection connection) : base(connection)
         {
 
         }
 
-        public override Guid Add(Transfer entity)
+        public override Guid Add(Withdraw entity)
         {
-            if(entity.AccountId == Guid.Empty)
+            if (entity.AccountId == Guid.Empty)
             {
                 throw new InvalidOperationException();
             }
 
             NpgsqlTransaction transaction = null;
             Guid transactionId = Guid.Empty;
-            
+
             try
             {
                 transaction = this.Connection.BeginTransaction();
@@ -43,10 +43,10 @@ namespace HappyBank.Data.Repository
                     transactionId = (Guid)cmd.ExecuteScalar();
                 }
 
-                using (var cmd = new NpgsqlCommand(INSERT_TRANSFER_QUERY, Connection, transaction))
+                using (var cmd = new NpgsqlCommand(INSERT_WITHDRAW_QUERY, Connection, transaction))
                 {
                     cmd.Parameters.AddWithValue("transaction_id", transactionId);
-                    cmd.Parameters.AddWithValue("account_destiny_id", entity.AccountDestinyId);
+                    cmd.Parameters.AddWithValue("terminal_code", entity.TerminalCode);
                     cmd.Prepare();
 
                     cmd.ExecuteNonQuery();
@@ -56,10 +56,10 @@ namespace HappyBank.Data.Repository
                 {
                     cmd.Parameters.AddWithValue("transaction_id", transactionId);
                     cmd.Parameters.AddWithValue("account_id", entity.AccountId);
-                    cmd.Parameters.AddWithValue("account_destiny_id", entity.AccountDestinyId);
                     cmd.Parameters.AddWithValue("kind", (char)OperationKind.DEBIT);
                     cmd.Parameters.AddWithValue("value", entity.Value);
                     cmd.Parameters.AddWithValue("execution_date", entity.ExecutionDate);
+                    cmd.Parameters.AddWithValue("terminal_code", entity.TerminalCode);
                     cmd.Prepare();
 
                     cmd.ExecuteNonQuery();
@@ -69,22 +69,22 @@ namespace HappyBank.Data.Repository
 
                 return transactionId;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 transaction.Rollback();
                 throw e;
             }
         }
 
-        public override bool Delete(Transfer client)
+        public override bool Delete(Withdraw client)
         {
             throw new NotSupportedException();
         }
 
-        public override List<Transfer> FindAll()
+        public override List<Withdraw> FindAll()
         {
-            var result = new List<Transfer>();
-            using (var cmd = new NpgsqlCommand("select t.id, t.account_id, tr.account_destiny_id, t.value, t.execution_date from transaction t inner join transfer tr on t.id = tr.id order by t.id", Connection))
+            var result = new List<Withdraw>();
+            using (var cmd = new NpgsqlCommand("select t.id, t.account_id, t.value, t.execution_date, w.terminal_code from transaction t inner join withdraw w on t.id = w.id order by t.id", Connection))
             {
                 cmd.Prepare();
 
@@ -94,7 +94,7 @@ namespace HappyBank.Data.Repository
                     {
                         while (reader.Read())
                         {
-                            result.Add(GetTransfer(reader));
+                            result.Add(GetWithdraw(reader));
                         }
                     }
                 }
@@ -103,9 +103,9 @@ namespace HappyBank.Data.Repository
             return result;
         }
 
-        public override Transfer FindOne(Guid id)
+        public override Withdraw FindOne(Guid id)
         {
-            using (var cmd = new NpgsqlCommand("select t.id, t.account_id, tr.account_destiny_id, t.value, t.execution_date from transaction t inner join transfer tr on t.id = tr.id WHERE t.id = @id order by t.id", Connection))
+            using (var cmd = new NpgsqlCommand("select t.id, t.account_id, t.value, t.execution_date, w.terminal_code from transaction t inner join withdraw w on t.id = w.id WHERE t.id = @id order by t.id", Connection))
             {
                 cmd.Parameters.AddWithValue("id", id);
                 cmd.Prepare();
@@ -116,21 +116,20 @@ namespace HappyBank.Data.Repository
                     {
                         while (reader.Read())
                         {
-                            return GetTransfer(reader);
+                            return GetWithdraw(reader);
                         }
                     }
                 }
             }
 
             return null;
-
         }
 
-        public Transfer FindOneByAccountDestinyId(Guid accountDestinyId)
+        public Withdraw FindOneByTerminalCode(string terminalCode)
         {
-            using (var cmd = new NpgsqlCommand("select t.id, t.account_id,  tr.account_destiny_id, t.value, t.execution_date from transaction t inner join transfer tr on t.id = tr.id WHERE tr.account_destiny_id = @account_destiny_id order by t.id", Connection))
+            using (var cmd = new NpgsqlCommand("select t.id, t.account_id, t.value, t.execution_date, w.terminal_code from transaction t inner join withdraw w on t.id = w.id WHERE w.terminal_code = @terminal_code order by t.id", Connection))
             {
-                cmd.Parameters.AddWithValue("account_destiny_id", accountDestinyId);
+                cmd.Parameters.AddWithValue("terminal_code", terminalCode);
                 cmd.Prepare();
 
                 using (var reader = cmd.ExecuteReader())
@@ -139,7 +138,7 @@ namespace HappyBank.Data.Repository
                     {
                         while (reader.Read())
                         {
-                            return GetTransfer(reader);
+                            return GetWithdraw(reader);
                         }
                     }
                 }
@@ -148,19 +147,24 @@ namespace HappyBank.Data.Repository
             return null;
         }
 
-        public override bool Update(Transfer entity)
+        public override bool Update(Withdraw entity)
         {
             throw new NotSupportedException();
         }
 
-        private Transfer GetTransfer(NpgsqlDataReader reader)
+        Withdraw IWithdrawRepository.FindOneByTerminalCode(string terminalCode)
         {
-            return new Transfer(
+            throw new NotImplementedException();
+        }
+
+        private Withdraw GetWithdraw(NpgsqlDataReader reader)
+        {
+            return new Withdraw(
                 reader.GetGuid(0),
                 reader.GetGuid(1),
-                reader.GetGuid(2),
-                reader.GetDecimal(3),
-                reader.GetDateTime(4)
+                reader.GetDecimal(2),
+                reader.GetDateTime(3),
+                reader.GetString(4)
             );
         }
     }
