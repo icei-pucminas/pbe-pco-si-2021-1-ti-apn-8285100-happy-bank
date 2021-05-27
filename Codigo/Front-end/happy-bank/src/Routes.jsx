@@ -6,6 +6,7 @@ import Landing from "./Pages/Landing";
 import Login from "./Pages/Login";
 import TerminalDeposit from "./Pages/Terminal/TerminalDeposit";
 import TransferScreen from "./Pages/TransferScreen";
+import PrivateRoute from "./PrivateRoute";
 
 export default function Routes() {
   return (
@@ -14,7 +15,7 @@ export default function Routes() {
       <Route path="/login" component={Login} />
       <Route path="/createaccount" component={CreateAccount} />
       <Route exact path="/deposit" component={TerminalDeposit} />
-      <Route path="/myaccount" component={InitialScreen} />
+      <PrivateRoute path="/myaccount" component={InitialScreen} />
       <Route path="/transfer" component={TransferScreen} />
     </BrowserRouter>
   );

@@ -34,4 +34,11 @@
   display: block;
   font-size: 7rem;
   margin-right: 5rem;
+  text-align: center;
+}
+
+.acconut-name span {
+  display: block;
+  text-align: center;
+  font-size: 3rem;
 }

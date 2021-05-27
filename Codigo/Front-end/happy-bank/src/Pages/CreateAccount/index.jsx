@@ -1,5 +1,7 @@
 import "./styles.css";
 
+import axios from "axios";
+
 import DrawCreate from "../../images/heroCreate.png";
 import LogoImg from "../../images/logo.png";
 import SelfieImg from "../../images/selfie.png";
@@ -8,38 +10,63 @@ import { Link } from "react-router-dom";
 import React, { useState } from "react";
 
 import { FaCircle } from "react-icons/fa";
+import { FaCheckCircle } from "react-icons/fa";
 import { FiSend } from "react-icons/fi";
 
 import Modal from "../../Component/Modal/Modal";
+import CreateAccountService from "../../services/CreateAccountService";
 
 export default function CreateAccount() {
   const [visibility, setVisibility] = useState(false);
   const [modal, setModal] = useState(false);
+  const [validationScreen, setValidationScreen] = useState(false);
+  const [confirmSenha, setConfirmSenha] = useState({
+    confirmsenha: "",
+  });
   const [inputs, setInputs] = useState({
     name: "",
-    cpf: "",
-    data: "",
+    govNumber: "",
+    birthDate: "",
     email: "",
-    senha: "",
-    confirmsenha: "",
-    rua: "",
-    numero: "",
-    bairro: "",
-    cidade: "",
-    estado: "",
-    telefone: "",
+    password: "",
+    //confirmsenha: "",
+    street: "",
+    addressNumber: "",
+    district: "",
+    city: "",
+    state: "",
+    phone: "",
   });
 
-  function verifyField() {
+  //Requisção POST criar conta
+
+  async function submitData(event) {
+    event.preventDefault();
+
+    const responseData = (await CreateAccountService.CustomerRegister(inputs))
+      .data;
+
+    console.log(responseData.customerId);
+
+    setTimeout(() => {
+      CreateAccountService.OpenAccount(responseData.customerId);
+      openModal();
+    }, 1000);
+  }
+
+  // Requisiao POST - FIM
+
+  function verifyField(event) {
+    event.preventDefault();
     if (inputs.name == "") {
       alert("Campo nome é obrigatório!");
       return;
     }
-    if (inputs.cpf == "") {
+    if (inputs.govNumber == "") {
       alert("Campo cpf é obrigatório!");
       return;
     }
-    if (inputs.data == "") {
+    if (inputs.birthDate == "") {
       alert("Campo data é obrigatório!");
       return;
     }
@@ -47,38 +74,38 @@ export default function CreateAccount() {
       alert("Campo email é obrigatório!");
       return;
     }
-    if (inputs.senha == "") {
+    if (inputs.password == "") {
       alert("Campo senha é obrigatório!");
       return;
     }
-    if (inputs.confirmsenha == "") {
-      alert("Campo confirmar senha é obrigatório!");
+    if (confirmSenha.confirmsenha !== inputs.password) {
+      console.log(confirmSenha.confirmsenha);
+      console.log(inputs.password);
+      alert("As senhas não conferem");
       return;
     }
-    if (inputs.bairro == "") {
+    if (inputs.district == "") {
       alert("Campo bairro é obrigatório!");
       return;
     }
-    if (inputs.confirmsenha == "") {
-      alert("Campo numero é obrigatório!");
-      return;
-    }
-    if (inputs.cidade == "") {
+
+    if (inputs.city == "") {
       alert("Campo cidade é obrigatório!");
       return;
     }
-    if (inputs.telefone == "") {
+    if (inputs.phone == "") {
       alert("Campo telefone é obrigatório!");
       return;
     }
-    if (inputs.estado == "") {
+    if (inputs.district == "") {
       alert("Campo estado é obrigatório!");
       return;
     }
-    if (inputs.rua == "") {
+    if (inputs.state == "") {
       alert("Campo rua é obrigatório!");
       return;
     }
+    submitData(event);
   }
 
   function handleInputs({ target }) {
@@ -88,17 +115,24 @@ export default function CreateAccount() {
     setInputs(clone);
   }
 
-  function abrirModal() {
+  function handleConfirm({ target }) {
+    const { value, name } = target;
+    const clone = { ...confirmSenha };
+    clone[name] = value;
+    setConfirmSenha(clone);
+  }
+
+  function openModal() {
     console.log("Abrindo modal");
     setModal(true);
   }
 
-  function closeModal() {
-    setModal(false);
+  function openValidationScreen() {
+    setValidationScreen(true);
   }
 
-  async function criarConta(event) {
-    event.preventDefault();
+  function closeModal() {
+    window.location.reload();
   }
 
   return (
@@ -106,7 +140,7 @@ export default function CreateAccount() {
       <main className="mainSide">
         <h1>Criar uma conta</h1>
 
-        <form onSubmit={criarConta}>
+        <form onSubmit={verifyField}>
           <div
             style={{ display: visibility ? "none" : "" }}
             className="form-wrapper"
@@ -118,57 +152,51 @@ export default function CreateAccount() {
               value={inputs.name}
               onChange={handleInputs}
               placeholder="Nome completo"
-              required
             />
             <div style={{ display: "flex", gap: "20px" }}>
               <input
                 type="text"
-                name="cpf"
+                name="govNumber"
                 id="cpf"
-                value={inputs.cpf}
+                value={inputs.govNumber}
                 onChange={handleInputs}
                 placeholder="CPF"
-                required
               />
               <input
                 type="date"
-                name="data"
+                name="birthDate"
                 id="data"
-                value={inputs.data}
+                value={inputs.birthDate}
                 onChange={handleInputs}
                 placeholder="Nascimento"
-                required
               />
             </div>
 
             <input
-              type="email"
+              type="string"
               name="email"
               id="email"
               value={inputs.email}
               onChange={handleInputs}
               placeholder="E-mail"
-              required
             />
             <div style={{ display: "flex", gap: "20px" }}>
               {" "}
               <input
                 type="password"
-                name="senha"
+                name="password"
                 id="senha"
-                value={inputs.senha}
+                value={inputs.password}
                 onChange={handleInputs}
                 placeholder="Senha"
-                required
               />
               <input
                 type="password"
+                value={confirmSenha.confirmsenha}
+                onChange={handleConfirm}
                 name="confirmsenha"
                 id="confirmsenha"
-                value={inputs.confirmsenha}
-                onChange={handleInputs}
                 placeholder="Confirmar senha"
-                required
               />
             </div>
           </div>
@@ -179,65 +207,59 @@ export default function CreateAccount() {
           >
             <input
               type="text"
-              name="rua"
+              name="street"
               id="rua"
-              value={inputs.rua}
+              value={inputs.street}
               onChange={handleInputs}
               placeholder="Endereço"
-              required
             />
             <div style={{ display: "flex", gap: "20px" }}>
               <input
                 type="text"
-                name="numero"
+                name="addressNumber"
                 id="numero"
-                value={inputs.numero}
+                value={inputs.addressNumber}
                 onChange={handleInputs}
                 placeholder="Número"
-                required
               />
               <input
                 type="text"
-                name="bairro"
+                name="district"
                 id="bairro"
-                value={inputs.bairro}
+                value={inputs.district}
                 onChange={handleInputs}
                 placeholder="Bairro"
-                required
               />
             </div>
 
             <input
               type="text"
-              name="telefone"
+              name="phone"
               id="tel"
-              value={inputs.telefone}
+              value={inputs.phone}
               onChange={handleInputs}
               placeholder="Telefone"
-              required
             />
             <div style={{ display: "flex", gap: "20px" }}>
               <input
                 type="text"
-                name="cidade"
+                name="city"
                 id="cidade"
-                value={inputs.cidade}
+                value={inputs.city}
                 onChange={handleInputs}
                 placeholder="Cidade"
-                required
               />
               <input
                 type="text"
-                name="estado"
+                name="state"
                 id="estado"
-                value={inputs.estado}
+                value={inputs.state}
                 onChange={handleInputs}
                 placeholder="Estado"
-                required
               />
             </div>
 
-            <button className="btn-create" onClick={abrirModal}>
+            <button type="submit" className="btn-create">
               Criar Conta
             </button>
           </div>
@@ -267,11 +289,47 @@ export default function CreateAccount() {
             sem cobrir seu rosto e forma legível
           </p>
           <img src={SelfieImg} alt="" />
-          <button className="send-selfie" onClick={closeModal}>
+          <button className="send-selfie" onClick={openValidationScreen}>
             <FiSend />
             Enviar
           </button>
         </Modal>
+
+        <div
+          style={{
+            display: validationScreen ? "" : "none",
+          }}
+        >
+          <Modal>
+            <h1>Validação realziada com sucesso</h1>
+            <FaCheckCircle
+              style={{
+                color: "green",
+                fontSize: "8rem",
+              }}
+            />
+            <p>
+              A sua solicitação do procedimento de verificação Happy Bank foi
+              realizada com sucesso :)
+            </p>
+            <button
+              className="validation-btn"
+              onClick={() =>
+                window.location.replace("http://localhost:3000/login")
+              }
+            >
+              <Link
+                style={{
+                  textDecoration: "none",
+                  color: "#fff",
+                }}
+                onClick={closeModal}
+              >
+                Continuar
+              </Link>
+            </button>
+          </Modal>
+        </div>
       </div>
     </div>
   );

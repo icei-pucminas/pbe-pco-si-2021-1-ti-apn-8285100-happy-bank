@@ -64,7 +64,9 @@ function TransferScreen() {
           style={{ display: errorScreen ? "" : "none" }}
         >
           <h1>Ops! Houve um problema</h1>
-          <strong>Por favor, verifique se o o saldo é suficiente</strong>
+          <strong>
+            Por favor, verifique os dados informados ou se o saldo é suficiente
+          </strong>
           <button className="back-error-btn" type="button" onClick={backError}>
             Voltar
           </button>
