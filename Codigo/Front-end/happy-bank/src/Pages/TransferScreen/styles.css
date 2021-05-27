@@ -1,0 +1,142 @@
+.transfer-content {
+  width: 100vw;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.transfer-title {
+  color: var(--pink);
+  font-size: 5rem;
+  margin-top: 5rem;
+  text-align: center;
+}
+
+.transfer-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.transfer-content input {
+  width: 35rem;
+  height: 5rem;
+  outline: none;
+  padding: 3rem;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #808080;
+  border: none;
+  border-radius: 3rem;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.transfer-btn {
+  width: 32rem;
+  height: 60px;
+
+  color: #fff;
+  font-size: 2.5rem;
+  background-color: var(--pink);
+
+  transition: background-color 300ms;
+  cursor: pointer;
+  margin-top: 5rem;
+  align-self: center;
+
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* TRANSFERENCIA - ERRO */
+
+.transfer-error {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100vw;
+  height: 100%;
+
+  background-color: var(--darkPurple);
+
+  color: #fff;
+
+  display: flex;
+  gap: 5rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.transfer-error h1 {
+  font-size: 5rem;
+}
+
+.transfer-error strong {
+  font-size: 5rem;
+}
+
+.back-error-btn {
+  background-color: #fff;
+  cursor: pointer;
+  font-size: 3rem;
+  width: 30rem;
+}
+.back-error-btn:hover {
+  background-color: rgb(185, 185, 185);
+}
+
+/* TRANSFERENCIA - Sucesso */
+
+.transfer-sucess {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100vw;
+  height: 100%;
+
+  background-color: #f7f7f7;
+
+  color: #808080;
+
+  display: flex;
+  gap: 5rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.transfer-sucess h1 {
+  font-size: 5rem;
+}
+
+.sucess-circle {
+  color: green;
+  font-size: 10rem;
+}
+
+.transfer-sucess p {
+  font-size: 3rem;
+  font-weight: bold;
+  text-align: center;
+  line-height: 5rem;
+}
+
+.share-btn {
+  background-color: var(--pink);
+  color: #fff;
+
+  font-size: 3rem;
+  font-weight: bold;
+  width: 30rem;
+
+  cursor: pointer;
+}
+
+.share-btn:hover {
+  background-color: #b90f50;
+}
