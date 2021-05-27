@@ -1,11 +1,11 @@
 import "./styles.css";
 import React, { useState } from "react";
+import Swal from "sweetalert2";
 
 import DrawImage from "../../images/draw.png";
 import logo from "../../images/logo.png";
 import { Link } from "react-router-dom";
 import LoginService from "../../services/LoginService";
-import CreateAccountService from "../../services/CreateAccountService";
 
 export default function Login() {
   const [dataLogin, setDatalogin] = useState({
@@ -28,7 +28,7 @@ export default function Login() {
       sessionStorage.setItem("accountBalance", saldo);
       window.location.replace("http://localhost:3000/myaccount");
     } else {
-      window.alert("Email ou senha incorreta");
+      Swal.fire("Erro", "Email ou senha incorreta!!", "error");
     }
   }
 

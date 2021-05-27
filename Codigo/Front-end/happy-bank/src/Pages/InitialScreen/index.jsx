@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 import HeaderAccount from "../../Component/HeaderAccount/HeaderAccount";
@@ -12,7 +12,6 @@ import { BiCreditCard } from "react-icons/bi";
 import "./styles.css";
 
 function InitialScreen() {
-  const sessionID = sessionStorage.getItem("customerId");
   const sessionName = sessionStorage.getItem("customerName");
   const sessionAccount = sessionStorage.getItem("accountNumber");
   const sessionAgency = sessionStorage.getItem("agencyNumber");

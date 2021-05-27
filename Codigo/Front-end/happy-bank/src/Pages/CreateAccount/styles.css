@@ -137,3 +137,21 @@ button.send-selfie {
 
   transition: background-color 300ms;
 }
+#swal2-content{
+  font: 500 2.0rem "Nunito";
+}
+#swal2-title{
+  font: 500 2.6rem "Nunito";
+  font-weight: bold;
+}
+.swal2-confirm{
+  display: inline-block; 
+  border-left-color: rgb(48, 133, 214); 
+  border-right-color: rgb(48, 133, 214);
+  height: 50px;
+  width: 100px;
+}
+.swal2-popup{
+  width: 46em!important;
+}
+

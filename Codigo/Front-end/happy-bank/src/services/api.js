@@ -1,4 +1,4 @@
-import Axios from "axios";
+import Axios from 'axios';
 export default Axios.create({
   baseURL: "https://localhost:5001/",
 });

@@ -1,7 +1,5 @@
 import "./styles.css";
 
-import axios from "axios";
-
 import DrawCreate from "../../images/heroCreate.png";
 import LogoImg from "../../images/logo.png";
 import SelfieImg from "../../images/selfie.png";
@@ -12,6 +10,8 @@ import React, { useState } from "react";
 import { FaCircle } from "react-icons/fa";
 import { FaCheckCircle } from "react-icons/fa";
 import { FiSend } from "react-icons/fi";
+import Swal from 'sweetalert2';
+
 
 import Modal from "../../Component/Modal/Modal";
 import CreateAccountService from "../../services/CreateAccountService";
@@ -46,7 +46,6 @@ export default function CreateAccount() {
     const responseData = (await CreateAccountService.CustomerRegister(inputs))
       .data;
 
-    console.log(responseData.customerId);
 
     setTimeout(() => {
       CreateAccountService.OpenAccount(responseData.customerId);
@@ -56,56 +55,84 @@ export default function CreateAccount() {
 
   // Requisiao POST - FIM
 
+  function verifySpace(field){
+    let cont = 0;
+    let achou = false;
+    for (let i = 0; i < field.length; i++) {
+      if(field[i]===" "){
+        cont ++;
+      }
+    }
+    if(field.length === cont){
+      achou = true;
+    }
+    return achou;
+  }
+
   function verifyField(event) {
     event.preventDefault();
-    if (inputs.name == "") {
-      alert("Campo nome é obrigatório!");
-      return;
+    let message = "O(s) campo(s) ";
+    let cont = 0;
+    if (inputs.name === ""||verifySpace(inputs.name)) {
+      message += "Nome ";
+      cont++;
     }
-    if (inputs.govNumber == "") {
-      alert("Campo cpf é obrigatório!");
-      return;
+    if (inputs.govNumber === ""||verifySpace(inputs.govNumber)) {
+      message += cont > 0 ? ", CPF" : " CPF";
+      cont++;
     }
-    if (inputs.birthDate == "") {
-      alert("Campo data é obrigatório!");
-      return;
+    if (inputs.birthDate === ""||verifySpace(inputs.birthDate)) {
+      message += cont > 0 ? ", Data de nascimento" : " Data de nascimento";
+      cont++;
     }
-    if (inputs.email == "") {
-      alert("Campo email é obrigatório!");
-      return;
+    if (inputs.email === ""||verifySpace(inputs.email)) {
+      message += cont > 0 ? ", E-mail" : " E-mail";
+      cont++;
     }
-    if (inputs.password == "") {
-      alert("Campo senha é obrigatório!");
-      return;
+    if (inputs.password === ""||verifySpace(inputs.password)) {
+      message += cont > 0 ? ", Senha" : " Senha";
+      cont++;
     }
-    if (confirmSenha.confirmsenha !== inputs.password) {
-      console.log(confirmSenha.confirmsenha);
-      console.log(inputs.password);
-      alert("As senhas não conferem");
-      return;
+    if (inputs.street === ""||verifySpace(inputs.street)) {
+      message += cont > 0 ? ", Endereço" : " Endereço";
+      cont++;
     }
-    if (inputs.district == "") {
-      alert("Campo bairro é obrigatório!");
-      return;
+    if (inputs.addressNumber === ""||verifySpace(inputs.addressNumber)) {
+      message += cont > 0 ? ", Número" : " Número";
+      cont++;
     }
+    if (inputs.district === ""||verifySpace(inputs.district)) {
+      message += cont > 0 ? ", Bairro" : " Bairro";
+      cont++;
+    }
+    if (inputs.phone === ""||verifySpace(inputs.phone)) {
+      message += cont > 0 ? ", Telefone" : " Telefone";
+      cont++;
+    }
+    if (inputs.city === "") {
+      message += cont > 0 ? ", Cidade" : " Cidade";
+      cont++;
+    }
+    if (inputs.state === ""||verifySpace(inputs.state)) {
+      message += cont > 0 ? ", Estado" : " Estado";
+      cont++;
+    }
+    message += ",  é(são) obrigatório(s)!!";
+    if(cont>0){
+      Swal.fire('Atenção', message,"warning");
+    }
+    if(cont===0){
+      verifyPass(event);
+    }
+    
+  }
 
-    if (inputs.city == "") {
-      alert("Campo cidade é obrigatório!");
-      return;
+  function verifyPass(event){
+    if (confirmSenha.confirmsenha !== inputs.password) {
+      Swal.fire('Erro','As senhas não conferem',"error");
+    }else{
+      submitData(event);
     }
-    if (inputs.phone == "") {
-      alert("Campo telefone é obrigatório!");
-      return;
-    }
-    if (inputs.district == "") {
-      alert("Campo estado é obrigatório!");
-      return;
-    }
-    if (inputs.state == "") {
-      alert("Campo rua é obrigatório!");
-      return;
-    }
-    submitData(event);
   }
 
   function handleInputs({ target }) {
