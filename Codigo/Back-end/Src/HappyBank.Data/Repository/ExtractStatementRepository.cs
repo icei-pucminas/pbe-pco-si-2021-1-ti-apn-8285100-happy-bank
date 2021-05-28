@@ -13,7 +13,7 @@ namespace HappyBank.Data.Repository
             SELECT
                 '00000000-0000-0000-0000-000000000000' id,
                 'SALDO ANTERIOR' as description,
-                @end - INTERVAL '1 DAY' as execution_date,
+                @start - INTERVAL '1 DAY' as execution_date,
                 coalesce(sum(case when kind = 'c' then value else value * -1 end), 0) as value
             FROM
                 operation o
@@ -42,13 +42,12 @@ namespace HappyBank.Data.Repository
             GROUP BY
                 t.id,
                 t.kind
-    
             UNION ALL
   
             SELECT
                 '00000000-0000-0000-0000-000000000000' id,
                 'SALDO EM ' || to_char(@end, 'DD/MM/YYYY') as description,
-                '2019-12-31' as execution_date,
+                @end as execution_date,
                 coalesce(sum(case when kind = 'c' then value else value * -1 end), 0) as value
             FROM
                 operation o
@@ -96,8 +95,8 @@ namespace HappyBank.Data.Repository
             using (var cmd = new NpgsqlCommand(EXTRACT_STATEMENT_QUERY, Connection))
             {
                 cmd.Parameters.AddWithValue("account_id", accountId);
-                cmd.Parameters.AddWithValue("start", start);
-                cmd.Parameters.AddWithValue("end", end);
+                cmd.Parameters.AddWithValue("start", start.Date);
+                cmd.Parameters.AddWithValue("end", end.AddDays(1).AddTicks(-1)); //Force time to final of the day
                 cmd.Prepare();
 
                 using (var reader = cmd.ExecuteReader())
