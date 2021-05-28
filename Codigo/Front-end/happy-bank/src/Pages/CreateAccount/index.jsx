@@ -328,7 +328,7 @@ export default function CreateAccount() {
           }}
         >
           <Modal>
-            <h1>Validação realziada com sucesso</h1>
+            <h1>Validação realizada com sucesso</h1>
             <FaCheckCircle
               style={{
                 color: "green",
