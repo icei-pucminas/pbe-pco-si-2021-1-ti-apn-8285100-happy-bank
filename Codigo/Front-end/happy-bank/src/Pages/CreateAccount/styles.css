@@ -98,6 +98,8 @@
   color: #fff;
   border: 5px solid #fff;
   margin-top: 3rem;
+
+  align-self: center;
 }
 /* Temporario */
 .btn-circle:hover {
@@ -122,3 +124,34 @@ button.send-selfie {
 
   transition: background-color 300ms;
 }
+
+.validation-btn {
+  width: 15rem;
+  height: 50px;
+  border-radius: 1rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: var(--pink);
+
+  cursor: pointer;
+
+  transition: background-color 300ms;
+}
+#swal2-content{
+  font: 500 2.0rem "Nunito";
+}
+#swal2-title{
+  font: 500 2.6rem "Nunito";
+  font-weight: bold;
+}
+.swal2-confirm{
+  display: inline-block; 
+  border-left-color: rgb(48, 133, 214); 
+  border-right-color: rgb(48, 133, 214);
+  height: 50px;
+  width: 100px;
+}
+.swal2-popup{
+  width: 46em!important;
+}
+

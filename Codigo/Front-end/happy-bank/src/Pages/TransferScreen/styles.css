@@ -47,6 +47,96 @@
 
   display: flex;
   align-items: center;
+  font-weight: bold;
   justify-content: center;
   gap: 10px;
+}
+
+/* TRANSFERENCIA - ERRO */
+
+.transfer-error {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100vw;
+  height: 100%;
+
+  background-color: var(--darkPurple);
+
+  color: #fff;
+
+  display: flex;
+  gap: 5rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.transfer-error h1 {
+  font-size: 5rem;
+}
+
+.transfer-error strong {
+  font-size: 5rem;
+}
+
+.back-error-btn {
+  background-color: #fff;
+  cursor: pointer;
+  font-size: 3rem;
+  width: 30rem;
+}
+.back-error-btn:hover {
+  background-color: rgb(185, 185, 185);
+}
+
+/* TRANSFERENCIA - Sucesso */
+
+.transfer-sucess {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100vw;
+  height: 100%;
+
+  background-color: #f7f7f7;
+
+  color: #808080;
+
+  display: flex;
+  gap: 5rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.transfer-sucess h1 {
+  font-size: 5rem;
+}
+
+.sucess-circle {
+  color: green;
+  font-size: 10rem;
+}
+
+.transfer-sucess p {
+  font-size: 3rem;
+  font-weight: bold;
+  text-align: center;
+  line-height: 5rem;
+}
+
+.share-btn {
+  background-color: var(--pink);
+  color: #fff;
+
+  font-size: 3rem;
+  font-weight: bold;
+  width: 30rem;
+
+  cursor: pointer;
+}
+
+.share-btn:hover {
+  background-color: #b90f50;
 }

@@ -6,13 +6,13 @@ using HappyBank.Domain.Model;
 
 namespace HappyBank.IntegrationTests.HappyData
 {
-    public class AccountReporsitoryTest : BaseTest
+    public class AccountRepositoryTest : BaseTest
     {
         private AccountRepository accountRepository { get; set; }
         private BankRepository bankRepository { get; set; }
         private CustomerRepository customerRepository { get; set; }
 
-        public AccountReporsitoryTest()
+        public AccountRepositoryTest()
         {
             this.accountRepository = new AccountRepository(this.Connection);
             this.bankRepository = new BankRepository(this.Connection);
