@@ -8,5 +8,6 @@ namespace HappyBank.Domain.Repository
     public interface IAccountRepository : IRepository<Account>
     {
         List<Account> FindByCustomerId(Guid customerId);
+        Account FindOneByAgencyAndAccountNumber(int agencyNumber, int accountNumber);
     }
 }

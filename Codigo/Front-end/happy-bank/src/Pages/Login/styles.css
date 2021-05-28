@@ -43,7 +43,7 @@ button {
   font-weight: bold;
 }
 
-#login button {
+#login button{
   background: var(--darkPurple);
   color: #fff;
   cursor: pointer;

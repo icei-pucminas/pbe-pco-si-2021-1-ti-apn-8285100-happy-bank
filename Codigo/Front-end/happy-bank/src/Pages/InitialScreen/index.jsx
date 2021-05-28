@@ -12,9 +12,19 @@ import { BiCreditCard } from "react-icons/bi";
 import "./styles.css";
 
 function InitialScreen() {
+  const sessionName = sessionStorage.getItem("customerName");
+  const sessionAccount = sessionStorage.getItem("accountNumber");
+  const sessionAgency = sessionStorage.getItem("agencyNumber");
+  const accountBalance = sessionStorage.getItem("accountBalance");
+
   return (
     <div>
-      <HeaderAccount />
+      <HeaderAccount
+        Name={sessionName}
+        Agencia={sessionAgency}
+        Conta={sessionAccount}
+        Saldo={accountBalance}
+      />
       <main className="initial-screen-content">
         <h1>Acesso rapido</h1>
         <div className="btn-wrapper">

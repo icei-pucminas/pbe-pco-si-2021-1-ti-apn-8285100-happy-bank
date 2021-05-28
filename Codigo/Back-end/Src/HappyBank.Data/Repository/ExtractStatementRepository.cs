@@ -14,7 +14,7 @@ namespace HappyBank.Data.Repository
                 '00000000-0000-0000-0000-000000000000' id,
                 'SALDO ANTERIOR' as description,
                 @end - INTERVAL '1 DAY' as execution_date,
-                coalesce(sum(case when kind = '1' then value else value * -1 end), 0) as value
+                coalesce(sum(case when kind = 'c' then value else value * -1 end), 0) as value
             FROM
                 operation o
             WHERE
@@ -26,12 +26,12 @@ namespace HappyBank.Data.Repository
             SELECT
                 t.id,
                 case
-                    when t.kind = '0' then 'DEPÓSITO'
-                    when t.kind = '1' then 'TRANSFERÊNCIA'
-                    when t.kind = '2' then 'SAQUE'
+                    when t.kind = 'd' then 'DEPÓSITO'
+                    when t.kind = 't' then 'TRANSFERÊNCIA'
+                    when t.kind = 'w' then 'SAQUE'
                 end as description,
                 t.execution_date,
-                coalesce(sum(case when o.kind = '1' then o.value else o.value * -1 end), 0) as value
+                coalesce(sum(case when o.kind = 'c' then o.value else o.value * -1 end), 0) as value
             FROM
                 operation o
             INNER JOIN transaction t ON
@@ -49,7 +49,7 @@ namespace HappyBank.Data.Repository
                 '00000000-0000-0000-0000-000000000000' id,
                 'SALDO EM ' || to_char(@end, 'DD/MM/YYYY') as description,
                 '2019-12-31' as execution_date,
-                coalesce(sum(case when kind = '1' then value else value * -1 end), 0) as value
+                coalesce(sum(case when kind = 'c' then value else value * -1 end), 0) as value
             FROM
                 operation o
             WHERE
@@ -57,7 +57,7 @@ namespace HappyBank.Data.Repository
                 AND o.execution_date <= @end";
 
          private const string BALANCE_QUERY = @"
-            SELECT coalesce(sum(case when kind = '1' then value else value * -1 end), 0) as value
+            SELECT coalesce(sum(case when kind = 'c' then value else value * -1 end), 0) as value
             FROM
                 operation o
             WHERE
