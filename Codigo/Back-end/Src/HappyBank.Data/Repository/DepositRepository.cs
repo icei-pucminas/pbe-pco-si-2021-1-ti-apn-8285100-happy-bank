@@ -59,7 +59,6 @@ namespace HappyBank.Data.Repository
                     cmd.Parameters.AddWithValue("kind", (char)OperationKind.CREDIT);
                     cmd.Parameters.AddWithValue("value", entity.Value);
                     cmd.Parameters.AddWithValue("execution_date", entity.ExecutionDate);
-                    cmd.Parameters.AddWithValue("envelope_code", entity.EnvelopeCode);
                     cmd.Prepare();
 
                     cmd.ExecuteNonQuery();
@@ -72,7 +71,7 @@ namespace HappyBank.Data.Repository
             catch(Exception e)
             {
                 transaction.Rollback();
-                throw e;
+                return Guid.Empty;
             }
         }
 

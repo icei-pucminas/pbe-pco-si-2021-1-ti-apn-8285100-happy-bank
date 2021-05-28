@@ -19,17 +19,17 @@ namespace HappyBank.Data.Repository
 
         public override Guid Add(Account entity)
         {
-            if(entity.BankId == Guid.Empty || entity.CustomerId == Guid.Empty)
+            if (entity.BankId == Guid.Empty || entity.CustomerId == Guid.Empty)
             {
                 throw new InvalidOperationException();
             }
-            
+
             using (var cmd = new NpgsqlCommand("INSERT INTO \"account\" (bank_id, customer_id, agency_number) VALUES (@bank_id, @customer_id, @agency_number) RETURNING id", Connection))
             {
                 cmd.Parameters.AddWithValue("bank_id", entity.BankId);
-                cmd.Parameters.AddWithValue("customer_id", entity.CustomerId);                
-                cmd.Parameters.AddWithValue("agency_number", entity.AgencyNumber);                
-                
+                cmd.Parameters.AddWithValue("customer_id", entity.CustomerId);
+                cmd.Parameters.AddWithValue("agency_number", entity.AgencyNumber);
+
                 cmd.Prepare();
 
                 return (Guid)cmd.ExecuteScalar();
@@ -93,7 +93,7 @@ namespace HappyBank.Data.Repository
         public List<Account> FindByCustomerId(Guid customerId)
         {
             var result = new List<Account>();
-            using (var cmd = new NpgsqlCommand("SELECT id, bank_id, customer_id, agency_number, account_number FROM account WHERE customer_id = customer_id", Connection))
+            using (var cmd = new NpgsqlCommand("SELECT id, bank_id, customer_id, agency_number, account_number FROM account WHERE customer_id = @customer_id", Connection))
             {
                 cmd.Parameters.AddWithValue("customer_id", customerId);
                 cmd.Prepare();
@@ -119,8 +119,8 @@ namespace HappyBank.Data.Repository
             {
                 cmd.Parameters.AddWithValue("id", entity.Id);
                 cmd.Parameters.AddWithValue("bank_id", entity.BankId);
-                cmd.Parameters.AddWithValue("customer_id", entity.CustomerId);                
-                cmd.Parameters.AddWithValue("agency_number", entity.AgencyNumber);                
+                cmd.Parameters.AddWithValue("customer_id", entity.CustomerId);
+                cmd.Parameters.AddWithValue("agency_number", entity.AgencyNumber);
                 cmd.Parameters.AddWithValue("account_number", entity.AccountNumber);
                 cmd.Prepare();
 
@@ -131,12 +131,35 @@ namespace HappyBank.Data.Repository
         private Account GetAccount(NpgsqlDataReader reader)
         {
             return new Account(
-                reader.GetGuid(0), 
-                reader.GetGuid(1), 
+                reader.GetGuid(0),
+                reader.GetGuid(1),
                 reader.GetGuid(2),
-                reader.GetInt32(3), 
+                reader.GetInt32(3),
                 reader.GetInt32(4)
             );
+        }
+
+        public Account FindOneByAgencyAndAccountNumber(int agencyNumber, int accountNumber)
+        {
+            using (var cmd = new NpgsqlCommand("SELECT id, bank_id, customer_id, agency_number, account_number FROM account WHERE agency_number = @agency_number and account_number = @account_number", Connection))
+            {
+                cmd.Parameters.AddWithValue("agency_number", agencyNumber);
+                cmd.Parameters.AddWithValue("account_number", accountNumber);
+                cmd.Prepare();
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            return GetAccount(reader);
+                        }
+                    }
+                }
+            }
+
+            return null;
         }
     }
 }
