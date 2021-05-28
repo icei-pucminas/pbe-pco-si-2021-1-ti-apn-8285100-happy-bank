@@ -20,14 +20,14 @@ namespace HappyBank.Data.Repository
 
         public override Guid Add(Transfer entity)
         {
-            if(entity.AccountId == Guid.Empty)
+            if (entity.AccountId == Guid.Empty)
             {
                 throw new InvalidOperationException();
             }
 
             NpgsqlTransaction transaction = null;
             Guid transactionId = Guid.Empty;
-            
+
             try
             {
                 transaction = this.Connection.BeginTransaction();
@@ -56,8 +56,19 @@ namespace HappyBank.Data.Repository
                 {
                     cmd.Parameters.AddWithValue("transaction_id", transactionId);
                     cmd.Parameters.AddWithValue("account_id", entity.AccountId);
-                    cmd.Parameters.AddWithValue("account_destiny_id", entity.AccountDestinyId);
                     cmd.Parameters.AddWithValue("kind", (char)OperationKind.DEBIT);
+                    cmd.Parameters.AddWithValue("value", entity.Value);
+                    cmd.Parameters.AddWithValue("execution_date", entity.ExecutionDate);
+                    cmd.Prepare();
+
+                    cmd.ExecuteNonQuery();
+                }
+
+                using (var cmd = new NpgsqlCommand(INSERT_OPERATION_QUERY, Connection, transaction))
+                {
+                    cmd.Parameters.AddWithValue("transaction_id", transactionId);
+                    cmd.Parameters.AddWithValue("account_id", entity.AccountDestinyId);
+                    cmd.Parameters.AddWithValue("kind", (char)OperationKind.CREDIT);
                     cmd.Parameters.AddWithValue("value", entity.Value);
                     cmd.Parameters.AddWithValue("execution_date", entity.ExecutionDate);
                     cmd.Prepare();
@@ -69,7 +80,7 @@ namespace HappyBank.Data.Repository
 
                 return transactionId;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 transaction.Rollback();
                 throw e;
