@@ -21,8 +21,8 @@ namespace HappyBank.Domain.Model
 
     public enum TransactionKind
     {
-        DEPOSIT, /*0*/
-        WITHDRAW, /*1*/
-        TRANSFER /*2*/
+        DEPOSIT = 'd',
+        WITHDRAW = 'w',
+        TRANSFER = 't'
     }
 }

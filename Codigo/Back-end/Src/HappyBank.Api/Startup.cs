@@ -18,6 +18,7 @@ using HappyBank.UseCases.OpenAccount;
 using HappyBank.UseCases.ExtractStatement;
 using HappyBank.UseCases.ExtractBalance;
 using HappyBank.UseCases.SignIn;
+using HappyBank.UseCases.DoDeposit;
 using HappyBank.Api.Services;
 using Npgsql;
 using System.Data;
@@ -49,6 +50,7 @@ namespace HappyBank.api
             services.AddSingleton<ICustomerRepository, CustomerRepository>();
             services.AddSingleton<IBankRepository, BankRepository>();
             services.AddSingleton<IExtractStatementRepository, ExtractStatementRepository>();
+            services.AddSingleton<IDepositRepository, DepositRepository>();
 
             services.AddTransient<ContextService>();
             services.AddTransient<CustomerRegistrationUC>();
@@ -56,6 +58,7 @@ namespace HappyBank.api
             services.AddTransient<ExtractBalanceUC>();
             services.AddTransient<OpenAccountUC>();
             services.AddTransient<SignInUC>();
+            services.AddTransient<DoDepositUC>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
