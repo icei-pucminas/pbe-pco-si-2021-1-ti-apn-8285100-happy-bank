@@ -30,10 +30,13 @@
   font-size: 4rem;
 }
 
+.acconut-name {
+  padding: 10px 20px;
+}
+
 .acconut-name strong {
   display: block;
   font-size: 7rem;
-  margin-right: 5rem;
   text-align: center;
 }
 

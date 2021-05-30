@@ -10,7 +10,14 @@ function HeaderAccount({ children, Display, Name, Conta, Agencia, Saldo }) {
   const accountBalance = Saldo;
 
   const saldoConvert = parseFloat(accountBalance).toFixed(2).replace(".", ",");
+  function cl() {
+    const sair = window.confirm("Deseja mesmo sair?");
 
+    if (sair) {
+      sessionStorage.clear();
+      window.location.reload();
+    }
+  }
   return (
     <div id="header-container">
       <div className="balance">
@@ -18,9 +25,12 @@ function HeaderAccount({ children, Display, Name, Conta, Agencia, Saldo }) {
         <strong>R$ {saldoConvert}</strong>
       </div>
       <div className="acconut-name">
-        <strong>{accountName}</strong>
+        <strong onClick={cl} style={{ cursor: "pointer" }}>
+          {accountName}
+        </strong>
         <span>
-          ag: {accountAgence} - cc: {accountNumber}
+          {("000" + accountAgence).slice(-3)} -{" "}
+          {("00000" + accountNumber).slice(-5)}
         </span>
       </div>
     </div>

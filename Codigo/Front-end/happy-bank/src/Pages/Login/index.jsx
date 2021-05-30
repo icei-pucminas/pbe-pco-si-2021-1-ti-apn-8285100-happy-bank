@@ -49,12 +49,14 @@ export default function Login() {
             placeholder="E-mail"
             onChange={handleInputs}
             name="email"
+            required
           />
           <input
             type="password"
             placeholder="Senha"
             onChange={handleInputs}
             name="password"
+            required
           />
 
           <Link to="/createaccount" id="link">

@@ -44,12 +44,6 @@
   display: flex;
 }
 
-.initial-logo {
-  width: 10vw;
-  position: absolute;
-  right: 7rem;
-}
-
 @media (max-height: 30rem) {
   .initial-logo {
     display: none;
