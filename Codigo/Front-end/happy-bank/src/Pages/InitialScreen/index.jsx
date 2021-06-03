@@ -50,7 +50,7 @@ function InitialScreen() {
           </button>
         </div>
 
-        <img class="initial-logo" src={LogoImg} alt="" />
+        {/* <img class="initial-logo" src={LogoImg} alt="" /> */}
       </main>
     </div>
   );

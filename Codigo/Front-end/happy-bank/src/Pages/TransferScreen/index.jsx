@@ -31,10 +31,18 @@ function TransferScreen() {
     setSucessScreen(true);
     console.log("Sucesso na transferencia");
   }
-
+  const sessionName = sessionStorage.getItem("customerName");
+  const sessionAccount = sessionStorage.getItem("accountNumber");
+  const sessionAgency = sessionStorage.getItem("agencyNumber");
+  const accountBalance = sessionStorage.getItem("accountBalance");
   return (
     <div>
-      <HeaderAccount />
+      <HeaderAccount
+        Name={sessionName}
+        Agencia={sessionAgency}
+        Conta={sessionAccount}
+        Saldo={accountBalance}
+      />
       <h1 class="transfer-title">Realizar Transferencia</h1>
       <div className="transfer-content">
         <form action="">

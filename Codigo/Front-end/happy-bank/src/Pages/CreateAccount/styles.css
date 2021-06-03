@@ -17,14 +17,16 @@
 }
 
 .mainSide h1 {
-  font-size: 5rem;
-  margin: 9rem 0 7rem 0;
+  font-size: 4.5rem;
+  margin: 3rem 0 5rem 0;
 }
 
 .mainSide form .form-wrapper {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  margin: 0 auto;
+  width: 85%;
 }
 .mainSide form div#circles {
   text-align: center;
@@ -35,9 +37,9 @@
 
 #wrapper input {
   width: 100%;
-  height: 70px;
-  padding: 3rem;
-  font-size: 26px;
+  height: 5rem;
+  padding: 2rem;
+  font-size: 2.3rem;
   font-weight: bold;
   border: none;
   outline: none;
@@ -61,7 +63,7 @@
 
 #drawC {
   display: block;
-  width: 60rem;
+  width: 45rem;
 }
 
 .secondPage {
@@ -87,8 +89,8 @@
 
 .btn-create {
   width: 30rem;
-  height: 70px;
-  font-size: 26px;
+  height: 6.5rem;
+  font-size: 24px;
   font-weight: bold;
   border: none;
   outline: none;
@@ -96,10 +98,15 @@
   cursor: pointer;
   background: none;
   color: #fff;
-  border: 5px solid #fff;
+  border: 4px solid #fff;
   margin-top: 3rem;
 
+  transition: background-color 300ms;
   align-self: center;
+}
+
+.btn-create:hover {
+  background-color: rgb(4, 2, 26);
 }
 /* Temporario */
 .btn-circle:hover {
@@ -125,6 +132,11 @@ button.send-selfie {
   transition: background-color 300ms;
 }
 
+.selfie-img {
+  height: 17rem;
+  margin-bottom: 2rem;
+}
+
 .validation-btn {
   width: 15rem;
   height: 50px;
@@ -137,21 +149,82 @@ button.send-selfie {
 
   transition: background-color 300ms;
 }
-#swal2-content{
-  font: 500 2.0rem "Nunito";
+#swal2-content {
+  font: 500 2rem "Nunito";
 }
-#swal2-title{
+#swal2-title {
   font: 500 2.6rem "Nunito";
   font-weight: bold;
 }
-.swal2-confirm{
-  display: inline-block; 
-  border-left-color: rgb(48, 133, 214); 
+.swal2-confirm {
+  display: inline-block;
+  border-left-color: rgb(48, 133, 214);
   border-right-color: rgb(48, 133, 214);
   height: 50px;
   width: 100px;
 }
-.swal2-popup{
-  width: 46em!important;
+.swal2-popup {
+  width: 46em !important;
 }
 
+@media (max-width: 960px) {
+  .drawSide {
+    display: none;
+  }
+
+  .mainSide {
+    width: 100%;
+  }
+
+  .mainSide form .form-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    width: 60rem;
+  }
+
+  #wrapper input {
+    font-size: 2rem;
+    padding: 1rem;
+  }
+
+  .mainSide h1 {
+    font-size: 3.8rem;
+    margin: 2rem 0 2rem 0;
+  }
+}
+
+@media (max-width: 760px) {
+  .mainSide form .form-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    width: 45rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .mainSide form .form-wrapper {
+    gap: 20px;
+
+    width: 28rem;
+  }
+
+  #wrapper input {
+    font-size: 1.6rem;
+    padding: 1rem;
+  }
+
+  .mainSide h1 {
+    font-size: 3.8rem;
+    margin: 3rem 0 2rem 0;
+  }
+  .btn-create {
+    margin-top: 0;
+    height: 5rem;
+    width: 25rem;
+    font-size: 2rem;
+  }
+}
