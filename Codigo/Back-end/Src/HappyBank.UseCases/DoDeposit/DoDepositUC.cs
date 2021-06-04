@@ -10,11 +10,13 @@ namespace HappyBank.UseCases.DoDeposit
     {
         private readonly IAccountRepository _accountRepository;
         private readonly IDepositRepository _deposityRepository;
+        private readonly ICustomerRepository _customerRepository;
 
-        public DoDepositUC(IAccountRepository accountRepository, IDepositRepository deposityRepository)
+        public DoDepositUC(IAccountRepository accountRepository, IDepositRepository deposityRepository, ICustomerRepository customerRepository)
         {
             this._accountRepository = accountRepository;
             this._deposityRepository = deposityRepository;
+            this._customerRepository = customerRepository;
         }
 
         public DoDepositOutput Execute(DoDepositInput input)
@@ -26,10 +28,13 @@ namespace HappyBank.UseCases.DoDeposit
                 throw new AccountNotFoundException();
             }
 
+            var customer = _customerRepository.FindOne(account.CustomerId);
+
             var deposit = new Deposit(account.Id, input.Value, DateTime.Now, input.EnvelopeCode);
             var depositId = _deposityRepository.Add(deposit);
 
             return new DoDepositOutput{
+                CustomerName = customer.Name,
                 TransactionId = depositId
             };
         }

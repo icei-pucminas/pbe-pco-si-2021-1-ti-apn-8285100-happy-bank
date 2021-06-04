@@ -68,7 +68,7 @@ namespace HappyBank.Data.Repository
 
                 return transactionId;
             }
-            catch(Exception e)
+            catch
             {
                 transaction.Rollback();
                 return Guid.Empty;
