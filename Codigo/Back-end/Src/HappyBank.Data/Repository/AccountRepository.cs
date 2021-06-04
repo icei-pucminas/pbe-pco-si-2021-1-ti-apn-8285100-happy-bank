@@ -141,10 +141,37 @@ namespace HappyBank.Data.Repository
 
         public Account FindOneByAgencyAndAccountNumber(int agencyNumber, int accountNumber)
         {
-            using (var cmd = new NpgsqlCommand("SELECT id, bank_id, customer_id, agency_number, account_number FROM account WHERE agency_number = @agency_number and account_number = @account_number", Connection))
+            using (var cmd = new NpgsqlCommand("SELECT id, bank_id, customer_id, agency_number, account_number FROM account WHERE agency_number = @agency_number and account_number = @account_number and bank_id = @bank_id", Connection))
             {
                 cmd.Parameters.AddWithValue("agency_number", agencyNumber);
+                cmd.Parameters.AddWithValue("agency_number", agencyNumber);
                 cmd.Parameters.AddWithValue("account_number", accountNumber);
+                cmd.Parameters.AddWithValue("bank_id", _bankRepository.HappyBank.Id);
+                cmd.Prepare();
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            return GetAccount(reader);
+                        }
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        public Account FindOneByAgencyAndAccountNumber(Guid bankId, int agencyNumber, int accountNumber)
+        {
+             using (var cmd = new NpgsqlCommand("SELECT id, bank_id, customer_id, agency_number, account_number FROM account WHERE agency_number = @agency_number and account_number = @account_number and bank_id = @bank_id", Connection))
+            {
+                cmd.Parameters.AddWithValue("agency_number", agencyNumber);
+                cmd.Parameters.AddWithValue("agency_number", agencyNumber);
+                cmd.Parameters.AddWithValue("account_number", accountNumber);
+                cmd.Parameters.AddWithValue("bank_id", bankId);
                 cmd.Prepare();
 
                 using (var reader = cmd.ExecuteReader())

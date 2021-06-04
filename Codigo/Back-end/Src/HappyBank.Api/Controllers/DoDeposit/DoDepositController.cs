@@ -38,6 +38,7 @@ namespace HappyBank.Api.Controllers.SignIn
 
             return new DoDepositResponse
             {
+                CustomerName = output.CustomerName,
                 TransactionId = output.TransactionId
             };
         }
