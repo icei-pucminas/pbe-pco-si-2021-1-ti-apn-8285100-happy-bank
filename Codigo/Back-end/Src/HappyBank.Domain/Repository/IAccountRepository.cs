@@ -9,5 +9,7 @@ namespace HappyBank.Domain.Repository
     {
         List<Account> FindByCustomerId(Guid customerId);
         Account FindOneByAgencyAndAccountNumber(int agencyNumber, int accountNumber);
+
+        Account FindOneByAgencyAndAccountNumber(Guid bankId, int agencyNumber, int accountNumber);
     }
 }

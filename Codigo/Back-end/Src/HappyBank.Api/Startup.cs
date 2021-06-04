@@ -20,6 +20,7 @@ using HappyBank.UseCases.ExtractBalance;
 using HappyBank.UseCases.SignIn;
 using HappyBank.UseCases.DoDeposit;
 using HappyBank.UseCases.DoWithdraw;
+using HappyBank.UseCases.FindAccount;
 using HappyBank.Api.Services;
 using Npgsql;
 using System.Data;
@@ -58,6 +59,7 @@ namespace HappyBank.api
             services.AddTransient<CustomerRegistrationUC>();
             services.AddTransient<ExtractStatementUC>();
             services.AddTransient<ExtractBalanceUC>();
+            services.AddTransient<FindAccountUC>();
             services.AddTransient<OpenAccountUC>();
             services.AddTransient<SignInUC>();
             services.AddTransient<DoDepositUC>();
