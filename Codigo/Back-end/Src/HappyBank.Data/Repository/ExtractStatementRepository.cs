@@ -37,11 +37,12 @@ namespace HappyBank.Data.Repository
             INNER JOIN transaction t ON
                 o.transaction_id = t.id
             WHERE
-                t.account_id = @account_id and o.account_id = @account_id
+                o.account_id = @account_id
                 AND t.execution_date between @start and @end
             GROUP BY
                 t.id,
                 t.kind
+
             UNION ALL
   
             SELECT
@@ -53,7 +54,9 @@ namespace HappyBank.Data.Repository
                 operation o
             WHERE
                 account_id = @account_id
-                AND o.execution_date <= @end";
+                AND o.execution_date <= @end
+                
+            ORDER BY 3";
 
          private const string BALANCE_QUERY = @"
             SELECT coalesce(sum(case when kind = 'c' then value else value * -1 end), 0) as value
