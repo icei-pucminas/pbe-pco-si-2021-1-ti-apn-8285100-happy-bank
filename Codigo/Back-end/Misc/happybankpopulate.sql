@@ -16,11 +16,11 @@ begin
  
    INSERT INTO account(id, bank_id, customer_id, agency_number, account_number) VALUES (account_id, bank_id, customer_id, 171, 123456789);
  
-   INSERT INTO transaction(id, account_id, kind, value, execution_date) VALUES (transaction_id, account_id, 0, 500, '2021-04-10');
+   INSERT INTO transaction(id, account_id, kind, value, execution_date) VALUES (transaction_id, account_id, 'd', 500, '2021-04-10');
  
    INSERT INTO deposit(id, envelope_code) VALUES (transaction_id, '00017100171');
  
-   INSERT INTO operation(id, account_id, transaction_id, kind, value, execution_date) VALUES (operation_id, account_id, transaction_id, 1, 500, '2021-04-10');
+   INSERT INTO operation(id, account_id, transaction_id, kind, value, execution_date) VALUES (operation_id, account_id, transaction_id, 'c', 500, '2021-04-10');
 
    customer_id := new_id();
    employess_id := new_id();
@@ -34,12 +34,12 @@ begin
 
   INSERT INTO account(id, bank_id, customer_id, agency_number, account_number) VALUES (account_id, bank_id, customer_id, 171, 987654321);
  
-  INSERT INTO transaction(id, account_id, kind, value, execution_date) VALUES (transaction_id, account_id, 1, 1000, '2021-04-11');
+  INSERT INTO transaction(id, account_id, kind, value, execution_date) VALUES (transaction_id, account_id, 't', 1000, '2021-04-11');
 
   INSERT INTO transfer(id, account_destiny_id) VALUES (transaction_id, account_id);
  
-  INSERT INTO operation(id, account_id, transaction_id, kind, value, execution_date) VALUES (operation_id, account_id, transaction_id, 1, 1000, '2021-04-11');
-
+  INSERT INTO operation(id, account_id, transaction_id, kind, value, execution_date) VALUES (operation_id, account_id, transaction_id, 'd', 1000, '2021-04-11');
+  
    customer_id := new_id();
    employess_id := new_id();
    account_id := new_id();
@@ -52,11 +52,11 @@ begin
 
   INSERT INTO account(id, bank_id, customer_id, agency_number, account_number) VALUES (account_id, bank_id, customer_id, 171, 912345678);
 
-  INSERT INTO transaction(id, account_id, kind, value, execution_date) VALUES (transaction_id, account_id, 2, 400, '2021-04-12');
+  INSERT INTO transaction(id, account_id, kind, value, execution_date) VALUES (transaction_id, account_id, 'w', 400, '2021-04-12');
 
   INSERT INTO withdraw(id, terminal_code) VALUES (transaction_id, '000171000');
 
-  INSERT INTO operation(id, account_id, transaction_id, kind, value, execution_date) VALUES (operation_id, account_id, transaction_id, 0, 400, '2021-04-12');
+  INSERT INTO operation(id, account_id, transaction_id, kind, value, execution_date) VALUES (operation_id, account_id, transaction_id, 'd', 400, '2021-04-12');
 
    customer_id := new_id();
    employess_id := new_id();
@@ -70,11 +70,11 @@ begin
 
   INSERT INTO account(id, bank_id, customer_id, agency_number, account_number) VALUES (account_id, bank_id, customer_id, 171, 891234567);
 
-  INSERT INTO transaction(id, account_id, kind, value, execution_date) VALUES (transaction_id, account_id, 0, 250, '2021-04-01');
+  INSERT INTO transaction(id, account_id, kind, value, execution_date) VALUES (transaction_id, account_id, 'd', 250, '2021-04-01');
 
   INSERT INTO deposit(id, envelope_code) VALUES (transaction_id, '00017100172');
 
-  INSERT INTO operation(id, account_id, transaction_id, kind, value, execution_date) VALUES (operation_id, account_id, transaction_id, 1, 250, '2021-04-01');
+  INSERT INTO operation(id, account_id, transaction_id, kind, value, execution_date) VALUES (operation_id, account_id, transaction_id, 'c', 250, '2021-04-01');
 
    customer_id := new_id();
    employess_id := new_id();
@@ -88,11 +88,11 @@ begin
 
   INSERT INTO account(id, bank_id, customer_id, agency_number, account_number) VALUES (account_id, bank_id, customer_id, 171, 789123456);
 
-  INSERT INTO transaction(id, account_id, kind, value, execution_date) VALUES (transaction_id, account_id, 2, 300, '2021-05-05');
+  INSERT INTO transaction(id, account_id, kind, value, execution_date) VALUES (transaction_id, account_id, 'w', 300, '2021-05-05');
 
   INSERT INTO withdraw(id, terminal_code) VALUES (transaction_id, '000171001');
 
-  INSERT INTO operation(id, account_id, transaction_id, kind, value, execution_date) VALUES (operation_id, account_id, transaction_id, 0, 300, '2021-05-05');
+  INSERT INTO operation(id, account_id, transaction_id, kind, value, execution_date) VALUES (operation_id, account_id, transaction_id, 'd', 300, '2021-05-05');
 
 END $$;
  
