@@ -3,44 +3,47 @@ import LogoImg from "../../../images/logo.png";
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import { HiCheckCircle } from "react-icons/hi";
+import DepositService from "../../../services/DepositService";
+import Swal from "sweetalert2";
+import Utils from "../../../services/Utils";
 
 export default function TerminalDeposit() {
   const [depositSucess, setDepositSucess] = useState(false);
+
+  const [data, setData] = useState("");
 
   const [depositScreen, setDepositScreen] = useState(false);
 
   const [agValue, setAgValue] = useState("");
   const [contaValue, setContaValue] = useState("");
-  const [moneyValue, setMoneyValue] = useState(null);
+  const [moneyValue, setMoneyValue] = useState(0);
 
   const [currentName, setCurrentName] = useState("");
 
-  const contas = [
-    {
-      agencia: 123,
-      conta: 45678,
-      nome: "Jośe da Silva",
-    },
-    {
-      agencia: 1,
-      conta: 123456,
-      nome: "Agatha Christie",
-    },
-  ];
+  const sessionID = sessionStorage.getItem("customerId");
 
-  let currentAccountName;
+  const account = {
+    accountNumber: contaValue,
+    agencyNumber: agValue,
+    envelopeCode: "PC123456",
+    value: moneyValue,
+  };
 
-  function contaExiste() {
-    let achou = false;
-    contas.forEach((conta) => {
-      if (agValue == conta.agencia && contaValue == conta.conta && !achou) {
-        setCurrentName(conta.nome);
-        setDepositScreen(true);
-        achou = true;
-      }
+  async function doDeposit() {
+    await DepositService.DoDeposit(account).then(() => {
+      setDepositSucess(true);
     });
-    if (!achou) {
-      alert("Conta nao encontrada!");
+  }
+
+  async function findAccount() {
+    try {
+      const responseData = (
+        await DepositService.FindAccount(contaValue, agValue)
+      ).data.customerName;
+      setData(responseData);
+      setDepositScreen(true);
+    } catch (error) {
+      Swal.fire("Ops!", "Conta não encontrada!", "error");
     }
   }
 
@@ -49,7 +52,7 @@ export default function TerminalDeposit() {
   }
 
   function sendDeposit() {
-    setDepositSucess(true);
+    doDeposit();
   }
 
   function verifyFields() {
@@ -73,7 +76,7 @@ export default function TerminalDeposit() {
       return;
     }
 
-    contaExiste();
+    findAccount();
   }
 
   return (
@@ -129,18 +132,22 @@ export default function TerminalDeposit() {
             <div className="account-data">
               <div className="account-field">
                 <span>Agência</span>
-                <strong>{agValue}</strong>
+                <strong>{agValue.padStart(3, "0")}</strong>
               </div>
               <div className="account-field">
                 <span>Conta</span>
-                <strong>{contaValue}</strong>
+                <strong>{contaValue.padStart(5, "0")}</strong>
               </div>
             </div>
 
+            <strong className="dataName">{data}</strong>
+
             <p className="deposit-text">
-              Se estiver tudo certo, pode inserir o dinheiro ou cheque no
-              terminal
-              <br></br>(R$ {moneyValue})
+              Se estiver tudo certo, pode inserir o dinheiro no terminal
+              <br></br>{" "}
+              <span style={{ fontSize: "5rem" }}>
+                {Utils.formatarMoeda(+moneyValue)}
+              </span>
             </p>
             <button onClick={sendDeposit} className="realize-deposit">
               Realizar Deposito
@@ -164,9 +171,10 @@ export default function TerminalDeposit() {
               <div>
                 <p>R$ {moneyValue}</p>
                 <p>
-                  {contaValue} - {agValue}
+                  {("000" + contaValue).slice(-3)} -{" "}
+                  {("00000" + agValue).slice(-5)}
                 </p>
-                <p>{currentName}</p>
+                <p>{data}</p>
               </div>
               <button onClick={closeDepositScreen} className="share-btn">
                 Imprimir comprovante

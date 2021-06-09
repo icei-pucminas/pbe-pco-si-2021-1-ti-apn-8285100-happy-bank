@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-import HeaderAccount from "../../Component/HeaderAccount/HeaderAccount";
+import HeaderAccount from "../../Components/HeaderAccount/HeaderAccount";
 
 import LogoImg from "../../images/logo.png";
 
@@ -37,12 +37,7 @@ function TransferScreen() {
   const accountBalance = sessionStorage.getItem("accountBalance");
   return (
     <div>
-      <HeaderAccount
-        Name={sessionName}
-        Agencia={sessionAgency}
-        Conta={sessionAccount}
-        Saldo={accountBalance}
-      />
+      <HeaderAccount />
       <h1 class="transfer-title">Realizar Transferencia</h1>
       <div className="transfer-content">
         <form action="">
