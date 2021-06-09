@@ -147,3 +147,61 @@ group by
 	c.name
 having coalesce(sum(case when o.kind = 'c' then o.value else o.value * -1 end), 0) > 10
 order by 4
+
+-- *********************************************************************************************************************************************
+-- 7-Clientes com saldo entre R$ 200 e R$ 600
+select c.id, c."name", c.phone from customer c where c.id in 
+(
+	select
+		a.customer_id
+    from operation o
+    inner join account a on o.account_id = a.id
+    group by a.customer_id 
+    having coalesce(sum(case when kind = 'c' then value else value * -1 end), 0) 
+    	between 200 and 600
+)
+
+-- *********************************************************************************************************************************************
+-- 8-Clientes com data da última operação
+select
+	c.id,
+	c."name",
+	c.phone,
+	(select
+			max(o.execution_date)
+		from
+			operation o
+		inner join account a on
+			a.id = o.account_id
+			and a.customer_id = c.id ) last_operation
+from
+	customer c
+
+-- *********************************************************************************************************************************************
+-- 9-Clientes que já realizaram pelo menos um saque
+select
+	c.id,
+	c."name",
+	c.phone
+from
+	customer c
+where exists (select t.id from "transaction" t inner join account a on t.account_id = a.id and a.customer_id = c.id where t.kind = 'w')
+
+-- *********************************************************************************************************************************************
+-- 10-Clientes que possuem saldo maior que zero e maior que todas as transaçõe de saque
+select * from (
+	select
+		c.id,
+		c."name",
+		c.phone,
+		coalesce(sum(case when kind = 'c' then value else value * -1 end), 0) balance
+	from
+		customer c
+	inner join account a on a.customer_id = c.id 
+	left outer join operation o on o.account_id  = a.id 
+	group by c.id, c."name", c.phone
+	having coalesce(sum(case when kind = 'c' then value else value * -1 end), 0) > 0
+) cs where cs.balance > all (
+	select value from "transaction" t where t.kind = 'w'
+)
+
