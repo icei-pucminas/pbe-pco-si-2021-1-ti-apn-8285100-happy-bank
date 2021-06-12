@@ -75,10 +75,12 @@ function ExtractBalance() {
         <div className="extract-balance-wrapper">
           <ul class="extract-list">
             {extract.map((item, index, arr) => {
-              if (index != 0 && index != arr.length - 1) {
+              if (true) {
                 return (
                   <li key={item.id}>
-                    <span>{Utils.formatarData(item.executionDate)}</span>
+                    <span className="balance-date">
+                      {Utils.formatarData(item.executionDate)}
+                    </span>
                     <span>{item.description}</span>{" "}
                     <strong style={{ color: "darkgreen" }}>
                       {Utils.formatarMoeda(item.value)}
