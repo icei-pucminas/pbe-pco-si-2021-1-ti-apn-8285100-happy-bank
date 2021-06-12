@@ -40,6 +40,40 @@ textarea {
   justify-content: center;
 }
 
+.btn-back {
+  color: #fff;
+  background-color: var(--pink);
+  margin-top: 10px;
+  margin-left: 10px;
+  font-size: 5rem;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.btn-swal-cancel {
+  background-color: var(--darkPurple);
+  color: #fff;
+  font-weight: 600;
+  font-size: 2rem;
+  width: 10rem;
+  height: 5rem;
+  cursor: pointer;
+  margin-right: 2rem;
+}
+
+.btn-swal-confirm {
+  background-color: var(--pink);
+  color: #fff;
+  font-weight: 600;
+  font-size: 2rem;
+  width: 10rem;
+  height: 5rem;
+  cursor: pointer;
+  margin-right: 2rem;
+}
+
 @media (min-width: 700px) {
   :root {
     font-size: 62.5%;

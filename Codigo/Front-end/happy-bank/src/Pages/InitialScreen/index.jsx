@@ -27,12 +27,14 @@ function InitialScreen() {
               <span>Transferencia</span>
             </button>
           </Link>
-          <button className="initial-btn">
-            <div>
-              <AiOutlineFileText />
-            </div>
-            <span>Extrato</span>
-          </button>
+          <Link to="/extract">
+            <button className="initial-btn">
+              <div>
+                <AiOutlineFileText />
+              </div>
+              <span>Extrato</span>
+            </button>
+          </Link>
           <button className="initial-btn">
             <div>
               <BiCreditCard />

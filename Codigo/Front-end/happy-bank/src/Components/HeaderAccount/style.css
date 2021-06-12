@@ -1,10 +1,10 @@
 #header-container {
   padding: 10px;
 
-  border-bottom: 2rem solid pink;
+  border-bottom: 1rem solid pink;
 
   background-color: var(--pink);
-  height: 16rem;
+  height: 13rem;
   width: 100%;
 
   display: flex;
@@ -27,7 +27,7 @@
 }
 
 .balance strong {
-  font-size: 4rem;
+  font-size: 3.5rem;
 }
 
 .acconut-name {
@@ -36,7 +36,7 @@
 
 .acconut-name strong {
   display: block;
-  font-size: 7rem;
+  font-size: 5rem;
   text-align: center;
 }
 
@@ -44,4 +44,12 @@
   display: block;
   text-align: center;
   font-size: 3rem;
+  position: relative;
+}
+
+#header-container .loggout-btn {
+  font-size: 3.5rem;
+  margin-left: 10rem;
+  position: absolute;
+  cursor: pointer;
 }
