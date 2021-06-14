@@ -9,6 +9,8 @@ export default function TerminalDeposit() {
 
   const [depositScreen, setDepositScreen] = useState(false);
 
+  const [comprovantScreen, setComprovantScreen] = useState(true);
+
   const [agValue, setAgValue] = useState("");
   const [contaValue, setContaValue] = useState("");
   const [moneyValue, setMoneyValue] = useState(null);
@@ -171,6 +173,14 @@ export default function TerminalDeposit() {
               <button onClick={closeDepositScreen} className="share-btn">
                 Imprimir comprovante
               </button>
+            </div>
+          </div>
+
+          <div style={{ display: comprovantScreen ? "" : "" }}>
+            <div id="comprovant-bg">
+              <div id="comprovant-paper">
+                <h1>Ola mundo</h1>
+              </div>
             </div>
           </div>
         </div>
