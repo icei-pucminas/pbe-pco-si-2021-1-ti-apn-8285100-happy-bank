@@ -1,0 +1,73 @@
+#extract-balance-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#extract-balance-content h1 {
+  font-size: 5rem;
+  color: #7f7f7f;
+  text-align: center;
+  margin: 1rem 0 2rem 0;
+}
+
+#extract-balance-content .data-wrapper {
+  font-size: 3rem;
+  padding: 3rem 0 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#extract-balance-content .data-wrapper .data-input {
+  width: 35rem;
+  height: 5rem;
+  outline: none;
+  padding: 3rem;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #808080;
+  border: none;
+  border-radius: 3rem;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+#extract-balance-content .data-wrapper button {
+  background-color: var(--pink);
+  width: 15rem;
+  color: #fff;
+  font-size: 2.3rem;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 3rem;
+  transition: background-color 250ms ease;
+}
+
+#extract-balance-content .data-wrapper button:hover {
+  background-color: rgb(238, 85, 136);
+}
+
+.data-wrapper label {
+  font-weight: bold;
+  margin-right: 1.2rem;
+  color: #7f7f7f;
+}
+
+.extract-list {
+  font-size: 3rem;
+  list-style: none;
+}
+
+.extract-list .balance-date {
+  color: var(--pink);
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+.extract-list li {
+  border-bottom: 2px solid grey;
+  width: 980px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}

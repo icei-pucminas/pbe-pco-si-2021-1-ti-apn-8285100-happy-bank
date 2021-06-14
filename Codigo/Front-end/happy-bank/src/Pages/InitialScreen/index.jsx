@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-import HeaderAccount from "../../Component/HeaderAccount/HeaderAccount";
+import HeaderAccount from "../../Components/HeaderAccount/HeaderAccount";
 
 import LogoImg from "../../images/logo.png";
 
@@ -10,21 +10,12 @@ import { AiOutlineFileText } from "react-icons/ai";
 import { BiCreditCard } from "react-icons/bi";
 
 import "./styles.css";
+import LoginService from "../../services/LoginService";
 
 function InitialScreen() {
-  const sessionName = sessionStorage.getItem("customerName");
-  const sessionAccount = sessionStorage.getItem("accountNumber");
-  const sessionAgency = sessionStorage.getItem("agencyNumber");
-  const accountBalance = sessionStorage.getItem("accountBalance");
-
   return (
     <div>
-      <HeaderAccount
-        Name={sessionName}
-        Agencia={sessionAgency}
-        Conta={sessionAccount}
-        Saldo={accountBalance}
-      />
+      <HeaderAccount />
       <main className="initial-screen-content">
         <h1>Acesso rapido</h1>
         <div className="btn-wrapper">
@@ -36,12 +27,14 @@ function InitialScreen() {
               <span>Transferencia</span>
             </button>
           </Link>
-          <button className="initial-btn">
-            <div>
-              <AiOutlineFileText />
-            </div>
-            <span>Extrato</span>
-          </button>
+          <Link to="/extract">
+            <button className="initial-btn">
+              <div>
+                <AiOutlineFileText />
+              </div>
+              <span>Extrato</span>
+            </button>
+          </Link>
           <button className="initial-btn">
             <div>
               <BiCreditCard />

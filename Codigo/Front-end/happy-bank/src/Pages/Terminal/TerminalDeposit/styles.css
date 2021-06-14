@@ -102,6 +102,11 @@
   font-size: 5rem;
 }
 
+#deposit .dataName {
+  color: #fff;
+  font-size: 3rem;
+}
+
 #deposit .account-data {
   display: flex;
   gap: 10rem;

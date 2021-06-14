@@ -12,7 +12,7 @@ import { FaCheckCircle } from "react-icons/fa";
 import { FiSend } from "react-icons/fi";
 import Swal from "sweetalert2";
 
-import Modal from "../../Component/Modal/Modal";
+import Modal from "../../Components/Modal/Modal";
 import CreateAccountService from "../../services/CreateAccountService";
 
 export default function CreateAccount() {
