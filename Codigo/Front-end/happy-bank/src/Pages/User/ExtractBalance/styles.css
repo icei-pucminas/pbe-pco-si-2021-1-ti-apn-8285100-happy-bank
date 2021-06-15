@@ -1,7 +1,6 @@
 #extract-balance-content {
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 #extract-balance-content h1 {
@@ -47,6 +46,10 @@
   background-color: rgb(238, 85, 136);
 }
 
+.extract-balance-wrapper {
+  align-self: center;
+}
+
 .data-wrapper label {
   font-weight: bold;
   margin-right: 1.2rem;
@@ -56,6 +59,7 @@
 .extract-list {
   font-size: 3rem;
   list-style: none;
+  margin-bottom: 10rem;
 }
 
 .extract-list .balance-date {
