@@ -8,6 +8,7 @@ import TerminalDeposit from "./Pages/Terminal/TerminalDeposit";
 import TransferScreen from "./Pages/TransferScreen";
 import PrivateRoute from "./PrivateRoute";
 import ExtractBalance from "./Pages/User/ExtractBalance";
+import MyCard from "./Pages/User/MyCard";
 
 export default function Routes() {
   return (
@@ -19,6 +20,7 @@ export default function Routes() {
       <PrivateRoute path="/myaccount" component={InitialScreen} />
       <PrivateRoute path="/transfer" component={TransferScreen} />
       <PrivateRoute path="/extract" component={ExtractBalance} />
+      <PrivateRoute path="/mycard" component={MyCard} />
     </BrowserRouter>
   );
 }

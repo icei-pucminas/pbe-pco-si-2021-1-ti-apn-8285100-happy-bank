@@ -17,14 +17,14 @@ function InitialScreen() {
     <div>
       <HeaderAccount />
       <main className="initial-screen-content">
-        <h1>Acesso rapido</h1>
+        <h1>Acesso rápido</h1>
         <div className="btn-wrapper">
           <Link to="/transfer" style={{ textDecoration: "none" }}>
             <button className="initial-btn">
               <div>
                 <FaRegMoneyBillAlt />
               </div>
-              <span>Transferencia</span>
+              <span>Transferência</span>
             </button>
           </Link>
           <Link to="/extract">
@@ -35,12 +35,14 @@ function InitialScreen() {
               <span>Extrato</span>
             </button>
           </Link>
-          <button className="initial-btn">
-            <div>
-              <BiCreditCard />
-            </div>
-            <span>Cartão</span>
-          </button>
+          <Link to="/mycard">
+            <button className="initial-btn">
+              <div>
+                <BiCreditCard />
+              </div>
+              <span>Cartão</span>
+            </button>
+          </Link>
         </div>
 
         {/* <img class="initial-logo" src={LogoImg} alt="" /> */}

@@ -123,7 +123,7 @@ group by
 order by 4
 
 -- *********************************************************************************************************************************************
--- 6-Todas as transações com valor maior que 10
+-- 6- Somátorio de todas as operações de crédito ou débito com valor maior que 10
 
 select
 	t.id,
@@ -162,7 +162,7 @@ select c.id, c."name", c.phone from customer c where c.id in
 )
 
 -- *********************************************************************************************************************************************
--- 8-Clientes com data da última operação
+-- 8-Clientes com operação de data mais recente
 select
 	c.id,
 	c."name",
