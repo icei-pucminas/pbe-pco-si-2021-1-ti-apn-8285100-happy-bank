@@ -8,10 +8,10 @@ import LogoImg from "../../images/logo.png";
 import { FiSend } from "react-icons/fi";
 import { FaCheckCircle } from "react-icons/fa";
 import { BiArrowBack } from "react-icons/bi";
-
 import { FaRegMoneyBillAlt } from "react-icons/fa";
 import { AiOutlineFileText } from "react-icons/ai";
 import { BiCreditCard } from "react-icons/bi";
+import { AiOutlineCheck } from "react-icons/ai";
 
 import DepositService from "../../services/DepositService";
 import TransferService from "../../services/TransferService";
@@ -25,6 +25,8 @@ function TransferScreen() {
   const [errorScreen, setErrorScreen] = useState(false);
   const [sucessScreen, setSucessScreen] = useState(false);
   const [confirmData, setconfirmData] = useState(false);
+  const [comprovantScreen, setComprovantScreen] = useState(false);
+
   const [inputs, setInputs] = useState({
     agValue: "",
     contaValue: "",
@@ -34,6 +36,17 @@ function TransferScreen() {
     accountId: "",
     customerName: "",
   });
+
+  const [dataDeposito, setDataDeposito] = useState({
+    year: "",
+    month: "",
+    day: "",
+    hours: "",
+    minutes: "",
+    seconds: "",
+  });
+
+  const d = new Date();
 
   function handleInputs({ target }) {
     const { value, name } = target;
@@ -48,7 +61,7 @@ function TransferScreen() {
   };
 
   async function findAccount() {
-    if (inputs.value <= accountBalance) {
+    if (+inputs.value <= +accountBalance) {
       if (inputs.contaValue !== sessionAccount) {
         try {
           const responseData = (
@@ -70,6 +83,13 @@ function TransferScreen() {
   }
 
   async function doTransfer() {
+    dataDeposito.year = d.getFullYear();
+    dataDeposito.day = String(d.getDate()).padStart(2, "0");
+    dataDeposito.month = String(d.getMonth() + 1).padStart(2, "0");
+    dataDeposito.minutes = String(d.getMinutes()).padStart(2, "0");
+    dataDeposito.seconds = String(d.getSeconds()).padStart(2, "0");
+    dataDeposito.hours = String(d.getHours()).padStart(2, "0");
+
     try {
       await TransferService.doTransfer(transferData, sessionID);
       transferSucess();
@@ -100,12 +120,9 @@ function TransferScreen() {
     window.location.reload();
   }
 
-  /* 
-  {
-      "value": 25,
-      "accountDestinyId": "7f46025c-4435-f664-d09b-63559f2873d1"
+  function printComprovant() {
+    setComprovantScreen(true);
   }
-*/
 
   const sessionName = sessionStorage.getItem("customerName");
   const sessionAccount = sessionStorage.getItem("accountNumber");
@@ -228,14 +245,80 @@ function TransferScreen() {
           <div>
             <p>{Utils.formatarMoeda(+inputs.value)}</p>
             <p>
-              {inputs.contaValue} - {inputs.agValue}
+              {inputs.agValue.padStart(3, "0")} -{" "}
+              {inputs.contaValue.padStart(5, "0")}
             </p>
             <p>{data.customerName}</p>
           </div>
 
-          <button className="share-btn" onClick={reload}>
+          <button className="share-btn" onClick={printComprovant}>
             Compartilhar
           </button>
+        </div>
+      </div>
+
+      <div
+        className="transfer-comprovant-bg"
+        style={{ display: comprovantScreen ? "" : "none" }}
+        onClick={reload}
+      >
+        <div className="transfer-comprovant">
+          <img src={LogoImg} alt="" />
+          <h1>Comprovante de transferência</h1>
+          <div
+            style={{
+              background: "green",
+              width: "100%",
+              display: "flex",
+              padding: "10px 0",
+              alignItems: "center",
+              gap: "2rem",
+              color: "#fff",
+              fontSize: "2rem",
+            }}
+          >
+            <AiOutlineCheck
+              style={{ color: "#fff", fontSize: "3rem", marginLeft: "2rem" }}
+            />{" "}
+            realizado em {dataDeposito.day}/{dataDeposito.month}/
+            {dataDeposito.year} às {dataDeposito.hours}:{dataDeposito.minutes}:
+            {dataDeposito.seconds}
+          </div>
+
+          <div className="comprovant-row">
+            <p>valor</p>
+            <p>{Utils.formatarMoeda(+inputs.value)}</p>
+          </div>
+
+          <div className="comprovant-row">
+            <p>data da transferência</p>
+            <p>
+              {dataDeposito.day}/{dataDeposito.month}/{dataDeposito.year}
+            </p>
+          </div>
+
+          <div className="comprovant-row">
+            <p>de</p>
+            <strong>{sessionName}</strong>
+            <p>
+              Agencia {sessionAgency.padStart(3, "0")} - Conta{" "}
+              {sessionAccount.padStart(5, "0")}
+            </p>
+          </div>
+
+          <div className="comprovant-row">
+            <p>para</p>
+            <strong>{data.customerName}</strong>
+            <p>
+              Agencia {inputs.agValue.padStart(3, "0")} - Conta{" "}
+              {inputs.contaValue.padStart(5, "0")}
+            </p>
+          </div>
+
+          <div className="comprovant-row">
+            <p>finalidade</p>
+            <p>Crédito em conta corrente</p>
+          </div>
         </div>
       </div>
     </div>

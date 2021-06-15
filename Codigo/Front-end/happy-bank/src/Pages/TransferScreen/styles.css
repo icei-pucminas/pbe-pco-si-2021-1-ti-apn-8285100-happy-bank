@@ -228,3 +228,49 @@
 .share-btn:hover {
   background-color: #b90f50;
 }
+
+/* Comprovante */
+
+.transfer-comprovant-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 1, 43, 0.856);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.transfer-comprovant {
+  width: 50rem;
+  height: 90%;
+  background-color: #fff;
+  filter: drop-shadow(9px 5px 12px rgba(0, 0, 0, 0.568));
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.transfer-comprovant {
+  font-family: Arial, sans-serif;
+}
+
+.transfer-comprovant h1 {
+  font-size: 3rem;
+  padding-left: 20px;
+  color: grey;
+}
+
+.transfer-comprovant img {
+  margin-top: 1.5rem;
+  align-self: center;
+  width: 15rem;
+}
+
+.comprovant-row {
+  padding: 10px 20px;
+  font-size: 2.3rem;
+}

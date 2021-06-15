@@ -27,7 +27,7 @@ function InitialScreen() {
               <span>Transferência</span>
             </button>
           </Link>
-          <Link to="/extract">
+          <Link to="/extract" style={{ textDecoration: "none" }}>
             <button className="initial-btn">
               <div>
                 <AiOutlineFileText />
@@ -35,7 +35,7 @@ function InitialScreen() {
               <span>Extrato</span>
             </button>
           </Link>
-          <Link to="/mycard">
+          <Link to="/mycard" style={{ textDecoration: "none" }}>
             <button className="initial-btn">
               <div>
                 <BiCreditCard />

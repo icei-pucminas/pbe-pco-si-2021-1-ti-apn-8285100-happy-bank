@@ -15,7 +15,7 @@ function MyCard() {
           <BiArrowBack />
         </button>
       </Link>
-      <div className="my-card-content">
+      <div className="my-card-content card-screen">
         <h1>Meu cartão Happy</h1>
         <img src={CardImg} alt="" />
       </div>

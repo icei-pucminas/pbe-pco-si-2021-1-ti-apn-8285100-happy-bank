@@ -90,7 +90,9 @@ function ExtractBalance() {
                       {Utils.formatarData(item.executionDate)}
                     </span>
                     <span>{item.description}</span>{" "}
-                    <strong style={{ color: "darkgreen" }}>
+                    <strong
+                      style={{ color: +item.value > 0 ? "darkgreen" : "red" }}
+                    >
                       {Utils.formatarMoeda(item.value)}
                     </strong>
                   </li>

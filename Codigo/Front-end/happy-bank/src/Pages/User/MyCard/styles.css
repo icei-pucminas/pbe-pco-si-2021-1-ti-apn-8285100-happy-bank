@@ -1,0 +1,12 @@
+.card-screen {
+  display: flex;
+  align-items: center;
+  justify-self: center;
+  flex-direction: column;
+}
+
+.card-screen h1 {
+  margin-bottom: 10rem;
+  color: grey;
+  font-size: 5rem;
+}

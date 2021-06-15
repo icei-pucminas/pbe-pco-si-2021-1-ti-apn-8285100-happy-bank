@@ -15,11 +15,7 @@ export default function TerminalDeposit() {
 
   const [depositScreen, setDepositScreen] = useState(false);
 
-<<<<<<< HEAD
-  const [comprovantScreen, setComprovantScreen] = useState(true);
-=======
   const [comprovantScreen, setComprovantScreen] = useState(false);
->>>>>>> d05cc5363b2a0dbab56239ca78c962126c27d05a
 
   const [agValue, setAgValue] = useState("");
   const [contaValue, setContaValue] = useState("");
@@ -83,50 +79,11 @@ export default function TerminalDeposit() {
   function sendDeposit() {
     dataDeposito.year = d.getFullYear();
     dataDeposito.day = d.getDate();
+    dataDeposito.month = String(d.getMonth() + 1).padStart(2, "0");
     dataDeposito.minutes = String(d.getMinutes()).padStart(2, "0");
     dataDeposito.seconds = String(d.getSeconds()).padStart(2, "0");
     dataDeposito.hours = String(d.getHours()).padStart(2, "0");
 
-    switch (d.getMonth()) {
-      case 0:
-        dataDeposito.month = "01";
-        break;
-      case 1:
-        dataDeposito.month = "02";
-        break;
-      case 2:
-        dataDeposito.month = "03";
-        break;
-      case 3:
-        dataDeposito.month = "04";
-        break;
-      case 4:
-        dataDeposito.month = "05";
-        break;
-      case 5:
-        dataDeposito.month = "06";
-        break;
-      case 6:
-        dataDeposito.month = "07";
-        break;
-      case 7:
-        dataDeposito.month = "08";
-        break;
-      case 8:
-        dataDeposito.month = "09";
-        break;
-      case 9:
-        dataDeposito.month = "10";
-        break;
-      case 10:
-        dataDeposito.month = "11";
-        break;
-      case 11:
-        dataDeposito.month = "12";
-        break;
-      default:
-        break;
-    }
     doDeposit();
   }
 

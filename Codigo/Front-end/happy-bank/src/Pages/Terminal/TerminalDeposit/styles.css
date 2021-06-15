@@ -183,16 +183,6 @@ button.realize-deposit {
   line-height: 5rem;
 }
 
-<<<<<<< HEAD
-/* COMPROVANTE SCREEN */
-
-#comprovant-bg {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-
-  background-color: rgba(1, 9, 78, 0.87);
-=======
 /* COMPROVANTE */
 
 .comprovant-bg {
@@ -203,19 +193,12 @@ button.realize-deposit {
   height: 100%;
 
   background-color: rgba(9, 0, 41, 0.705);
->>>>>>> d05cc5363b2a0dbab56239ca78c962126c27d05a
 
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-<<<<<<< HEAD
-#comprovant-bg #comprovant-paper {
-  width: 30rem;
-  height: 50rem;
-  background-color: #fffcbc;
-=======
 #deposit-screen button.deposit-back-btn {
   position: fixed;
   top: 1.5rem;
@@ -255,5 +238,4 @@ button.realize-deposit {
 
 span.margin-bottom {
   margin-top: 2.5rem;
->>>>>>> d05cc5363b2a0dbab56239ca78c962126c27d05a
 }
