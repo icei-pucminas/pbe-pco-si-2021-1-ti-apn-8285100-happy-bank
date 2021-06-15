@@ -35,7 +35,7 @@ function HeaderAccount() {
     swalWithBootstrapButtons
       .fire({
         title: "Deseja mesmo sair?",
-        text: "Isso fara vc sair em lek kkj",
+        text: "Isso fará você ser desconectado!",
         icon: "warning",
         showCancelButton: true,
         confirmButtonText: "Sim",

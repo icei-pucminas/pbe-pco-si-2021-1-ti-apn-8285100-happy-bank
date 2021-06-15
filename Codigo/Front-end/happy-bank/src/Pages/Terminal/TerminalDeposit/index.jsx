@@ -6,6 +6,7 @@ import { HiCheckCircle } from "react-icons/hi";
 import DepositService from "../../../services/DepositService";
 import Swal from "sweetalert2";
 import Utils from "../../../services/Utils";
+import { BiArrowBack } from "react-icons/bi";
 
 export default function TerminalDeposit() {
   const [depositSucess, setDepositSucess] = useState(false);
@@ -14,6 +15,8 @@ export default function TerminalDeposit() {
 
   const [depositScreen, setDepositScreen] = useState(false);
 
+  const [comprovantScreen, setComprovantScreen] = useState(false);
+
   const [agValue, setAgValue] = useState("");
   const [contaValue, setContaValue] = useState("");
   const [moneyValue, setMoneyValue] = useState(0);
@@ -21,6 +24,17 @@ export default function TerminalDeposit() {
   const [currentName, setCurrentName] = useState("");
 
   const sessionID = sessionStorage.getItem("customerId");
+
+  const [dataDeposito, setDataDeposito] = useState({
+    year: "",
+    month: "",
+    day: "",
+    hours: "",
+    minutes: "",
+    seconds: "",
+  });
+
+  const d = new Date();
 
   const account = {
     accountNumber: contaValue,
@@ -48,35 +62,105 @@ export default function TerminalDeposit() {
   }
 
   function closeDepositScreen() {
-    window.location.reload(false);
+    window.location.reload();
+  }
+
+  function close() {
+    setDepositScreen(false);
+  }
+
+  function openComprovant() {
+    setComprovantScreen(true);
+  }
+  function closeComprovant() {
+    setComprovantScreen(false);
   }
 
   function sendDeposit() {
+    dataDeposito.year = d.getFullYear();
+    dataDeposito.day = d.getDate();
+    dataDeposito.minutes = String(d.getMinutes()).padStart(2, "0");
+    dataDeposito.seconds = String(d.getSeconds()).padStart(2, "0");
+    dataDeposito.hours = String(d.getHours()).padStart(2, "0");
+
+    switch (d.getMonth()) {
+      case 0:
+        dataDeposito.month = "01";
+        break;
+      case 1:
+        dataDeposito.month = "02";
+        break;
+      case 2:
+        dataDeposito.month = "03";
+        break;
+      case 3:
+        dataDeposito.month = "04";
+        break;
+      case 4:
+        dataDeposito.month = "05";
+        break;
+      case 5:
+        dataDeposito.month = "06";
+        break;
+      case 6:
+        dataDeposito.month = "07";
+        break;
+      case 7:
+        dataDeposito.month = "08";
+        break;
+      case 8:
+        dataDeposito.month = "09";
+        break;
+      case 9:
+        dataDeposito.month = "10";
+        break;
+      case 10:
+        dataDeposito.month = "11";
+        break;
+      case 11:
+        dataDeposito.month = "12";
+        break;
+      default:
+        break;
+    }
     doDeposit();
   }
 
   function verifyFields() {
+    let message = "O(s) campo(s) ";
+    let cont = 0;
+
     if (agValue == "") {
-      alert("ERRO - Campo Agência obrigatório");
-      return;
+      message += " Agência";
+      cont++;
     }
 
     if (contaValue == "") {
-      alert("ERRO - Campo Conta obrigatório");
-      return;
+      message += cont > 0 ? ", Conta" : " Conta";
+      cont++;
     }
 
     if (moneyValue == null || moneyValue == "" || moneyValue == 0) {
-      alert("ERRO - Campo Valor(R$) obrigatório");
-      return;
+      message += cont > 0 ? ", Valor(R$)" : " Valor(R$)";
+      cont++;
     }
+
+    message += ", é(são) obrigatórios!";
 
     if (moneyValue < 10) {
-      alert("ERRO - O valor minimo para depósito é R$ 10,00");
-      return;
+      message +=
+        cont > 0
+          ? "\n O valor minimo para depósito é R$ 10,00"
+          : " O valor minimo para depósito é R$ 10,00";
+      cont++;
     }
 
-    findAccount();
+    if (cont > 0) {
+      Swal.fire("Atenção", message, "warning");
+    }
+    if (cont === 0) {
+      findAccount();
+    }
   }
 
   return (
@@ -122,6 +206,9 @@ export default function TerminalDeposit() {
 
       <div style={{ display: depositScreen ? "" : "none" }}>
         <div id="deposit-screen">
+          <button className="deposit-back-btn" onClick={close}>
+            <BiArrowBack />
+          </button>
           <div className="main-side">
             <div></div>
             <h1 className="deposit-title">Depósito</h1>
@@ -176,9 +263,57 @@ export default function TerminalDeposit() {
                 </p>
                 <p>{data}</p>
               </div>
-              <button onClick={closeDepositScreen} className="share-btn">
+              <button onClick={openComprovant} className="share-btn">
                 Imprimir comprovante
               </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style={{ display: comprovantScreen ? "" : "none" }}>
+        <div className="comprovant-bg" onClick={closeDepositScreen}>
+          <div className="comprovant-paper">
+            <span className="margin-bottom">Happy Bank :)</span>
+            <div className="line">
+              <p>AUTO ATENDIMENTO</p>
+              <p>-</p>
+              <p>AG BETIM</p>
+            </div>
+            <div className="line">
+              <p>
+                DATA: {dataDeposito.day}/{dataDeposito.month}/
+                {dataDeposito.year}
+              </p>
+
+              <p>
+                HORA: {dataDeposito.hours}:{dataDeposito.minutes}:
+                {dataDeposito.seconds}
+              </p>
+            </div>
+            <div className="line margin-bottom">TERMINAL: 874654768</div>
+            <div
+              className="line margin-bottom"
+              style={{ width: "30rem", textAlign: "center" }}
+            >
+              COMPROVANTE PROVISÓRIO DE DEPÓSITO EM DINHEIRO
+            </div>
+            <div className="line">
+              <p>CONTA CREDITADA</p>
+              <p>
+                {("000" + contaValue).slice(-3)} -{" "}
+                {("00000" + agValue).slice(-5)}
+              </p>
+            </div>
+            <div className="line margin-bottom">
+              <p>NOME</p>
+              <p>{data}</p>
+            </div>
+            <div className="line margin-bottom">
+              <p>VALOR TOTAL EM DINHEIRO</p>
+              <p>R$ {moneyValue}</p>
+            </div>
+            <div className="line" style={{ textAlign: "center" }}>
+              1ª via
             </div>
           </div>
         </div>

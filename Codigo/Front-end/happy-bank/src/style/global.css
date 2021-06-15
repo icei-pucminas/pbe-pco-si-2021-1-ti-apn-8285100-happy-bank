@@ -41,11 +41,12 @@ textarea {
 }
 
 .btn-back {
-  color: #fff;
-  background-color: var(--pink);
+  color: var(--pink);
+  background-color: inherit;
   margin-top: 10px;
   margin-left: 10px;
   font-size: 5rem;
+  font-weight: bold;
   width: 5rem;
   height: 5rem;
   border-radius: 50%;

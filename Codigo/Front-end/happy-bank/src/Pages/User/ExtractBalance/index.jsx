@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import HeaderAccount from "../../../Components/HeaderAccount/HeaderAccount";
 import ExtractService from "../../../services/ExtractService";
 import Utils from "../../../services/Utils";
+
+import { BiArrowBack } from "react-icons/bi";
 
 import "./styles.css";
 
@@ -42,6 +45,11 @@ function ExtractBalance() {
     <div>
       <HeaderAccount />
       <div id="extract-balance-content">
+        <Link to="/myaccount">
+          <button className="btn-back">
+            <BiArrowBack />
+          </button>
+        </Link>
         <h1>Extrato</h1>
         <form className="data-wrapper" onSubmit={filterExtract}>
           <div style={{ display: "flex" }}>
