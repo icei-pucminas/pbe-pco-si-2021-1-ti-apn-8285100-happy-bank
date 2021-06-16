@@ -20,22 +20,23 @@
 }
 #deposit h1 {
   color: #fff;
-  font-size: 5rem;
+  font-size: 4rem;
 }
 
 #deposit form input {
-  height: 60px;
+  height: 5rem;
   margin: 10px;
   border-radius: 3rem;
   outline: none;
   border: none;
   padding: 15px;
-  font-size: 2.3rem;
+  font-size: 2rem;
   text-align: center;
   font-weight: bold;
 }
 
 #deposit button {
+  height: 5rem;
   background: var(--darkPurple);
   cursor: pointer;
   color: #fff;
@@ -56,13 +57,13 @@
 }
 
 #deposit .image-side #logo {
-  width: 35rem;
+  width: 30rem;
   margin: 5rem 2rem;
 }
 
 #deposit .image-side h2 {
   width: 40rem;
-  font-size: 4rem;
+  font-size: 3rem;
   text-align: center;
   color: #545454;
 }
@@ -99,7 +100,7 @@
 }
 #deposit h1 {
   color: #fff;
-  font-size: 5rem;
+  font-size: 4rem;
 }
 
 #deposit .dataName {
@@ -113,7 +114,7 @@
 }
 
 #deposit .account-data span {
-  font-size: 2.5rem;
+  font-size: 2rem;
   color: #c5c5c5;
   margin-left: 10px;
 }
@@ -133,7 +134,7 @@
 
   color: rgb(133, 133, 133);
 
-  font-size: 2.5rem;
+  font-size: 2rem;
 
   display: flex;
   align-items: center;
@@ -143,13 +144,13 @@
 .deposit-subtitle {
   color: #fff;
   font-weight: 200;
-  font-size: 3rem;
+  font-size: 2.7rem;
 }
 
 .deposit-text {
-  font-size: 3rem;
+  font-size: 2.5rem;
   width: 500px;
-
+  margin-bottom: 1rem;
   color: #fff;
 
   text-align: center;
@@ -160,6 +161,9 @@ button.realize-deposit {
 }
 
 /* DEPOSITO SUCESSSO SCREEN  */
+.deposit-sucess img {
+  width: 25rem;
+}
 
 .deposit-sucess {
   position: fixed;
@@ -177,7 +181,7 @@ button.realize-deposit {
 }
 
 .deposit-sucess p {
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: bold;
   text-align: center;
   line-height: 5rem;

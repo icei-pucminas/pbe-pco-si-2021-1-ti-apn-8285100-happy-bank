@@ -1,6 +1,5 @@
 .transfer-content {
   width: 100vw;
-  height: 500px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -8,8 +7,9 @@
 
 .transfer-title {
   color: var(--pink);
-  font-size: 5rem;
-  margin-top: 5rem;
+  font-size: 3rem;
+  margin-top: 3rem;
+  margin-bottom: 5rem;
   text-align: center;
 }
 
@@ -20,11 +20,11 @@
 }
 
 .transfer-content input {
-  width: 35rem;
+  width: 30rem;
   height: 5rem;
   outline: none;
-  padding: 3rem;
-  font-size: 2.5rem;
+  padding: 2rem;
+  font-size: 2.1rem;
   font-weight: bold;
   color: #808080;
   border: none;
@@ -34,7 +34,7 @@
 
 .transfer-btn {
   width: 32rem;
-  height: 60px;
+  height: 5rem;
 
   color: #fff;
   font-size: 2.5rem;
@@ -65,30 +65,25 @@
   color: #fff;
 
   display: flex;
-  gap: 5rem;
+  gap: 4rem;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
 }
 
-.confirm-data img {
-  width: 30rem;
-  margin-top: 5rem;
-}
-
 .confirm-data h1 {
-  font-size: 5rem;
+  font-size: 4rem;
   color: #fff;
 }
 
 .confirm-data .account-data {
   display: flex;
   gap: 2rem;
-  font-size: 3rem;
+  font-size: 2.5rem;
 }
 
 .confirm-data .value-data {
-  font-size: 3rem;
+  font-size: 2.5rem;
 }
 
 .confirm-data .account-field {
@@ -106,7 +101,7 @@
 
   color: rgb(133, 133, 133);
 
-  font-size: 2.5rem;
+  font-size: 2.3rem;
 
   display: flex;
   align-items: center;
@@ -124,7 +119,7 @@
 
 .confirm-data .btn-wrapper button {
   width: 30rem;
-  height: 7rem;
+  height: 5rem;
   color: #fff;
   font-size: 2.3rem;
   font-weight: 600;
@@ -133,11 +128,21 @@
 
 .confirm-data .btn-wrapper button.back {
   background-color: var(--darkPurple);
+  transition: background-color 250ms;
 }
 
 .confirm-data .btn-wrapper button.send {
   background-color: #fff;
   color: var(--pink);
+  transition: background-color 250ms;
+}
+
+.confirm-data .btn-wrapper button.send:hover {
+  background-color: rgb(204, 204, 204);
+}
+
+.confirm-data .btn-wrapper button.back:hover {
+  background-color: #000;
 }
 
 /* TRANSFERENCIA - ERRO */
@@ -161,18 +166,19 @@
 }
 
 .transfer-error h1 {
-  font-size: 5rem;
+  font-size: 4rem;
 }
 
 .transfer-error strong {
-  font-size: 5rem;
+  font-size: 3.5rem;
 }
 
 .back-error-btn {
   background-color: #fff;
   cursor: pointer;
-  font-size: 3rem;
-  width: 30rem;
+  font-size: 2rem;
+  height: 5rem;
+  width: 25rem;
 }
 .back-error-btn:hover {
   background-color: rgb(185, 185, 185);
@@ -192,19 +198,23 @@
   color: #808080;
 
   display: flex;
-  gap: 5rem;
+  gap: 3rem;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
+.transfer-sucess img {
+  width: 25rem !important;
+}
+
 .transfer-sucess h1 {
-  font-size: 5rem;
+  font-size: 3rem;
 }
 
 .sucess-circle {
   color: green;
-  font-size: 10rem;
+  font-size: 7rem;
 }
 
 .transfer-sucess p {
@@ -245,13 +255,13 @@
 }
 
 .transfer-comprovant {
-  width: 50rem;
+  width: 45rem;
   height: 90%;
   background-color: #fff;
   filter: drop-shadow(9px 5px 12px rgba(0, 0, 0, 0.568));
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.3rem;
 }
 
 .transfer-comprovant {
@@ -259,7 +269,7 @@
 }
 
 .transfer-comprovant h1 {
-  font-size: 3rem;
+  font-size: 2rem;
   padding-left: 20px;
   color: grey;
 }
@@ -272,5 +282,5 @@
 
 .comprovant-row {
   padding: 10px 20px;
-  font-size: 2.3rem;
+  font-size: 1.7rem;
 }

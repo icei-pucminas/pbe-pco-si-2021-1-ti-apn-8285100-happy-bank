@@ -139,7 +139,7 @@ function TransferScreen() {
         </button>
       </Link>
 
-      <h1 class="transfer-title">Realizar Transferencia</h1>
+      <h1 class="transfer-title">Realizar Transfêrencia</h1>
       <div className="transfer-content">
         <form action="">
           <div style={{ display: "flex", gap: "20px" }}>
@@ -209,7 +209,7 @@ function TransferScreen() {
               Voltar
             </button>
             <button className="send" onClick={doTransfer}>
-              Realizar Trasnferência
+              Realizar Transfêrencia
             </button>
           </div>
         </div>
@@ -274,11 +274,11 @@ function TransferScreen() {
               alignItems: "center",
               gap: "2rem",
               color: "#fff",
-              fontSize: "2rem",
+              fontSize: "1.5rem",
             }}
           >
             <AiOutlineCheck
-              style={{ color: "#fff", fontSize: "3rem", marginLeft: "2rem" }}
+              style={{ color: "#fff", fontSize: "2rem", marginLeft: "2rem" }}
             />{" "}
             realizado em {dataDeposito.day}/{dataDeposito.month}/
             {dataDeposito.year} às {dataDeposito.hours}:{dataDeposito.minutes}:

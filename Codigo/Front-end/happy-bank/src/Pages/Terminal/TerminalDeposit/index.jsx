@@ -217,7 +217,7 @@ export default function TerminalDeposit() {
               </h1>
               <HiCheckCircle className="sucess-circle" />
               <div>
-                <p>R$ {moneyValue}</p>
+                <p>{Utils.formatarMoeda(+moneyValue)}</p>
                 <p>
                   {("000" + contaValue).slice(-3)} -{" "}
                   {("00000" + agValue).slice(-5)}
@@ -279,7 +279,7 @@ export default function TerminalDeposit() {
             </div>
             <div className="line margin-bottom">
               <p>VALOR TOTAL EM DINHEIRO</p>
-              <p>R$ {moneyValue}</p>
+              <p>{Utils.formatarMoeda(+moneyValue)}</p>
             </div>
             <div className="line" style={{ textAlign: "center" }}>
               1ª via

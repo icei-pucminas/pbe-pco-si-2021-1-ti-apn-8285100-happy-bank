@@ -4,14 +4,13 @@
 }
 
 #extract-balance-content h1 {
-  font-size: 5rem;
+  font-size: 4rem;
   color: #7f7f7f;
   text-align: center;
-  margin: 1rem 0 2rem 0;
 }
 
 #extract-balance-content .data-wrapper {
-  font-size: 3rem;
+  font-size: 2rem;
   padding: 3rem 0 5rem;
   display: flex;
   flex-direction: column;
@@ -19,11 +18,11 @@
 }
 
 #extract-balance-content .data-wrapper .data-input {
-  width: 35rem;
+  width: 30rem;
   height: 5rem;
   outline: none;
-  padding: 3rem;
-  font-size: 2.5rem;
+  padding: 2rem;
+  font-size: 2rem;
   font-weight: bold;
   color: #808080;
   border: none;
@@ -34,6 +33,7 @@
 #extract-balance-content .data-wrapper button {
   background-color: var(--pink);
   width: 15rem;
+  height: 5rem;
   color: #fff;
   font-size: 2.3rem;
   cursor: pointer;
@@ -57,7 +57,7 @@
 }
 
 .extract-list {
-  font-size: 3rem;
+  font-size: 2.5rem;
   list-style: none;
   margin-bottom: 10rem;
 }
