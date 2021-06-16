@@ -17,7 +17,7 @@ function MyCard() {
       </Link>
       <div className="my-card-content card-screen">
         <h1>Meu cartão Happy</h1>
-        <img src={CardImg} alt="" />
+        <img src={CardImg} alt="" style={{ width: "80rem" }} />
       </div>
     </div>
   );

@@ -269,8 +269,8 @@ export default function TerminalDeposit() {
             <div className="line">
               <p>CONTA CREDITADA</p>
               <p>
-                {("000" + contaValue).slice(-3)} -{" "}
-                {("00000" + agValue).slice(-5)}
+                {("000" + agValue).slice(-3)} -{" "}
+                {("00000" + contaValue).slice(-5)}
               </p>
             </div>
             <div className="line margin-bottom">
