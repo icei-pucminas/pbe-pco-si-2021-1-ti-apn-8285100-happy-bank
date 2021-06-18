@@ -219,8 +219,8 @@ export default function TerminalDeposit() {
               <div>
                 <p>{Utils.formatarMoeda(+moneyValue)}</p>
                 <p>
-                  {("000" + contaValue).slice(-3)} -{" "}
-                  {("00000" + agValue).slice(-5)}
+                  {("000" + agValue ).slice(-3)} -{" "}
+                  {("00000" + contaValue ).slice(-5)}
                 </p>
                 <p>{data}</p>
               </div>
