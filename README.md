@@ -1,6 +1,6 @@
-# Nome do projeto
+# Happy Bank :)
 
-Escreva um ou dois  parágrafo resumindo o objetivo do seu projeto.
+Um banco digital, sem burocracia e fácil de usar!!
 
 ## Alunos integrantes da equipe
 
@@ -12,8 +12,8 @@ Escreva um ou dois  parágrafo resumindo o objetivo do seu projeto.
 
 ## Professores responsáveis
 
-* Nome completo do professor 1
-* Nome completo do professor 2
+* Marco Paulo
+* Joyce
 
 ## Instruções de utilização
 
@@ -40,4 +40,8 @@ Na pasta **/Codigo/HappyBank** execute os comandos
     dotnet run
 
 #### Execução do Frontend
-...
+
+Na pasta **/Codigo/HappyBank/Fron-end/happy-bank** execute os comandos
+
+    npp install
+    npm start
