@@ -12,8 +12,8 @@ Um banco digital, sem burocracia e fácil de usar!!
 
 ## Professores responsáveis
 
-* Marco Paulo
-* Joyce
+* Marco Paulo Soares Gomes
+* Joyce Christina de Paiva Carvalho
 
 ## Instruções de utilização
 
@@ -41,7 +41,7 @@ Na pasta **/Codigo/HappyBank** execute os comandos
 
 #### Execução do Frontend
 
-Na pasta **/Codigo/HappyBank/Fron-end/happy-bank** execute os comandos
+Na pasta **/Codigo/HappyBank/Front-end/happy-bank** execute os comandos
 
     npp install
     npm start
